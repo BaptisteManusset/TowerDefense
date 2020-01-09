@@ -1,39 +1,68 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Placer : MonoBehaviour
 {
     private Camera cam;
-    public GameObject carre;
-    Vector3 point;
+    Vector3 clickPosition = Vector3.zero;
+    [BoxGroup("Dimension")] public int caseSize = 3;
+    [BoxGroup("Gizmos")] public GameObject gizmos;
+    [BoxGroup("Gizmos")] public Color Sucess;
+    [BoxGroup("Gizmos")] public Color Error;
+    [BoxGroup("Gizmos")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
+
+
+
+    [BoxGroup("Tower")] public GameObject tower;
     void Start()
     {
         cam = Camera.main;
+
+
     }
 
     void Update()
     {
-        point.y = 1;
-        carre.transform.position = point;
+        gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Error);
+        //clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            clickPosition = hit.point;
+            pos = new Vector3(
+           Mathf.Round(clickPosition.x / caseSize) * caseSize,
+           5,
+           Mathf.Round(clickPosition.z / caseSize) * caseSize);
+
+            #region selection de la case
+            gizmos.transform.position = pos;
+            #endregion
+
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                Instantiate(tower, pos, Quaternion.identity);
+            }
+        }
+
+        Debug.Log(clickPosition);
     }
 
-    void OnGUI()
+    void OnDrawGizmos()
     {
-        Event currentEvent = Event.current;
-        Vector2 mousePos = new Vector2();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(clickPosition, .5f);
+        Gizmos.DrawLine(transform.position, clickPosition);
 
-        // Get the mouse position from Event.
-        // Note that the y position from Event is inverted.
-        mousePos.x = currentEvent.mousePosition.x;
-        mousePos.y = cam.pixelHeight - currentEvent.mousePosition.y;
-
-        point = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
-
-        GUILayout.BeginArea(new Rect(20, 20, 250, 120));
-        GUILayout.Label("Screen pixels: " + cam.pixelWidth + ":" + cam.pixelHeight);
-        GUILayout.Label("Mouse position: " + mousePos);
-        GUILayout.Label("World position: " + point.ToString("F3"));
-        GUILayout.EndArea();
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(pos, 2);
+    }
+    [Button]
+    public void changeColor()
+    {
+        gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Error);
     }
 }

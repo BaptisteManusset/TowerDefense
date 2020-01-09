@@ -14,10 +14,13 @@ public class Mind : MonoBehaviour
 
     NavMeshAgent MeshAgent;
     [BoxGroup("Deplacement")] public Transform destination;
-
+    Renderer cubeRenderer;
 
     void Start()
     {
+        cubeRenderer = GetComponent<Renderer>();
+
+
         MeshAgent = GetComponent<NavMeshAgent>();
         MeshAgent.SetDestination(destination.position);
     }
@@ -39,6 +42,10 @@ public class Mind : MonoBehaviour
     {
         alive = false;
         MeshAgent.isStopped = true;
+
+        cubeRenderer.material.SetColor("_BaseColor", Color.red);
+
+        //Call SetColor using the shader property name "_Color" and setting the color to red
     }
     public bool IsDead()
     {
