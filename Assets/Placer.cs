@@ -43,6 +43,16 @@ public class Placer : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                bool isTake = false;
+                //Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
+                //while (i < hitColliders.Length)
+                //{
+                //    //Output all of the collider names
+                //    Debug.Log("Hit : " + hitColliders[i].name + i);
+                //    //Increase the number of Colliders in the array
+                //    i++;
+                //}
+
 
                 Instantiate(tower, pos, Quaternion.identity);
             }
