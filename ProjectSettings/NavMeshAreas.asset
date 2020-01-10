@@ -13,8 +13,8 @@ NavMeshProjectSettings:
     cost: 2
   - name: slow
     cost: 100
-  - name: 
-    cost: 1
+  - name: other
+    cost: 2
   - name: 
     cost: 1
   - name: 

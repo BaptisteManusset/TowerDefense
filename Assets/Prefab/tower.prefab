@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 5593453251275554653}
   - component: {fileID: 5593453251275554652}
   - component: {fileID: 5593453251275554654}
+  - component: {fileID: 8849474674969183128}
   m_Layer: 10
   m_Name: tower
   m_TagString: Untagged
@@ -186,37 +187,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94a64308e34c0a459068b9e8eb82d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 30
-  hitColliders:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hitColliders: []
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  target: 7
-  shotStepLoad: 15
+  target: 0
+  slave: {fileID: 0}
+--- !u!114 &8849474674969183128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593453251275554641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281278da4d9f40d4e9852f2be3e9dee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 0}
   shotLoading: 100
-  damage: 1
+  shotStepLoad: 1
+  damage: 10
+  detectionRadius: 10

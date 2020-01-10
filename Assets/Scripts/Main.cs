@@ -7,39 +7,26 @@ public class Main : MonoBehaviour
 {
     static public Main instance;
 
-    public bool isPaused = false;
+    [BoxGroup("Game Infos")] public bool isPaused = false;
 
 
 
-    [BoxGroup("Destination tag")] public string destinationsTag;
+    [BoxGroup("Destination tag")][Tag] public string destinationsTag;
     static public GameObject[] destinations;
 
-    public int money;
-    public int lifes = 20;
+    [BoxGroup("Stats")] public int money;
+    [BoxGroup("Stats")] public int lifes = 20;
 
 
-    public GameObject camera;
+    [BoxGroup("Game Infos")] public GameObject camera;
 
 
 
     void Start()
     {
         if (Main.instance == null) Main.instance = this;
-        Debug.Log(Main.instance);
-
         Main.instance.camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
-
- 
-
 
     public void DecreaseLifes(int lifes = 1)
     {

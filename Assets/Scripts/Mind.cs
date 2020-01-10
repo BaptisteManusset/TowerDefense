@@ -12,15 +12,13 @@ public class Mind : MonoBehaviour
     bool alive = true;
     #endregion
 
-
     NavMeshAgent MeshAgent;
-    [BoxGroup("Deplacement")] public Transform destination;
+    Canvas canvas;
     Renderer cubeRenderer;
 
-
+    [BoxGroup("Deplacement")] public Transform destination;
     [BoxGroup("Valeur à la mort")] public int valeur = 10;
 
-    Canvas canvas;
     void Start()
     {
         health = maxHealth;
@@ -37,11 +35,22 @@ public class Mind : MonoBehaviour
         cubeRenderer = GetComponent<Renderer>();
         canvas = GetComponentInChildren<Canvas>();
         UpdateHealthBar();
+
+
+
     }
 
     void Update()
     {
         canvas.transform.LookAt(Main.instance.camera.transform);
+
+
+
+        NavMeshHit hit;
+        MeshAgent.SamplePathPosition(-1, 0.0f, out hit);
+        Debug.Log($"hit.mask >> {hit.mask}");
+
+
     }
     public void Damage(int d)
     {
