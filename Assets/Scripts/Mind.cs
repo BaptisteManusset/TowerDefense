@@ -1,12 +1,13 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 public class Mind : MonoBehaviour
 {
     #region stats    
-    [BoxGroup("Stats")]
-    [ProgressBar(null, 10)]
-    public int health = 10;
+    [BoxGroup("Stats")] [ProgressBar(null, 10)] public int health;
+    [BoxGroup("Stats")] public Image healthbar;
     int maxHealth = 10;
     bool alive = true;
     #endregion
@@ -16,15 +17,32 @@ public class Mind : MonoBehaviour
     [BoxGroup("Deplacement")] public Transform destination;
     Renderer cubeRenderer;
 
+
+    [BoxGroup("Valeur à la mort")] public int valeur = 10;
+
+    Canvas canvas;
     void Start()
     {
-        cubeRenderer = GetComponent<Renderer>();
-
-
+        health = maxHealth;
+        #region definition de la destination
         MeshAgent = GetComponent<NavMeshAgent>();
+        if (Main.destinations == null)
+        {
+            Main.destinations = GameObject.FindGameObjectsWithTag("Destination");
+        }
+        destination = Main.destinations[Random.Range(0, Main.destinations.Length)].transform;
+        if (destination == null) Debug.LogError("Impossible de trouver une destination");
         MeshAgent.SetDestination(destination.position);
+        #endregion
+        cubeRenderer = GetComponent<Renderer>();
+        canvas = GetComponentInChildren<Canvas>();
+        UpdateHealthBar();
     }
 
+    void Update()
+    {
+        canvas.transform.LookAt(Main.instance.camera.transform);
+    }
     public void Damage(int d)
     {
 
@@ -34,21 +52,34 @@ public class Mind : MonoBehaviour
         }
         if (health <= 0)
         {
-            dead();
+            Dead();
         }
+        UpdateHealthBar();
     }
 
-    void dead()
+    void Dead()
     {
-        alive = false;
-        MeshAgent.isStopped = true;
+        if (alive)
+        {
+            health = 0;
 
-        cubeRenderer.material.SetColor("_BaseColor", Color.red);
 
-        //Call SetColor using the shader property name "_Color" and setting the color to red
+            alive = false;
+            MeshAgent.isStopped = true;
+
+            cubeRenderer.material.SetColor("_BaseColor", Color.red);
+
+
+            Main.instance.UpdateMoney(valeur);
+        }
     }
     public bool IsDead()
     {
         return !alive;
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthbar.fillAmount = (float)health / (float)maxHealth;
     }
 }
