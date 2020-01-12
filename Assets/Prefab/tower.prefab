@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5593453251275554652}
   - component: {fileID: 5593453251275554654}
   - component: {fileID: 8849474674969183128}
+  - component: {fileID: 469396122315661724}
   m_Layer: 10
   m_Name: tower
   m_TagString: Untagged
@@ -191,7 +192,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  target: 0
+  target: {fileID: 0}
   slave: {fileID: 0}
 --- !u!114 &8849474674969183128
 MonoBehaviour:
@@ -210,3 +211,19 @@ MonoBehaviour:
   shotStepLoad: 1
   damage: 10
   detectionRadius: 10
+--- !u!208 &469396122315661724
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593453251275554641}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5, y: 1.5, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5

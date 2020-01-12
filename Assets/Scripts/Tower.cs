@@ -20,6 +20,11 @@ public class Tower : MonoBehaviour
     UpdateTowerBehaviour();
   }
 
+  void Start()
+  {
+    DefineTarget();
+  }
+
   void FixedUpdate()
   {
     if (GetTarget() == null || GetTarget().GetComponent<Mind>().IsDead())
@@ -73,17 +78,20 @@ public class Tower : MonoBehaviour
   public void DefineTarget()
   {
     hitColliders = Physics.OverlapSphere(transform.position, slave.detectionRadius, layerMask);
-    if (hitColliders.Length > 0)
+    Debug.Log("[1]"+ hitColliders + "> " + hitColliders.Length + "> " + target);
+    //if (hitColliders.Length > 0)
+    //{
+    //target = null;
+    for (int i = 0; i < hitColliders.Length; i++)
     {
-      target = null;
-      for (int i = 0; i < hitColliders.Length; i++)
+      if (!hitColliders[i].GetComponent<Mind>().IsDead())
       {
-        if (!hitColliders[i].GetComponent<Mind>().IsDead())
-        {
-          target = hitColliders[i].gameObject;
-        }
+        target = hitColliders[i].gameObject;
       }
     }
+    Debug.Log("[2]" + hitColliders.Length + "> " + target);
+
+    //}
   }
   [Button("Definir un TowerBehaviour")]
   void UpdateTowerBehaviour()
