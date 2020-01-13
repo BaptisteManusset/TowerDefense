@@ -8,7 +8,6 @@ public class Tower : MonoBehaviour
   Color color = Color.red;
   [BoxGroup("Target"), Label("Mob détectés")] public Collider[] hitColliders;
   [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
-  //[BoxGroup("Target"), Label("Cible"), ReadOnly] public int targetInt = -1;
   [BoxGroup("Target")] [Label("Cible")] [ShowAssetPreview] public GameObject target;
 
 
@@ -78,10 +77,6 @@ public class Tower : MonoBehaviour
   public void DefineTarget()
   {
     hitColliders = Physics.OverlapSphere(transform.position, slave.detectionRadius, layerMask);
-    Debug.Log("[1]"+ hitColliders + "> " + hitColliders.Length + "> " + target);
-    //if (hitColliders.Length > 0)
-    //{
-    //target = null;
     for (int i = 0; i < hitColliders.Length; i++)
     {
       if (!hitColliders[i].GetComponent<Mind>().IsDead())
@@ -89,9 +84,6 @@ public class Tower : MonoBehaviour
         target = hitColliders[i].gameObject;
       }
     }
-    Debug.Log("[2]" + hitColliders.Length + "> " + target);
-
-    //}
   }
   [Button("Definir un TowerBehaviour")]
   void UpdateTowerBehaviour()
