@@ -8,10 +8,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RoboRyanTron.Unite2017.Elements
+namespace ScriptableVariable.Unite2017.Elements
 {
     [CreateAssetMenu]
-    public class AttackElement : ScriptableObject
+    public class AttackElement : UnityEngine.ScriptableObject
     {
         [Tooltip("The elements that are defeated by this element.")]
         public List<AttackElement> DefeatedElements = new List<AttackElement>();

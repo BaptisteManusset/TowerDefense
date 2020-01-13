@@ -8,7 +8,7 @@
 using System;
 using UnityEngine;
 
-namespace RoboRyanTron.Unite2017.Variables
+namespace ScriptableVariable.Unite2017.Variables
 {
     public class KeyboardMover : MonoBehaviour
     {

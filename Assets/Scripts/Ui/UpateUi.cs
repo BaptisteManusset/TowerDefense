@@ -1,5 +1,5 @@
 using NaughtyAttributes;
-using RoboRyanTron.Unite2017.Variables;
+using ScriptableVariable.Unite2017.Variables;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

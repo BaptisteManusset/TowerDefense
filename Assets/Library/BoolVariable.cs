@@ -7,10 +7,10 @@
 
 using UnityEngine;
 
-namespace RoboRyanTron.Unite2017.Variables
+namespace ScriptableVariable.Unite2017.Variables
 {
     [CreateAssetMenu]
-    public class BoolVariable : ScriptableObject
+    public class BoolVariable : UnityEngine.ScriptableObject
     {
 #if UNITY_EDITOR
         [Multiline]

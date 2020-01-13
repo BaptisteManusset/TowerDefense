@@ -7,7 +7,7 @@
 
 using System;
 
-namespace RoboRyanTron.Unite2017.Variables
+namespace ScriptableVariable.Unite2017.Variables
 {
     [Serializable]
     public class BoolReference

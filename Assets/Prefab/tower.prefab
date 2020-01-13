@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8122568562001870799}
   m_Layer: 10
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 469396122315661724}
   m_Layer: 10
   m_Name: tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   target: {fileID: 0}
-  slave: {fileID: 0}
+  slave: {fileID: 8849474674969183128}
 --- !u!114 &8849474674969183128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281278da4d9f40d4e9852f2be3e9dee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  master: {fileID: 0}
+  master: {fileID: 5593453251275554654}
   shotLoading: 100
   shotStepLoad: 1
   damage: 10

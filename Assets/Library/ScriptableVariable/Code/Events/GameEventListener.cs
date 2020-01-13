@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RoboRyanTron.Unite2017.Events
+namespace ScriptableVariable.Unite2017.Events
 {
     public class GameEventListener : MonoBehaviour
     {

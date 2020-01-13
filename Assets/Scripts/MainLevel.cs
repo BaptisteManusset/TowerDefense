@@ -1,5 +1,5 @@
 using NaughtyAttributes;
-using RoboRyanTron.Unite2017.Variables;
+using ScriptableVariable.Unite2017.Variables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,6 @@ public class MainLevel : MonoBehaviour
 {
     static public MainLevel instance;
 
-    [BoxGroup("Game Infos")] [Label("Pause")] public bool isPaused = false;
     [BoxGroup("Game Infos")] [Label("Gameover")] public bool gameover;
 
 
@@ -16,8 +15,8 @@ public class MainLevel : MonoBehaviour
     [BoxGroup("Destination tag")] [Tag] public string destinationsTag;
     static public GameObject[] destinations;
 
-    [BoxGroup("Stats")] public int money;
-    [BoxGroup("Stats")] public int lifes = 20;
+    //[BoxGroup("Stats")] public int money;
+    //[BoxGroup("Stats")] public int lifes = 20;
 
 
     [BoxGroup("Game Infos")] [ReadOnly] public GameObject camera;
@@ -27,7 +26,7 @@ public class MainLevel : MonoBehaviour
     //MainUI mainui;
     MainMode mainMode;
 
-    [BoxGroup("Vie")]public FloatVariable health;
+    [BoxGroup("Vie")] public FloatVariable health;
     [BoxGroup("Vie")] public FloatReference maxHealth;
     [BoxGroup("Argent")] public FloatVariable argent;
     void Awake()

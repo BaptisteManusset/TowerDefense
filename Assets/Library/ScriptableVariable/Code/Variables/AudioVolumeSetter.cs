@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace RoboRyanTron.Unite2017.Variables
+namespace ScriptableVariable.Unite2017.Variables
 {
     public class AudioVolumeSetter : MonoBehaviour
     {

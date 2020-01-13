@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RoboRyanTron.Unite2017.Elements
+namespace ScriptableVariable.Unite2017.Elements
 {
     public class Elemental : MonoBehaviour
     {

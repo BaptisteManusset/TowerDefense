@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 782441928431970063}
   - component: {fileID: 782441928431970062}
   - component: {fileID: 7036824382373449248}
+  - component: {fileID: 7827598364762501028}
   m_Layer: 9
   m_Name: simpleMob
   m_TagString: Untagged
@@ -159,6 +160,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7827598364762501028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782441928431970052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f557f39c5d4c1464090e5d0220344341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RuntimeSet: {fileID: 11400000, guid: 14317b5ba6706354d962fc935ff7a375, type: 2}
 --- !u!1 &1766944699271892095
 GameObject:
   m_ObjectHideFlags: 0

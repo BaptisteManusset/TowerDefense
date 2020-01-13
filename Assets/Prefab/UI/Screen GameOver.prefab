@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8609045677354307497}
   - component: {fileID: 8610121486467144919}
   - component: {fileID: 8502116366430785181}
+  - component: {fileID: 9186245264030501109}
   m_Layer: 5
   m_Name: Screen GameOver
   m_TagString: Untagged
@@ -81,6 +82,35 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &9186245264030501109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8385752223192177425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b3a845bf319c3664994e02bf6b5fa13f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8386044875834781415}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &8386044875834781415
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +123,7 @@ GameObject:
   - component: {fileID: 8606404295901058463}
   - component: {fileID: 8502164489602840321}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: GameOVer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

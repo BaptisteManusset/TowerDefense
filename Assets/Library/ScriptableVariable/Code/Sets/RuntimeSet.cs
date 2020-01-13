@@ -8,9 +8,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RoboRyanTron.Unite2017.Sets
+namespace ScriptableVariable.Unite2017.Sets
 {
-    public abstract class RuntimeSet<T> : ScriptableObject
+    public abstract class RuntimeSet<T> : UnityEngine.ScriptableObject
     {
         public List<T> Items = new List<T>();
 

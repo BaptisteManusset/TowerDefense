@@ -5,18 +5,22 @@
 // Date:   10/04/17
 // ----------------------------------------------------------------------------
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RoboRyanTron.Unite2017.Sets
+namespace ScriptableVariable.Unite2017.Sets
 {
     public class ThingMonitor : MonoBehaviour
     {
-        public ThingRuntimeSet Set;
+        [SerializeField] ThingRuntimeSet Set;
 
-        public Text Text;
+        [SerializeField] TextMeshProUGUI Text;
 
-        private int previousCount = -1;
+        [SerializeField] int previousCount = -1;
+
+        [SerializeField] string prefix;
+        [SerializeField] string suffix;
 
         private void OnEnable()
         {
@@ -34,7 +38,7 @@ namespace RoboRyanTron.Unite2017.Sets
 
         public void UpdateText()
         {
-            Text.text = "There are " + Set.Items.Count + " things.";
+            Text.text = prefix + Set.Items.Count + suffix;
         }
     }
 }
