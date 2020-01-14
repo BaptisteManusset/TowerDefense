@@ -1,54 +1,55 @@
-﻿using NaughtyAttributes;
+using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using TMPro;
 using UnityEngine;
 
 public class UiStatTower : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI description;
-    [SerializeField] GameObjectVariable tower;
-    [SerializeField] TextMeshProUGUI UiName;
-    [SerializeField] UiStatDisplay UiRadius;
-    [SerializeField] UiStatDisplay UiDamage;
-    [SerializeField] UiStatDisplay UiRechargeDuration;
-    TowerStat stat;
-    string text;
-    [Button]
-    public void UpdateUi()
-    {
-        if (tower.Value != null)
-        {
-            stat = tower.Value.gameObject.GetComponent<Tower>().stat;
-            text = "";
-            text += "name " + tower.Value.name + "\n";
-            text += "radius " + stat.radius + "\n";
-            text += "damage " + stat.damage + "\n";
-            text += "recharge " + stat.reloadSpeed + "\n";
-            text += "ZoneAttack " + stat.isZoneAttack + "\n";
-            description.text = text;
-
-            UiName.name = stat.name;
-            UiRadius.SetValue(stat.radius);
-            UiDamage.SetValue(stat.damage);
-            UiRechargeDuration.SetValue(stat.reloadSpeed);
-        }
-        else
-        {
-            Debug.LogError("Aucune tour n'est selectionnée");
-        }
-    }
+  [BoxGroup("Debug")] [SerializeField] TextMeshProUGUI description;
+  [BoxGroup("Variable")] [SerializeField] GameObjectVariable tower;
+  [BoxGroup("UI")] [SerializeField] TextMeshProUGUI UiName;
+  [BoxGroup("UI")] [SerializeField] UiStatDisplay UiRadius;
+  [BoxGroup("UI")] [SerializeField] UiStatDisplay UiDamage;
+  [BoxGroup("UI")] [SerializeField] UiStatDisplay UiRechargeDuration;
 
 
-    public void IncrementRadius()
+
+  TowerStat stat;
+  string text;
+
+
+  [Button]
+  public void UpdateUi()
+  {
+    if (tower.Value != null)
     {
-        stat.radius++;
-    }
-    public void IncrementDamage()
+      stat = tower.Value.gameObject.GetComponent<Tower>().stat;
+      text = "";
+      text += "name " + tower.Value.name + "\n";
+      text += "radius " + stat.datas["Radius"].value + "\n";
+      text += "damage " + stat.datas["Damage"].value + "\n";
+      text += "recharge " + stat.datas["ReloadSpeed"].value + "\n";
+      text += "ZoneAttack " + stat.isZoneAttack + "\n";
+      description.text = text;
+
+      UiName.name = stat.name;
+      Debug.Log("");
+      Debug.Log("");
+      Debug.Log("");
+      Debug.Log(UiRadius);
+      Debug.Log(TowerStat.listData.Radius.ToString());
+      Debug.Log(stat.datas[TowerStat.listData.Radius.ToString()].value);
+      UiRadius.SetValue(
+        stat.datas[TowerStat.listData.Radius.ToString()].value);
+      UiDamage.SetValue(
+        stat.datas[TowerStat.listData.Damage.ToString()].value);
+      UiRechargeDuration.SetValue(
+        stat.datas[TowerStat.listData.ReloadSpeed.ToString()].value);
+    } else
     {
-        stat.damage++;
+      Debug.LogError("Aucune tour n'est selectionnée");
     }
-    public void IncrementReload()
-    {
-        stat.reloadSpeed++;
-    }
+  }
+
+
 }

@@ -12,7 +12,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fb1f0c9d5093d47ad5e38adb5bcceb, type: 3}
   m_Name: TowerStat
   m_EditorClassIdentifier: 
-  radius: 10
   damage: 10
-  rechargeDuration: 10
+  reloadSpeed: 0
   isZoneAttack: 0
+  datas:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - Radius
+    - Damage
+    - ReloadSpeed
+    _keys:
+    - Radius
+    - Damage
+    - ReloadSpeed
+    _values:
+    - id: Radius
+      value: 10
+      cost: 10
+      upgrateLevel: 0
+    - id: Damage
+      value: 10
+      cost: 10
+      upgrateLevel: 0
+    - id: ReloadSpeed
+      value: 10
+      cost: 10
+      upgrateLevel: 0

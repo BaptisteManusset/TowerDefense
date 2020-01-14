@@ -19,7 +19,6 @@ public class Tower : MonoBehaviour
     [BoxGroup("Systeme de tir"), ReadOnly, Required("Il est necessaire d'avoir un TowerBehaviour")] public TowerBehaviour slave;
     void Awake()
     {
-        stat = new TowerStat();
         stat = Object.Instantiate(statDefault);
 
         UpdateTowerBehaviour();

@@ -39,7 +39,7 @@ public class Cursor : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 1000, RaycastLayerMask))
             {
 
-                Debug.Log(hit.collider.gameObject.tag, hit.collider.gameObject);
+                //Debug.Log(hit.collider.gameObject.tag, hit.collider.gameObject);
                 clickPosition = hit.point;
                 // align coordinate to the grid
                 pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, 2, Mathf.Round(clickPosition.z / caseSize) * caseSize);

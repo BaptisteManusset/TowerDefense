@@ -29,10 +29,11 @@ public class MainLevel : MonoBehaviour
     [BoxGroup("Vie")] public FloatVariable health;
     [BoxGroup("Vie")] public FloatReference maxHealth;
     [BoxGroup("Argent")] public FloatVariable argent;
+    [BoxGroup("Argent")] public float argentDefault = 1000;
     void Awake()
     {
         health.SetValue(maxHealth);
-        argent.SetValue(0);
+        argent.SetValue(argentDefault);
     }
 
 
