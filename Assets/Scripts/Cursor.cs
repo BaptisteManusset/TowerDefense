@@ -1,6 +1,6 @@
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
+using ScriptableVariable.Unite2017.Events;
+using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,14 +22,12 @@ public class Cursor : MonoBehaviour
     [BoxGroup("Tower")] [SerializeField] [Tag] string towerTag;
     [BoxGroup("Tower UI")] [SerializeField] GameObject towerUi;
     [BoxGroup("Tower UI")] [SerializeField] Vector3 offsetTowerUi;
-
-
+    [BoxGroup("Tower UI")] [SerializeField] GameObjectVariable actualTower;
 
     void Awake()
     {
         cam = Camera.main;
     }
-
     void Update()
     {
         // verification de si le curseur est sur le GUI
@@ -43,37 +41,48 @@ public class Cursor : MonoBehaviour
 
                 Debug.Log(hit.collider.gameObject.tag, hit.collider.gameObject);
                 clickPosition = hit.point;
-                // convertion des coordonnées en coordonées alignées à la grille
+                // align coordinate to the grid
                 pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, 2, Mathf.Round(clickPosition.z / caseSize) * caseSize);
 
 
+
+                // if the cursor touch a tower
                 if (hit.collider.gameObject.CompareTag(towerTag))
                 {
-                    towerUi.transform.position = pos;
-                    towerUi.transform.LookAt(Camera.main.transform.position);
+                    gizmos.SetActive(false);
+                    actualTower.SetValue(hit.collider.gameObject.GetComponent<Tower>().gameObject);
+
+                    towerUi.SetActive(true);
+                    towerUi.transform.position = pos + offsetTowerUi;
+                    towerUi.transform.rotation = Camera.main.transform.rotation;
 
                 }
-                else if (hit.collider.gameObject.tag == zoneDePlacement)
+                else
                 {
-                    
-                    gizmos.transform.position = pos;
-
-                    #region verification de si la place est disponible et changement de couleur
-                    Collider[] hitColliders = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
-                    if (hitColliders.Length == 0)
+                    towerUi.SetActive(false);
+                    //si on touche une zone de placement
+                    if (hit.collider.gameObject.tag == zoneDePlacement)
                     {
-                        gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
-                        if (Input.GetMouseButtonDown(0))
+                        //actualTower.Clear();
+
+                        gizmos.SetActive(true);
+                        gizmos.transform.position = pos;
+
+                        #region verification de si la place est disponible et changement de couleur
+                        Collider[] hitColliders = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
+                        if (hitColliders.Length == 0)
                         {
-                            Instantiate(tower, pos, Quaternion.identity, parent.transform);
-                        }
-                    }
-                    else
-                    {
-                        gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Error);
-                    }
-                    #endregion
+                            gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                               var obj =  Instantiate(tower, pos, Quaternion.identity, parent.transform);
 
+                                obj.gameObject.name += obj.GetHashCode();
+                            }
+                        }
+                        #endregion
+
+                    }
                 }
             }
 
@@ -90,7 +99,7 @@ public class Cursor : MonoBehaviour
         Gizmos.DrawWireSphere(pos, 2);
     }
     [Button]
-    public void changeColor()
+    void changeColor()
     {
         gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Error);
     }

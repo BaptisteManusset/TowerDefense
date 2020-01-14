@@ -10,23 +10,17 @@ public class TowerBehaviour : MonoBehaviour
     [BoxGroup("Stats"), ProgressBar("chargement")] public float shotLoading = 100;
 
     [BoxGroup("Stats"), Label("Vitesse de recharge")] public float shotStepLoad = 1;
-    [BoxGroup("Stats")] public int damage = 10;
-
-    [Space(10)] [BoxGroup("Stats")] public float detectionRadius = 10;
-
-
 
     public void Shot()
     {
         if (Shotenabled)
         {
             Mind m = master.GetTarget().GetComponent<Mind>();
-            m.Damage(damage);
+            m.Damage(master.stat.damage);
             Shotenabled = false;
             shotLoading = 0;
             if (m.IsDead())
             {
-                //master.targetInt = -1;
                 master.DefineTarget();
             }
         }
