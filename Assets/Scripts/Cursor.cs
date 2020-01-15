@@ -53,6 +53,7 @@ public class Cursor : MonoBehaviour
                 pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, 2, Mathf.Round(clickPosition.z / caseSize) * caseSize);
 
 
+                #region collide with a tower
 
                 if (hit.collider.gameObject.CompareTag(towerTag))
                 {
@@ -64,6 +65,7 @@ public class Cursor : MonoBehaviour
                     towerUi.transform.rotation = Camera.main.transform.rotation;
 
                 }
+                #endregion
                 else
                 {
                     towerUi.SetActive(false);

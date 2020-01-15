@@ -11,7 +11,7 @@ public class gridDisplay : MonoBehaviour
     public int caseSize = 3;
     public float hauteur;
     public bool display;
-    float offset = 1.5f;
+    public float offset = 1.5f;
     void OnDrawGizmos()
     {
         if (display)
