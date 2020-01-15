@@ -3,7 +3,16 @@ guid: 257aa77ea24490e468f5d4f733acc47d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - description: {instanceID: 0}
+  - tower: {instanceID: 0}
+  - stat: {instanceID: 0}
+  - argent: {fileID: 11400000, guid: a5eaad59f306f3343a3002385d0fa336, type: 2}
+  - UiName: {instanceID: 0}
+  - UiSellButton: {instanceID: 0}
+  - UiRadius: {instanceID: 0}
+  - UiDamage: {instanceID: 0}
+  - UiRechargeDuration: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

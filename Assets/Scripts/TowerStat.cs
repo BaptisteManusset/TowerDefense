@@ -7,59 +7,68 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TowerStat : ScriptableObject
 {
-  //[Space(20)] public int radius;
-  //public int radiusUpgradeCost;
-
-  [Space(20)] public int damage;
-  //public int damageUpgradeCost;
-
-  [Space(20)] public int reloadSpeed;
-  //public int reloadSpeedUpgradeCost;
-
-  [Space(20)] public bool isZoneAttack;
+    /*
+     * Radius
+     * Damage
+     * ReloadSpeed
+     */
 
 
+    //[Space(20)] public int radius;
+    //public int radiusUpgradeCost;
 
+    //[Space(20)] public int damage;
+    //public int damageUpgradeCost;
 
-  [System.Serializable]
-  public class Data
-  {
-    public string id;
-    public int value = 0;
-    public int cost = 10;
-    public int upgrateLevel = 0;
-  }
+    //[Space(20)] public int reloadSpeed;
+    //public int reloadSpeedUpgradeCost;
 
-  [System.Serializable]
-  public class GenericDictionary : SerializableDictionaryBase<string, Data> { }
-
-  [SerializeField, ID("id")]
-  public GenericDictionary datas;
-
-
-  public enum listData
-  {
-    Radius,
-    Damage,
-    ReloadSpeed
-  }
+    [Space(20)] public bool isZoneAttack;
+    public float sellValue;
+    public float buyCost;
 
 
 
-  [Button]
-  void Init()
-  {
-    datas.Clear();
-    //Debug.Log("init");
-    //Data d = new Data();
 
-    //d.id = "Radius";
-    //datas.Add(d.id, d);
+    [System.Serializable]
+    public class Data
+    {
+        public string id;
+        public int value = 0;
+        public int cost = 10;
+        public int upgrateLevel = 0;
+    }
 
-    //d.id = "Damage";
-    //datas.Add(d.id, d);
+    [System.Serializable]
+    public class GenericDictionary : SerializableDictionaryBase<string, Data> { }
 
-    //d.id = "ReloadSpeed";
-    //datas.Add(d.id, d);
-  }
+    [SerializeField, ID("id")]
+    public GenericDictionary datas;
+
+
+    public enum listData
+    {
+        Radius,
+        Damage,
+        ReloadSpeed
+    }
+
+
+
+    [Button]
+    public void Init()
+    {
+        GetValue();
+    }
+
+    public float GetValue()
+    {
+        sellValue = buyCost;
+
+        sellValue += datas["Radius"].cost * datas["Radius"].upgrateLevel;
+        sellValue += datas["Damage"].cost * datas["Damage"].upgrateLevel;
+        sellValue += datas["ReloadSpeed"].cost * datas["ReloadSpeed"].upgrateLevel;
+        sellValue = Mathf.Ceil(sellValue / 4);
+        return sellValue;
+    }
 }

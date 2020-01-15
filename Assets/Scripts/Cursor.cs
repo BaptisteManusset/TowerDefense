@@ -8,7 +8,12 @@ public class Cursor : MonoBehaviour
 {
     private Camera cam;
     Vector3 clickPosition = Vector3.zero;
+    [BoxGroup("Argent")] [SerializeField] FloatVariable argent;
+
+
+
     [BoxGroup("Dimension")] public int caseSize = 3;
+
     [BoxGroup("Gizmos")] public GameObject gizmos;
     [BoxGroup("Gizmos")] public Color Sucess;
     [BoxGroup("Gizmos")] public Color Error;
@@ -20,9 +25,12 @@ public class Cursor : MonoBehaviour
     [BoxGroup("Tower")] [SerializeField] LayerMask RaycastLayerMask;
     [BoxGroup("Tower")] [SerializeField] [Tag] string zoneDePlacement;
     [BoxGroup("Tower")] [SerializeField] [Tag] string towerTag;
+
     [BoxGroup("Tower UI")] [SerializeField] GameObject towerUi;
     [BoxGroup("Tower UI")] [SerializeField] Vector3 offsetTowerUi;
     [BoxGroup("Tower UI")] [SerializeField] GameObjectVariable actualTower;
+
+
 
     void Awake()
     {
@@ -46,7 +54,6 @@ public class Cursor : MonoBehaviour
 
 
 
-                // if the cursor touch a tower
                 if (hit.collider.gameObject.CompareTag(towerTag))
                 {
                     gizmos.SetActive(false);
@@ -75,9 +82,17 @@ public class Cursor : MonoBehaviour
                             gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
                             if (Input.GetMouseButtonDown(0))
                             {
-                               var obj =  Instantiate(tower, pos, Quaternion.identity, parent.transform);
+                                #region if player have enought money he can place the tower
+                                int buycost = (int)tower.GetComponent<Tower>().statDefault.buyCost;
+                                if (argent.Value - buycost >= 0)
+                                {
+                                    argent.ApplyChange(-buycost);
 
-                                obj.gameObject.name += obj.GetHashCode();
+                                    var obj = Instantiate(tower, pos, Quaternion.identity, parent.transform);
+
+                                    obj.gameObject.name += obj.GetHashCode();
+                                }
+                                #endregion
                             }
                         }
                         #endregion

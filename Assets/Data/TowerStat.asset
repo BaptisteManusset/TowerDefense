@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fb1f0c9d5093d47ad5e38adb5bcceb, type: 3}
   m_Name: TowerStat
   m_EditorClassIdentifier: 
-  damage: 10
-  reloadSpeed: 0
   isZoneAttack: 0
+  sellValue: 0
+  buyCost: 10
   datas:
     reorderableList:
       canAdd: 1
@@ -50,12 +50,12 @@ MonoBehaviour:
     - id: Radius
       value: 10
       cost: 10
-      upgrateLevel: 0
+      upgrateLevel: 1
     - id: Damage
       value: 10
       cost: 10
-      upgrateLevel: 0
+      upgrateLevel: 1
     - id: ReloadSpeed
       value: 10
       cost: 10
-      upgrateLevel: 0
+      upgrateLevel: 1

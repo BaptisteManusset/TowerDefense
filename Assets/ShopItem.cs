@@ -16,7 +16,7 @@ public class ShopItem : MonoBehaviour
     void Start()
     {
         TxtNom.text = nom;
-        TxtTarif.text = tarif + "$";
+        TxtTarif.text = tarif + "#";
         placer = (Cursor)FindObjectOfType(typeof(Cursor));
 
 

@@ -20,12 +20,14 @@ public class Tower : MonoBehaviour
     void Awake()
     {
         stat = Object.Instantiate(statDefault);
+        stat.Init();
 
         UpdateTowerBehaviour();
     }
 
     void Start()
     {
+
         DefineTarget();
     }
 
@@ -49,7 +51,7 @@ public class Tower : MonoBehaviour
     {
         Gizmos.color = color;
         if (slave)
-            Gizmos.DrawWireSphere(transform.position, stat.reloadSpeed);
+            Gizmos.DrawWireSphere(transform.position, stat.datas["ReloadSpeed"].value);
         if (hitColliders != null)
         {
             if (hitColliders.Length != 0)
@@ -80,7 +82,7 @@ public class Tower : MonoBehaviour
     }
     public void DefineTarget()
     {
-        hitColliders = Physics.OverlapSphere(transform.position, stat.reloadSpeed, layerMask);
+        hitColliders = Physics.OverlapSphere(transform.position, stat.datas["ReloadSpeed"].value, layerMask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
             if (!hitColliders[i].GetComponent<Mind>().IsDead())
@@ -108,4 +110,12 @@ public class Tower : MonoBehaviour
         DestroyImmediate(slave);
         slave = null;
     }
+
+
+    public void sellTower()
+    {
+        Destroy(gameObject);
+    }
+
+
 }

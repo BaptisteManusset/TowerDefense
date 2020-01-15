@@ -16,7 +16,7 @@ public class TowerBehaviour : MonoBehaviour
         if (Shotenabled)
         {
             Mind m = master.GetTarget().GetComponent<Mind>();
-            m.Damage(master.stat.damage);
+            m.Damage(master.stat.datas["Damage"].value);
             Shotenabled = false;
             shotLoading = 0;
             if (m.IsDead())
