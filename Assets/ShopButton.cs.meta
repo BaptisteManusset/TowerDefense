@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 93d09f5f6fa2e1e4ebb3a696d11546f0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tour: {instanceID: 0}
+  - argent: {fileID: 11400000, guid: a5eaad59f306f3343a3002385d0fa336, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

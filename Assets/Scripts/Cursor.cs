@@ -8,23 +8,26 @@ public class Cursor : MonoBehaviour
 {
     private Camera cam;
     Vector3 clickPosition = Vector3.zero;
-    [BoxGroup("Argent")] [SerializeField] FloatVariable argent;
+    [BoxGroup("Argent")] public FloatVariable argent;
 
 
 
-    [BoxGroup("Dimension")] public int caseSize = 3;
+    [BoxGroup("Dimension")] [ReadOnly] public int caseSize = 3;
 
     [BoxGroup("Gizmos")] public GameObject gizmos;
     [BoxGroup("Gizmos")] public Color Sucess;
     [BoxGroup("Gizmos")] public Color Error;
     [BoxGroup("Gizmos")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
+    [BoxGroup("Gizmos")] public float safeRadius;
 
-    [BoxGroup("Tower")] [ShowAssetPreview] [ReadOnly] public GameObject tower;
+    [BoxGroup("Tower")] [ReadOnly] public GameObjectVariable tower;
     [BoxGroup("Tower")] [SerializeField] GameObject parent;
     [BoxGroup("Tower")] [SerializeField] LayerMask m_LayerMask;
+    [BoxGroup("Tower")] [SerializeField] LayerMask safeRadius_LayerMask;
     [BoxGroup("Tower")] [SerializeField] LayerMask RaycastLayerMask;
     [BoxGroup("Tower")] [SerializeField] [Tag] string zoneDePlacement;
     [BoxGroup("Tower")] [SerializeField] [Tag] string towerTag;
+
 
     [BoxGroup("Tower UI")] [SerializeField] GameObject towerUi;
     [BoxGroup("Tower UI")] [SerializeField] Vector3 offsetTowerUi;
@@ -47,10 +50,10 @@ public class Cursor : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 1000, RaycastLayerMask))
             {
 
-                //Debug.Log(hit.collider.gameObject.tag, hit.collider.gameObject);
                 clickPosition = hit.point;
+
                 // align coordinate to the grid
-                pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, 2, Mathf.Round(clickPosition.z / caseSize) * caseSize);
+                pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, hit.point.y, Mathf.Round(clickPosition.z / caseSize) * caseSize);
 
 
                 #region collide with a tower
@@ -78,23 +81,28 @@ public class Cursor : MonoBehaviour
                         gizmos.transform.position = pos;
 
                         #region verification de si la place est disponible et changement de couleur
-                        Collider[] hitColliders = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
-                        if (hitColliders.Length == 0)
+                        Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
+                        if (hitCollidersBox.Length == 0)
                         {
-                            gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
-                            if (Input.GetMouseButtonDown(0))
+                            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadius_LayerMask);
+                            if (hitCollidersSphere.Length == 0)
                             {
-                                #region if player have enought money he can place the tower
-                                int buycost = (int)tower.GetComponent<Tower>().statDefault.buyCost;
-                                if (argent.Value - buycost >= 0)
+                                gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
+                                gizmos.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Sucess);
+                                if (Input.GetMouseButtonDown(0))
                                 {
-                                    argent.ApplyChange(-buycost);
+                                    #region if player have enought money he can place the tower
+                                    int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
+                                    if (argent.Value - buycost >= 0)
+                                    {
+                                        argent.ApplyChange(-buycost);
 
-                                    var obj = Instantiate(tower, pos, Quaternion.identity, parent.transform);
+                                        GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
 
-                                    obj.gameObject.name += obj.GetHashCode();
+                                        obj.gameObject.name += obj.GetHashCode();
+                                    }
+                                    #endregion
                                 }
-                                #endregion
                             }
                         }
                         #endregion
@@ -110,6 +118,7 @@ public class Cursor : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(clickPosition, .5f);
+        Gizmos.DrawWireSphere(clickPosition, safeRadius);
         Gizmos.DrawLine(transform.position, clickPosition);
 
         Gizmos.color = Color.green;
@@ -124,6 +133,6 @@ public class Cursor : MonoBehaviour
 
     public void selectTower(GameObject obj)
     {
-        tower = obj;
+        tower.SetValue(obj);
     }
 }

@@ -24,6 +24,6 @@ public class ShopItem : MonoBehaviour
 
     public void Click()
     {
-        placer.tower = obj;
+        placer.tower.SetValue(obj);
     }
 }

@@ -45,16 +45,16 @@ public class FlyCam : MonoBehaviour
         }
 
         p = p * Time.deltaTime;
-        if (Input.GetKey(KeyCode.Space))
-        { //If player wants to move on X and Z axis only
-            f = transform.position.y;
+        //if (Input.GetKey(KeyCode.Space))
+        //{ //If player wants to move on X and Z axis only
+        //    f = transform.position.y;
+        //    transform.Translate(p);
+        //    transform.Translate(0, f, 0);
+        //}
+        //else
+        //{
             transform.Translate(p);
-            transform.Translate(0, f, 0);
-        }
-        else
-        {
-            transform.Translate(p);
-        }
+        //}
 
     }
 
