@@ -43,4 +43,18 @@ public class MainLevel : MonoBehaviour
         camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+    
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+    }    
+    public void Accelerate(int value)
+    {
+        Time.timeScale = value;
+    }
+
 }

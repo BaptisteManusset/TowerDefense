@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ public class CameraController : MonoBehaviour
         float verti = Input.GetAxis("Vertical") * speed * Time.deltaTime * sboost;
 
 
+        //transform.Translate(hori, 0, 0);
         transform.Translate(hori, 0, 0);
         transform.Translate(0, verti, 0);
         #endregion
