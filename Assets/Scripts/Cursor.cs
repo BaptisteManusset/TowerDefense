@@ -9,12 +9,14 @@ public class Cursor : MonoBehaviour
     private Camera cam;
     Vector3 clickPosition = Vector3.zero;
     [BoxGroup("Argent")] public FloatVariable argent;
+    [BoxGroup("Shop")] public BoolVariable shopIsOpen;
 
 
 
     [BoxGroup("Dimension")] [ReadOnly] public int caseSize = 3;
 
     [BoxGroup("Gizmos")] public GameObject gizmos;
+    Renderer gizmosRender;
     [BoxGroup("Gizmos")] public Color Sucess;
     [BoxGroup("Gizmos")] public Color Error;
     [BoxGroup("Gizmos")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
@@ -38,6 +40,7 @@ public class Cursor : MonoBehaviour
     void Awake()
     {
         cam = Camera.main;
+        gizmosRender = gizmos.GetComponent<Renderer>();
     }
     void Update()
     {
@@ -60,10 +63,13 @@ public class Cursor : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag(towerTag))
                 {
-                    gizmos.SetActive(false);
+                    //gizmos.SetActive(false);
+                    gizmosRender.enabled = false;
                     actualTower.SetValue(hit.collider.gameObject.GetComponent<Tower>().gameObject);
 
-                    towerUi.SetActive(true);
+                    //towerUi.SetActive(true);
+
+                    gizmosRender.enabled = true;
                     towerUi.transform.position = pos + offsetTowerUi;
                     towerUi.transform.rotation = Camera.main.transform.rotation;
 
@@ -77,35 +83,41 @@ public class Cursor : MonoBehaviour
                     {
                         //actualTower.Clear();
 
-                        gizmos.SetActive(true);
-                        gizmos.transform.position = pos;
+                        //gizmos.SetActive(true);
 
-                        #region verification de si la place est disponible et changement de couleur
-                        Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
-                        if (hitCollidersBox.Length == 0)
+
+
+                        if (shopIsOpen.Value == true)
                         {
-                            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadius_LayerMask);
-                            if (hitCollidersSphere.Length == 0)
+                            gizmosRender.enabled = true;
+                            gizmos.transform.position = pos;
+                            #region verification de si la place est disponible et changement de couleur
+                            Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
+                            if (hitCollidersBox.Length == 0)
                             {
-                                gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
-                                gizmos.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Sucess);
-                                if (Input.GetMouseButtonDown(0))
+                                Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadius_LayerMask);
+                                if (hitCollidersSphere.Length == 0)
                                 {
-                                    #region if player have enought money he can place the tower
-                                    int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
-                                    if (argent.Value - buycost >= 0)
+                                    gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
+                                    gizmos.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Sucess);
+                                    if (Input.GetMouseButtonDown(0))
                                     {
-                                        argent.ApplyChange(-buycost);
+                                        #region if player have enought money he can place the tower
+                                        int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
+                                        if (argent.Value - buycost >= 0)
+                                        {
+                                            argent.ApplyChange(-buycost);
 
-                                        GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
+                                            GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
 
-                                        obj.gameObject.name += obj.GetHashCode();
+                                            obj.gameObject.name += obj.GetHashCode();
+                                        }
+                                        #endregion
                                     }
-                                    #endregion
                                 }
                             }
+                            #endregion
                         }
-                        #endregion
 
                     }
                 }
