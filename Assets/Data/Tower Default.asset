@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fb1f0c9d5093d47ad5e38adb5bcceb, type: 3}
+  m_Name: Tower Default
+  m_EditorClassIdentifier: 
+  isZoneAttack: 0
+  sellValue: 0
+  buyCost: 10
+  description: Tourrel Default
+  datas:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - Radius
+    - Damage
+    - ReloadSpeed
+    _keys:
+    - Radius
+    - Damage
+    - ReloadSpeed
+    _values:
+    - id: Radius
+      value: 10
+      cost: 10
+      upgrateLevel: 1
+    - id: Damage
+      value: 10
+      cost: 10
+      upgrateLevel: 1
+    - id: ReloadSpeed
+      value: 10
+      cost: 10
+      upgrateLevel: 1
