@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GlowingEmission
+  m_Shader: {fileID: -6465566751694194690, guid: d4592bc7988af8b4d8c3b2b41f217bf4,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_212E102C:
+        m_Texture: {fileID: 2800000, guid: a4156609cb9e84be5b5fafc60adeac6d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_C94745E3:
+        m_Texture: {fileID: 2800000, guid: b962d99ba1e86044ea453878b9fd1ad6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_549DE65B: 5
+    - Vector1_59C5942B: 1
+    - Vector1_6D81D6B8: 1
+    m_Colors:
+    - Color_B2CD9F35: {r: 1, g: 0, b: 0, a: 1}
+    - Color_C83DFD14: {r: 0, g: 0, b: 0, a: 0}
