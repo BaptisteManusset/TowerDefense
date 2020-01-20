@@ -3,7 +3,14 @@ guid: b1ff9b32ab260bc4b95be0152f414f9a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - argent: {fileID: 11400000, guid: a5eaad59f306f3343a3002385d0fa336, type: 2}
+  - shopIsOpen: {fileID: 11400000, guid: 55ef905b1c87cf543911280732e8feb1, type: 2}
+  - gizmos: {instanceID: 0}
+  - parent: {instanceID: 0}
+  - tower: {fileID: 11400000, guid: e9320d55695549f4ca9cf42d5a6886c1, type: 2}
+  - towerUi: {instanceID: 0}
+  - actualTower: {fileID: 11400000, guid: 70031e644ad48e24389236868005271b, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

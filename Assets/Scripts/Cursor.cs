@@ -2,30 +2,33 @@ using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class Cursor : MonoBehaviour
 {
     private Camera cam;
     Vector3 clickPosition = Vector3.zero;
+    [HideInInspector] public int caseSize = 3;
+
+
+
     [BoxGroup("Argent")] public FloatVariable argent;
-    [BoxGroup("Shop / Upgrade")] public BoolVariable shopIsOpen;
-    [BoxGroup("Shop / Upgrade")] public BoolVariable upgradeIsOpen;
+    [BoxGroup("Shop")] public BoolVariable shopIsOpen;
 
 
 
-    [BoxGroup("Dimension")] [ReadOnly] public int caseSize = 3;
 
     [BoxGroup("Gizmos")] public GameObject gizmos;
     Renderer gizmosRender;
-    [BoxGroup("Gizmos")] public Color Sucess;
-    [BoxGroup("Gizmos")] public Color Error;
-    [BoxGroup("Gizmos")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
-    [BoxGroup("Gizmos")] public float safeRadius;
 
-    [BoxGroup("Tower")] [ReadOnly] public GameObjectVariable tower;
-    [BoxGroup("Tower")] [SerializeField] GameObject parent;
-    [BoxGroup("Tower")] [SerializeField] LayerMask m_LayerMask;
-    [BoxGroup("Tower")] [SerializeField] LayerMask safeRadius_LayerMask;
+    [BoxGroup("Placement")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
+    [BoxGroup("Placement")] [Tooltip("Taille de la zone où le placement est interdit")] public float safeRadius;
+    [BoxGroup("Placement")] [SerializeField] [Label("Parent des Tours")] GameObject parent;
+
+    [BoxGroup("Tower")] public GameObjectVariable tower;
+
+    [BoxGroup("Tower")] [SerializeField] LayerMask LayerMaskAtPosition;
+    [BoxGroup("Tower")] [SerializeField] [FormerlySerializedAs("safeRadius_LayerMask")] LayerMask safeRadiusMask;
     [BoxGroup("Tower")] [SerializeField] LayerMask RaycastLayerMask;
     [BoxGroup("Tower")] [SerializeField] [Tag] string zoneDePlacement;
     [BoxGroup("Tower")] [SerializeField] [Tag] string towerTag;
@@ -67,7 +70,7 @@ public class Cursor : MonoBehaviour
                     towerUi.SetActive(true);
                     towerUi.transform.position = actualTower.Value.transform.position + offsetTowerUi;
                     towerUi.transform.rotation = Camera.main.transform.rotation;
-                    gizmos.transform.position = new Vector3(0,-100,0);
+                    gizmos.transform.position = new Vector3(0, -100, 0);
 
                 }
                 else
@@ -126,11 +129,7 @@ public class Cursor : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(pos, 2);
     }
-    [Button]
-    void changeColor()
-    {
-        gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Error);
-    }
+
 
 
     public void selectTower(GameObject obj)
@@ -145,11 +144,14 @@ public class Cursor : MonoBehaviour
     private bool BuyIfPossible()
     {
         //select the component each time for update the selected tower, can't be apply save in a variable
-        int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
-        if (argent.Value - buycost >= 0)
+        if (tower.Value != null)
         {
-            argent.ApplyChange(-buycost);
-            return true;
+            int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
+            if (argent.Value - buycost >= 0)
+            {
+                argent.ApplyChange(-buycost);
+                return true;
+            }
         }
 
         return false;
@@ -158,10 +160,10 @@ public class Cursor : MonoBehaviour
     private bool PlaceIsFree(Vector3 pos)
     {
 
-        Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
+        Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, LayerMaskAtPosition);
         if (hitCollidersBox.Length == 0)
         {
-            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadius_LayerMask);
+            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadiusMask);
             if (hitCollidersSphere.Length == 0)
             {
                 return true;

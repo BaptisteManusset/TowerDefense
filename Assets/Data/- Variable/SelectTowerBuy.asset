@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SelectTowerBuy
   m_EditorClassIdentifier: 
   DeveloperDescription: Tourrel choisis sur le shop
-  Value: {fileID: 9028553072534384541, guid: 8c5ad0fa8101aec46a369e361d197f40, type: 3}
+  Value: {fileID: 6377619553655962148, guid: 19573e638340bc6469ba8121ce4344e2, type: 3}

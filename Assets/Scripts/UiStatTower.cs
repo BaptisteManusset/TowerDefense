@@ -62,8 +62,6 @@ public class UiStatTower : MonoBehaviour
 
             UiName.text = tower.Value.name;
 
-
-
             UiRadius.SetValue(stat.datas[TowerStat.listData.Radius.ToString()].upgrateLevel);
             UiDamage.SetValue(stat.datas[TowerStat.listData.Damage.ToString()].upgrateLevel);
             UiRechargeDuration.SetValue(stat.datas[TowerStat.listData.ReloadSpeed.ToString()].upgrateLevel);
@@ -82,13 +80,10 @@ public class UiStatTower : MonoBehaviour
     public void sellTower()
     {
         Tower tw = tower.Value.GetComponent<Tower>();
-
-
-
         argent.ApplyChange(stat.GetValue());
-
         tw.sellTower();
         closeEvent.Raise();
+        tower.SetValue((GameObject)null);
     }
 
 }
