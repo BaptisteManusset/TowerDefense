@@ -1,5 +1,4 @@
 using NaughtyAttributes;
-using ScriptableVariable.Unite2017.Events;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +8,8 @@ public class Cursor : MonoBehaviour
     private Camera cam;
     Vector3 clickPosition = Vector3.zero;
     [BoxGroup("Argent")] public FloatVariable argent;
-    [BoxGroup("Shop")] public BoolVariable shopIsOpen;
+    [BoxGroup("Shop / Upgrade")] public BoolVariable shopIsOpen;
+    [BoxGroup("Shop / Upgrade")] public BoolVariable upgradeIsOpen;
 
 
 
@@ -63,62 +63,52 @@ public class Cursor : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag(towerTag))
                 {
-                    //gizmos.SetActive(false);
-                    gizmosRender.enabled = false;
                     actualTower.SetValue(hit.collider.gameObject.GetComponent<Tower>().gameObject);
-
-                    //towerUi.SetActive(true);
-
-                    gizmosRender.enabled = true;
-                    towerUi.transform.position = pos + offsetTowerUi;
+                    towerUi.SetActive(true);
+                    towerUi.transform.position = actualTower.Value.transform.position + offsetTowerUi;
                     towerUi.transform.rotation = Camera.main.transform.rotation;
+                    gizmos.transform.position = new Vector3(0,-100,0);
 
                 }
-                #endregion
                 else
                 {
-                    towerUi.SetActive(false);
-                    //si on touche une zone de placement
-                    if (hit.collider.gameObject.tag == zoneDePlacement)
+                    #endregion
+                    if (shopIsOpen.Value == true)
                     {
-                        //actualTower.Clear();
-
-                        //gizmos.SetActive(true);
-
-
-
-                        if (shopIsOpen.Value == true)
+                        if (hit.collider.gameObject.CompareTag(towerTag) == false)
                         {
-                            gizmosRender.enabled = true;
-                            gizmos.transform.position = pos;
-                            #region verification de si la place est disponible et changement de couleur
-                            Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
-                            if (hitCollidersBox.Length == 0)
+                            towerUi.SetActive(false);
+                            //si on touche une zone de placement
+
+                            if (hit.collider.gameObject.CompareTag(zoneDePlacement))
                             {
-                                Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadius_LayerMask);
-                                if (hitCollidersSphere.Length == 0)
+                                if (tower)
                                 {
-                                    gizmos.GetComponent<Renderer>().material.SetColor("_BaseColor", Sucess);
-                                    gizmos.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Sucess);
-                                    if (Input.GetMouseButtonDown(0))
+                                    gizmos.transform.position = pos;
+                                    #region verification de si la place est disponible et changement de couleur
+                                    if (PlaceIsFree(pos))
                                     {
-                                        #region if player have enought money he can place the tower
-                                        int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
-                                        if (argent.Value - buycost >= 0)
+                                        if (Input.GetMouseButtonDown(0))
                                         {
-                                            argent.ApplyChange(-buycost);
-
-                                            GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
-
-                                            obj.gameObject.name += obj.GetHashCode();
+                                            #region if player have enought money he can place the tower
+                                            if (BuyIfPossible())
+                                            {
+                                                GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
+                                                //obj.gameObject.name += obj.GetHashCode();
+                                            }
+                                            #endregion
                                         }
-                                        #endregion
                                     }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    Debug.LogError("There is no turrel assigned");
                                 }
                             }
-                            #endregion
-                        }
 
+
+                        }
                     }
                 }
             }
@@ -146,5 +136,38 @@ public class Cursor : MonoBehaviour
     public void selectTower(GameObject obj)
     {
         tower.SetValue(obj);
+    }
+
+    /// <summary>
+    /// control if the buy is possible
+    /// </summary>
+    /// <returns>true if is a sucess </returns>
+    private bool BuyIfPossible()
+    {
+        //select the component each time for update the selected tower, can't be apply save in a variable
+        int buycost = (int)tower.Value.GetComponent<Tower>().statDefault.buyCost;
+        if (argent.Value - buycost >= 0)
+        {
+            argent.ApplyChange(-buycost);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool PlaceIsFree(Vector3 pos)
+    {
+
+        Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, m_LayerMask);
+        if (hitCollidersBox.Length == 0)
+        {
+            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadius_LayerMask);
+            if (hitCollidersSphere.Length == 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

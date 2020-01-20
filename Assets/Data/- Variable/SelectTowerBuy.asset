@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afde042156902ab4b9521d2a74eb2466, type: 3}
-  m_Name: OnShopShow
+  m_Script: {fileID: 11500000, guid: a198c1fde7979bf40860fb57b1dba84c, type: 3}
+  m_Name: SelectTowerBuy
   m_EditorClassIdentifier: 
+  DeveloperDescription: Tourrel choisis sur le shop
+  Value: {fileID: 9028553072534384541, guid: 8c5ad0fa8101aec46a369e361d197f40, type: 3}

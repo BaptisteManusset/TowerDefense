@@ -14,7 +14,7 @@ public class UiStatTower : MonoBehaviour
     [BoxGroup("Debug")] [SerializeField] TextMeshProUGUI description;
 
     [BoxGroup("Tour Actuel")] [SerializeField] GameObjectVariable tower;
-    [BoxGroup("Tour Actuel")] [SerializeField] [ReadOnly] TowerStat stat;
+    [BoxGroup("Tour Actuel")] [SerializeField] TowerStat stat;
 
 
 
@@ -40,6 +40,9 @@ public class UiStatTower : MonoBehaviour
     [Button]
     public void UpdateUi()
     {
+        if (tower == null) Debug.LogError("bordel de merde !!!");
+
+
         if (tower.Value != null)
         {
             stat = tower.Value.gameObject.GetComponent<Tower>().stat;

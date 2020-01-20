@@ -5,6 +5,7 @@
 // Date:   10/04/17
 // ----------------------------------------------------------------------------
 
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
