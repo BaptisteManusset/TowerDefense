@@ -132,30 +132,6 @@ MonoBehaviour:
     m_Value: 24
     min: 3
     max: 24
---- !u!114 &-2825229437747003069
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b51a78e223a2e504bb88a059b55229ea, type: 3}
-  m_Name: WhiteBalance
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  temperature:
-    m_OverrideState: 1
-    m_Value: 100
-    min: -100
-    max: 100
-  tint:
-    m_OverrideState: 1
-    m_Value: 100
-    min: -100
-    max: 100
 --- !u!114 &-2524912049801036026
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -195,12 +171,10 @@ MonoBehaviour:
   - {fileID: 7951418418387817311}
   - {fileID: -2524912049801036026}
   - {fileID: 7243625280595426177}
-  - {fileID: 6003360469253941203}
   - {fileID: -8219358314360471820}
   - {fileID: -7998895080732031241}
   - {fileID: 4095934498896068887}
   - {fileID: -3117275120924943403}
-  - {fileID: -2825229437747003069}
 --- !u!114 &4095934498896068887
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -238,63 +212,6 @@ MonoBehaviour:
     m_Value: 1
     min: 0.01
     max: 5
---- !u!114 &6003360469253941203
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2150ee00179b2f4418ea8b21a7e98eea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  colorMode:
-    m_OverrideState: 1
-    m_Value: 1
-  color:
-    m_OverrideState: 1
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 1
-    showAlpha: 0
-    showEyeDropper: 1
-  density:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 0
-    max: 1
-  maxFogDistance:
-    m_OverrideState: 1
-    m_Value: 5000
-    min: 0
-  mipFogMaxMip:
-    m_OverrideState: 1
-    m_Value: 0.5
-    min: 0
-    max: 1
-  mipFogNear:
-    m_OverrideState: 1
-    m_Value: 0
-    min: 0
-  mipFogFar:
-    m_OverrideState: 1
-    m_Value: 1000
-    min: 0
-  fogDistance:
-    m_OverrideState: 1
-    m_Value: 200
-    min: 0
-  fogBaseHeight:
-    m_OverrideState: 1
-    m_Value: 0
-  fogHeightAttenuation:
-    m_OverrideState: 1
-    m_Value: 0.2
-    min: 0
-    max: 1
 --- !u!114 &7243625280595426177
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -387,7 +304,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   maxShadowDistance:
     m_OverrideState: 1
-    m_Value: 500
+    m_Value: 100
     min: 0
   cascadeShadowSplitCount:
     m_OverrideState: 1
