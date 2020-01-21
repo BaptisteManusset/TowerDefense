@@ -12,6 +12,8 @@ public class Tower : MonoBehaviour
     [BoxGroup("Target")] [Label("Cible")] [ShowAssetPreview] public GameObject target;
     public TowerStat statDefault;
     public TowerStat stat;
+    [SerializeField] GameObject radius;
+
 
 
 
@@ -45,6 +47,7 @@ public class Tower : MonoBehaviour
 
 
         slave.ShotReload();
+        UpdateInfo();
     }
 
     void OnDrawGizmosSelected()
@@ -117,5 +120,11 @@ public class Tower : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+    private void UpdateInfo()
+    {
+        int scale = stat.datas["Radius"].upgrateLevel * 3;
+        radius.transform.localScale = Vector3.one * scale;
+    }
 
 }

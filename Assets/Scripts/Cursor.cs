@@ -57,6 +57,7 @@ public class Cursor : MonoBehaviour
             {
 
                 clickPosition = hit.point;
+                if (Vector3Int.CeilToInt(hit.normal) != Vector3.up) return;
 
                 // align coordinate to the grid
                 pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, hit.point.y, Mathf.Round(clickPosition.z / caseSize) * caseSize);

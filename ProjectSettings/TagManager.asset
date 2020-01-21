@@ -7,6 +7,7 @@ TagManager:
   - Destination
   - Plot
   - Tower
+  - Spawner
   layers:
   - Default
   - TransparentFX
