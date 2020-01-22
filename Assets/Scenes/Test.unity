@@ -27118,7 +27118,7 @@ MonoBehaviour:
   tower: {fileID: 11400000, guid: e9320d55695549f4ca9cf42d5a6886c1, type: 2}
   LayerMaskAtPosition:
     serializedVersion: 2
-    m_Bits: 5120
+    m_Bits: 21504
   safeRadiusMask:
     serializedVersion: 2
     m_Bits: 1024
