@@ -13,48 +13,77 @@ public class ShopButton : MonoBehaviour
     [SerializeField] FloatReference argent;
 
     [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiName;
-    [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiRadius;
-    [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiPower;
-    [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiReloadPower;
+
+
+    //[BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiRadius;
+
+
+    [BoxGroup("UI")] [SerializeField] uiStatDisplayDot uiRadiusAdv;
+    [BoxGroup("UI")] [SerializeField] uiStatDisplayDot uiDamageAdv;
+    [BoxGroup("UI")] [SerializeField] uiStatDisplayDot uiReloadSpeedAdv;
+
+
+    //[BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiPower;
+
+
+    //[BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiReloadPower;
+
+
     [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiDescription;
+
+
     [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiCout;
 
     void Awake()
     {
-        UpdateUi();
+        tourToSell = null;
+
     }
     public void BuyTower()
     {
-        //if (argent.Value >= 0)
-        //{
         tour.Value = tourToSell;
-        //}
     }
 
-    public void UpdateUi(GameObject obj)
+    public void SetObj(GameObject obj)
     {
         tourToSell = obj;
         UpdateUi();
     }
 
-
-    [Button]
     public void UpdateUi()
     {
-        if (tour.Value == null)
-        {
-            Debug.LogError("Aucune tour selectionné", tour);
-            return;
-        }
 
-        GameObject t = tour.Value.gameObject;
 
-        TowerStat stat = t.GetComponent<Tower>().statDefault;
+        //if (tour.Value == null)
+        //{
+        //    Debug.LogError("Aucune tour selectionné", tour);
+        //    return;
+        //}
+
+        //GameObject t = tour.Value.gameObject;
+        
+        //TowerStat stat = t.GetComponent<Tower>().statDefault;
+        TowerStat stat = tourToSell.GetComponent<Tower>().statDefault;
         uiName.text = tourToSell.name;
-        uiRadius.text = stat.datas["Radius"].upgrateLevel.ToString();
-        uiPower.text = stat.datas["Damage"].upgrateLevel.ToString();
-        uiReloadPower.text = stat.datas["ReloadSpeed"].upgrateLevel.ToString();
+
+
         uiDescription.text = stat.description;
         uiCout.text = stat.buyCost + "#";
+
+
+        int level = stat.datas["Radius"].upgrateLevel;
+        uiRadiusAdv.UpdateUi(level, "Radius");
+
+
+        level = stat.datas["Damage"].upgrateLevel;
+        uiDamageAdv.UpdateUi(level, "Damage");
+
+        level = stat.datas["ReloadSpeed"].upgrateLevel;
+        uiReloadSpeedAdv.UpdateUi(level, "ReloadSpeed");
+    }
+
+    void Update()
+    {
+        //UpdateUi();
     }
 }

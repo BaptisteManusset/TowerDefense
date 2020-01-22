@@ -91,6 +91,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 5593453251275554654, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: stat
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593453251275554654, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: statDefault
+      value: 
+      objectReference: {fileID: 11400000, guid: 13f6aea2193aafb4eaf6ac00cf02ae2f,
+        type: 2}
     - target: {fileID: 5593453251275554650, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -145,6 +156,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039410000520649504, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198180087282262936, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9, type: 3}

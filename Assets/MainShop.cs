@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MainShop : MonoBehaviour
 {
-    [BoxGroup("Tour Disponible")] [ReorderableList] [SerializeField] GameObject[] itemToSell;
+    [BoxGroup("Tour Disponible")] [SerializeField] GameObject[] itemToSell;
     [SerializeField] GameObject parent;
     [SerializeField] GameObject prefab;
 
@@ -23,8 +23,10 @@ public class MainShop : MonoBehaviour
     {
         for (int i = 0; i < itemToSell.Length; i++)
         {
+            Debug.Log(itemToSell[i].name);
+
             GameObject p = Instantiate(prefab, parent.transform);
-            p.GetComponent<ShopButton>().UpdateUi(itemToSell[i]);
+            p.GetComponent<ShopButton>().SetObj(itemToSell[i].gameObject);
         }
     }
 }

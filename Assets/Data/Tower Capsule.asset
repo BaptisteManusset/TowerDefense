@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isZoneAttack: 0
   sellValue: 0
-  buyCost: 10
+  buyCost: 20
   description: Tourrel Capsule
   datas:
     reorderableList:
@@ -23,7 +23,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 0
+      isExpanded: 1
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -38,7 +38,7 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 0
+    isExpanded: 1
     _keyValues:
     - Radius
     - Damage
@@ -51,11 +51,11 @@ MonoBehaviour:
     - id: Radius
       value: 10
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 3
     - id: Damage
       value: 10
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 2
     - id: ReloadSpeed
       value: 10
       cost: 10

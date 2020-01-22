@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isZoneAttack: 0
   sellValue: 0
-  buyCost: 10
+  buyCost: 80
   description: Tourrel Sphere
   datas:
     reorderableList:
@@ -51,12 +51,12 @@ MonoBehaviour:
     - id: Radius
       value: 10
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 4
     - id: Damage
       value: 10
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 3
     - id: ReloadSpeed
       value: 10
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 3

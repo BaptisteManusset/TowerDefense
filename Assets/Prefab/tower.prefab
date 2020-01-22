@@ -992,8 +992,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   target: {fileID: 0}
-  statDefault: {fileID: 11400000, guid: 969f6dc70036b2c45b6f6f83758b58d5, type: 2}
-  stat: {fileID: 11400000, guid: c7150352ba9097843b1032d90d36f020, type: 2}
+  statDefault: {fileID: 11400000, guid: f2b09e3a9a2c66c428e904de34502f15, type: 2}
+  stat: {fileID: 0}
   radius: {fileID: 3159970124257178514}
   radiusDefault: 25
   slave: {fileID: 8849474674969183128}

@@ -15,8 +15,8 @@ NavMeshProjectSettings:
     cost: 100
   - name: other
     cost: 2
-  - name: 
-    cost: 1
+  - name: border
+    cost: 5
   - name: 
     cost: 1
   - name: 

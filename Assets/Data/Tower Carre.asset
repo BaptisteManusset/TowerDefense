@@ -51,7 +51,7 @@ MonoBehaviour:
     - id: Radius
       value: 10
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 2
     - id: Damage
       value: 10
       cost: 10
