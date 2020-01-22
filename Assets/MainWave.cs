@@ -8,6 +8,7 @@ public class MainWave : MonoBehaviour
     public int count;
     public GameObject[] spawners;
     public GameObject mob;
+    public Transform parent;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class MainWave : MonoBehaviour
         {
             for (int y = 0; y < spawners.Length; y++)
             {
-                Instantiate(mob, spawners[y].transform.position, Quaternion.identity);
+                Instantiate(mob, spawners[y].transform.position, Quaternion.identity, parent);
             }
             yield return new WaitForSeconds(.5f);
         }

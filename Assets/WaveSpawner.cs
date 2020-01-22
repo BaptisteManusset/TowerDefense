@@ -30,7 +30,7 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < wave.quantite; i++)
         {
             int t = Random.Range(0, wave.spawner.Length);
-            Instantiate(wave.spawner[t], transform.position, Quaternion.identity, parent);
+            Instantiate(wave.spawner[t], transform.position, Quaternion.identity, transform);
             yield return new WaitForSeconds(delay);
         }
 

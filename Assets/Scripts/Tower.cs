@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour
     public TowerStat statDefault;
     public TowerStat stat;
     [SerializeField] GameObject radius;
+    [SerializeField] int radiusDefault = 25;
 
 
 
@@ -50,11 +51,11 @@ public class Tower : MonoBehaviour
         UpdateInfo();
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         Gizmos.color = color;
         if (slave)
-            Gizmos.DrawWireSphere(transform.position, stat.datas["ReloadSpeed"].value);
+            Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
         if (hitColliders != null)
         {
             if (hitColliders.Length != 0)
@@ -85,7 +86,7 @@ public class Tower : MonoBehaviour
     }
     public void DefineTarget()
     {
-        hitColliders = Physics.OverlapSphere(transform.position, stat.datas["ReloadSpeed"].value, layerMask);
+        hitColliders = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
             if (!hitColliders[i].GetComponent<Mind>().IsDead())
@@ -120,11 +121,24 @@ public class Tower : MonoBehaviour
         Destroy(gameObject);
     }
 
-
+    //update radius of detection
     private void UpdateInfo()
     {
-        int scale = stat.datas["Radius"].upgrateLevel * 3;
+        int scale = stat.datas["Radius"].upgrateLevel * 8 + radiusDefault;
+
         radius.transform.localScale = Vector3.one * scale;
+        scale /= 2; // diameter to radius
+        stat.datas["Radius"].value = scale;
+    }
+
+
+    public void OnEnter()
+    {
+        Debug.Log("OnEnter");
+    }
+    public void OnQuit()
+    {
+        Debug.Log("OnQuit");
     }
 
 }

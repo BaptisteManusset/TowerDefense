@@ -306,8 +306,9 @@ GameObject:
   - component: {fileID: 7039410000520649504}
   - component: {fileID: 2719991994254705608}
   - component: {fileID: 2899526741855316617}
-  m_Layer: 10
-  m_Name: Sphere
+  - component: {fileID: 1336555779775540052}
+  m_Layer: 5
+  m_Name: Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 3159970124257178514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 5593453251275554650}
   m_RootOrder: 2
@@ -343,17 +344,17 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3159970124257178514}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: b5120e30a6d27874b91660514ef15036, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -374,6 +375,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &1336555779775540052
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159970124257178514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3334471031679207561
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +601,7 @@ GameObject:
   - component: {fileID: 1585972031212788439}
   - component: {fileID: 5593453251275554654}
   - component: {fileID: 8849474674969183128}
+  - component: {fileID: 7465954332259431506}
   m_Layer: 10
   m_Name: tower
   m_TagString: Tower
@@ -919,7 +934,24 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 11400000, guid: 1e51fd261cedf194bb9604432070e338, type: 2}
+        - m_Target: {fileID: 5593453251275554654}
+          m_MethodName: OnEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: f6f39ec4b0371674c80ba9ed712fea5e, type: 2}
           m_MethodName: Raise
           m_Mode: 1
           m_Arguments:
@@ -930,14 +962,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: f6f39ec4b0371674c80ba9ed712fea5e, type: 2}
-          m_MethodName: Raise
+        - m_Target: {fileID: 5593453251275554654}
+          m_MethodName: OnQuit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -968,6 +994,8 @@ MonoBehaviour:
   target: {fileID: 0}
   statDefault: {fileID: 11400000, guid: 969f6dc70036b2c45b6f6f83758b58d5, type: 2}
   stat: {fileID: 11400000, guid: c7150352ba9097843b1032d90d36f020, type: 2}
+  radius: {fileID: 3159970124257178514}
+  radiusDefault: 25
   slave: {fileID: 8849474674969183128}
 --- !u!114 &8849474674969183128
 MonoBehaviour:
@@ -984,3 +1012,16 @@ MonoBehaviour:
   master: {fileID: 5593453251275554654}
   shotLoading: 100
   shotStepLoad: 1
+--- !u!114 &7465954332259431506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593453251275554641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f557f39c5d4c1464090e5d0220344341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RuntimeSet: {fileID: 11400000, guid: dff78222c8e14d343b72f7c01ed83e7d, type: 2}

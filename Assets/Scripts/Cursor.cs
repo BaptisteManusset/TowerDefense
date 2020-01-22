@@ -25,13 +25,12 @@ public class Cursor : MonoBehaviour
     [BoxGroup("Placement")] [Tooltip("Taille de la zone où le placement est interdit")] public float safeRadius;
     [BoxGroup("Placement")] [SerializeField] [Label("Parent des Tours")] GameObject parent;
 
-    [BoxGroup("Tower")] public GameObjectVariable tower;
-
-    [BoxGroup("Tower")] [SerializeField] LayerMask LayerMaskAtPosition;
-    [BoxGroup("Tower")] [SerializeField] [FormerlySerializedAs("safeRadius_LayerMask")] LayerMask safeRadiusMask;
-    [BoxGroup("Tower")] [SerializeField] LayerMask RaycastLayerMask;
-    [BoxGroup("Tower")] [SerializeField] [Tag] string zoneDePlacement;
-    [BoxGroup("Tower")] [SerializeField] [Tag] string towerTag;
+    [BoxGroup("Tower Placement")] public GameObjectVariable tower;
+    [BoxGroup("Tower Placement")]  [SerializeField] LayerMask LayerMaskAtPosition; //[InfoBox("Liste des éléments sur lequelle la tour ne PEUT PAS etre placée", EInfoBoxType.Normal)]
+    [BoxGroup("Tower Placement")] [SerializeField] [FormerlySerializedAs("safeRadius_LayerMask")] LayerMask safeRadiusMask;
+    [BoxGroup("Tower Placement")] [SerializeField] LayerMask RaycastLayerMask;
+    [BoxGroup("Tower Placement")] [SerializeField] [Tag] string zoneDePlacement;
+    [BoxGroup("Tower Placement")] [SerializeField] [Tag] string towerTag;
 
 
     [BoxGroup("Tower UI")] [SerializeField] GameObject towerUi;
@@ -48,7 +47,7 @@ public class Cursor : MonoBehaviour
     void Update()
     {
         // verification de si le curseur est sur le GUI
-        if (EventSystem.current.IsPointerOverGameObject() == false)
+        if (EventSystem.current && EventSystem.current.IsPointerOverGameObject() == false)
         {
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -89,7 +88,7 @@ public class Cursor : MonoBehaviour
                                 if (tower)
                                 {
                                     gizmos.transform.position = pos;
-                                    #region verification de si la place est disponible et changement de couleur
+                                    #region verification de si la place est disponible
                                     if (PlaceIsFree(pos))
                                     {
                                         if (Input.GetMouseButtonDown(0))

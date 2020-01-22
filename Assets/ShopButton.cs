@@ -48,7 +48,6 @@ public class ShopButton : MonoBehaviour
         }
 
         GameObject t = tour.Value.gameObject;
-        Debug.Log($"{t.name} {t.GetComponent<Tower>()} {t.GetComponent<Tower>().statDefault}", t);
 
         TowerStat stat = t.GetComponent<Tower>().statDefault;
         uiName.text = tourToSell.name;
