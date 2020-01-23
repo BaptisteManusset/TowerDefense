@@ -13,7 +13,7 @@ public class MainLevel : MonoBehaviour
 
 
     [BoxGroup("Destination tag")] [Tag] public string destinationsTag;
-    static public GameObject[] destinations;
+    //static public GameObject[] destinations;
 
     //[BoxGroup("Stats")] public int money;
     //[BoxGroup("Stats")] public int lifes = 20;
