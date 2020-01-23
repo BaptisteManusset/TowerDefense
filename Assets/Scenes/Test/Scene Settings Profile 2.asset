@@ -64,14 +64,14 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   skyType:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 0
   fogType:
-    m_OverrideState: 1
-    m_Value: 3
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!114 &-3083812215323613819
 MonoBehaviour:
   m_ObjectHideFlags: 3
