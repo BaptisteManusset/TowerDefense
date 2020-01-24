@@ -29,6 +29,7 @@ public class TowerStat : ScriptableObject
     public int value = 0;
     public int cost = 10;
     public int upgrateLevel = 0;
+    public int upgrateLevelMax = 6;
   }
 
   [System.Serializable]

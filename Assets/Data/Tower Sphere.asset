@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fb1f0c9d5093d47ad5e38adb5bcceb, type: 3}
   m_Name: Tower Sphere
   m_EditorClassIdentifier: 
-  isZoneAttack: 0
+  isZoneAttack: 1
   sellValue: 0
   buyCost: 80
-  description: Tourrel Sphere
+  description: "Tour qui fait des d\xE9gas de zone."
   datas:
     reorderableList:
       canAdd: 1
@@ -52,11 +52,14 @@ MonoBehaviour:
       value: 10
       cost: 10
       upgrateLevel: 4
+      upgrateLevelMax: 6
     - id: Damage
       value: 10
       cost: 10
       upgrateLevel: 3
+      upgrateLevelMax: 6
     - id: ReloadSpeed
       value: 10
       cost: 10
       upgrateLevel: 3
+      upgrateLevelMax: 6

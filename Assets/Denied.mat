@@ -83,6 +83,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_20263647_Texture:
+        m_Texture: {fileID: 2800000, guid: b386c695e44403848ba6e53cf21d9d4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -120,7 +124,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_D2AAB94C: 2
+    - Vector1_138D1C28: 0.1
+    - Vector1_57FFDD08: 1
+    - Vector1_D2AAB94C: 100
+    - Vector1_FA62C729: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -245,6 +252,7 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 4
     - _ZWrite: 0
+    - _fresnel: 4
     m_Colors:
     - _BaseColor: {r: 1, g: 0, b: 0, a: 0.2627451}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
@@ -258,9 +266,10 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Tiling: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 1, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UnlitColor: {r: 1, g: 0, b: 0, a: 0.003921569}
+    - _position: {r: 0, g: 0, b: 0, a: 0}

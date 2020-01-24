@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiStatDisplay : MonoBehaviour
 {
@@ -11,14 +12,19 @@ public class UiStatDisplay : MonoBehaviour
     [SerializeField] string suffix;
     [SerializeField] TextMeshProUGUI description;
     [SerializeField] TextMeshProUGUI button;
+    [SerializeField] Button buttonComp;
     [SerializeField] GameObjectVariable tower;
     [SerializeField] FloatVariable argent;
+    [SerializeField] uiStatDisplayDot dots;
 
 
     public string variable;
     TowerStat stat;
 
-
+    private void Start()
+    {
+        buttonComp = GetComponentInChildren<Button>();
+    }
     public void UpdateInterface()
     {
         if (tower.Value != null)
@@ -26,7 +32,17 @@ public class UiStatDisplay : MonoBehaviour
             stat = tower.Value.gameObject.GetComponent<Tower>().stat;
             description.text = prefix + stat.datas[variable].upgrateLevel + suffix;
             button.text = stat.datas[variable].cost + "#";
+            dots.UpdateUi(stat.datas[variable].upgrateLevel, variable);
 
+
+            if (stat.datas[variable].upgrateLevel >= stat.datas[variable].upgrateLevelMax)
+            {
+                buttonComp.interactable = false;
+            }
+            else
+            {
+                buttonComp.interactable = true;
+            }
         }
     }
     public void IncrementValue()
@@ -34,11 +50,19 @@ public class UiStatDisplay : MonoBehaviour
         if (tower.Value != null)
         {
             stat = tower.Value.gameObject.GetComponent<Tower>().stat;
-            if (argent.Value - stat.datas[variable].cost >= 0)
+
+            if (stat.datas[variable].upgrateLevel < stat.datas[variable].upgrateLevelMax)
             {
-                stat.datas[variable].upgrateLevel++;
-                argent.Value -= stat.datas[variable].cost;
-                stat.GetValue();
+                if (argent.Value - stat.datas[variable].cost >= 0)
+                {
+                    stat.datas[variable].upgrateLevel++;
+                    argent.Value -= stat.datas[variable].cost;
+                    stat.GetValue();
+                }
+            }
+            else
+            {
+                buttonComp.interactable = false;
             }
         }
     }

@@ -26,12 +26,17 @@ public class Cursor : MonoBehaviour
     [BoxGroup("Placement")] [SerializeField] [Label("Parent des Tours")] GameObject parent;
 
     [BoxGroup("Tower Placement")] public GameObjectVariable tower;
-    [InfoBox("Liste des éléments sur lequelle la tour ne PEUT PAS etre placée", EInfoBoxType.Normal)] [Space(20)] [BoxGroup("Tower Placement")] [SerializeField] LayerMask LayerMaskAtPosition; //
-    [BoxGroup("Tower Placement")] [SerializeField] [FormerlySerializedAs("safeRadius_LayerMask")] LayerMask safeRadiusMask;
-    [BoxGroup("Tower Placement")] [SerializeField] LayerMask RaycastLayerMask;
-    [BoxGroup("Tower Placement")] [SerializeField] [Tag] string zoneDePlacement;
-    [BoxGroup("Tower Placement")] [SerializeField] [Tag] string towerTag;
-    [BoxGroup("Tower Placement")] [SerializeField] [Tag] string restrictedArea;
+
+    [InfoBox("Liste des éléments sur lequelle la tour ne PEUT PAS etre placée", EInfoBoxType.Normal)]
+    [Space(20)] [BoxGroup("Tower Placement")] [SerializeField] LayerMask LayerMaskAtPosition;
+
+
+    [BoxGroup("Tower Placement")] [SerializeField] [Label("[L] Tours")] LayerMask towerLayer;
+    [BoxGroup("Tower Placement")] [SerializeField] [Label("[L] Layer du Raycast")] LayerMask RaycastLayerMask;
+    [BoxGroup("Tower Placement")] [SerializeField] [Label("[L] Layer de Placement")] LayerMask placementLayer;
+
+    [BoxGroup("Tower Placement")] [Tag] [Label("[T] Tag des tours")] string towerTag;
+    [BoxGroup("Tower Placement")] [SerializeField] [Tag] [Label("[T] Tag interdits")] string restrictedArea;
 
 
     [BoxGroup("Tower UI")] [SerializeField] GameObject towerUi;
@@ -56,17 +61,19 @@ public class Cursor : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 1000, RaycastLayerMask))
             {
 
+
                 clickPosition = hit.point;
-                if (Vector3Int.CeilToInt(hit.normal) != Vector3.up) return;
+                
 
                 // align coordinate to the grid
                 pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, hit.point.y, Mathf.Round(clickPosition.z / caseSize) * caseSize);
 
 
                 #region collide with a tower
-
-                if (hit.collider.gameObject.CompareTag(towerTag))
+                Debug.Log(hit.collider.gameObject.tag);
+                if (hit.collider.gameObject.CompareTag("Tower"))  //////////////////////////////////////////////////////////
                 {
+                    Debug.Log("salut");
                     actualTower.SetValue(hit.collider.gameObject.GetComponent<Tower>().gameObject);
                     towerUi.SetActive(true);
                     towerUi.transform.position = actualTower.Value.transform.position + offsetTowerUi;
@@ -75,41 +82,46 @@ public class Cursor : MonoBehaviour
                 }
                 else
                 {
+                    if (Vector3Int.CeilToInt(hit.normal) != Vector3.up) return;
                     #endregion
                     if (shopIsOpen.Value == true)
                     {
-                        if (hit.collider.gameObject.CompareTag(restrictedArea) == false)
+
+                        towerUi.SetActive(false);
+                        //si on touche une zone de placement
+                        //if (hit.collider.gameObject.CompareTag(zoneDePlacement))
+                        //{
+                        if (tower)
                         {
-                            towerUi.SetActive(false);
-                            //si on touche une zone de placement
-                            if (hit.collider.gameObject.CompareTag(zoneDePlacement))
+
+                            #region verification de si la place est disponible
+                            //if (hit.collider.gameObject.layer != placementLayer) return;
+                            if (hit.collider.gameObject.CompareTag(restrictedArea)) return;
+
+                            if (PlaceIsFree(pos))
                             {
-                                if (tower)
+
+                                gizmos.transform.position = pos;
+                                if (Input.GetMouseButtonDown(0))
                                 {
-                                    gizmos.transform.position = pos;
-                                    #region verification de si la place est disponible
-                                    if (PlaceIsFree(pos))
+                                    #region if player have enought money he can place the tower
+                                    if (BuyIfPossible())
                                     {
-                                        if (Input.GetMouseButtonDown(0))
-                                        {
-                                            #region if player have enought money he can place the tower
-                                            if (BuyIfPossible())
-                                            {
-                                                GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
-                                            }
-                                            #endregion
-                                        }
+                                        GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
                                     }
                                     #endregion
                                 }
-                                else
-                                {
-                                    Debug.LogError("There is no turrel assigned");
-                                }
                             }
+                            #endregion
                         }
+                        else
+                        {
+                            Debug.LogError("There is no turrel assigned");
+                        }
+                        //}
                     }
                 }
+
             }
 
         }
@@ -164,7 +176,7 @@ public class Cursor : MonoBehaviour
         Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, LayerMaskAtPosition);
         if (hitCollidersBox.Length == 0)
         {
-            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, safeRadiusMask);
+            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, towerLayer); ////////////////////////////
             if (hitCollidersSphere.Length == 0)
             {
                 return true;

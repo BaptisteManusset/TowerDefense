@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -7,9 +8,9 @@ public class Tower : MonoBehaviour
 
 
     Color color = Color.red;
-    [BoxGroup("Target"), Label("Mob détectés")] public Collider[] hitColliders;
+    [BoxGroup("Target"), Label("Mob détectés")] public List<Collider> hitColliders;
     [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
-    [BoxGroup("Target")] [Label("Cible")] [ShowAssetPreview] public GameObject target;
+    [BoxGroup("Target")] [Label("Cible")] public List<GameObject> target;
     public TowerStat statDefault;
     public TowerStat stat;
     [SerializeField] GameObject radius;
@@ -31,16 +32,18 @@ public class Tower : MonoBehaviour
     void Start()
     {
 
+        UpdateInfo();
         DefineTarget();
     }
 
     void FixedUpdate()
     {
-        if (GetTarget() == null || GetTarget().GetComponent<Mind>().IsDead())
+        //if (GetTarget() == null || GetTarget().GetComponent<Mind>().IsDead())
+        if (GetTarget() == null || GetTarget().Count == 0)
             DefineTarget();
 
         #region shot
-        if (GetTarget())
+        if (GetTarget() != null && GetTarget().Count > 0)
         {
             slave.Shot();
         }
@@ -58,23 +61,41 @@ public class Tower : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
         if (hitColliders != null)
         {
-            if (hitColliders.Length != 0)
+            if (hitColliders.Count != 0)
             {
-                for (int i = 0; i < hitColliders.Length; i++)
+                for (int i = 0; i < hitColliders.Count; i++)
                 {
                     if (!hitColliders[i].GetComponent<Mind>().IsDead())
                     {
                         Gizmos.DrawLine(transform.position, hitColliders[i].transform.position);
                     }
                 }
-                if (GetTarget())
-                    DebugExtension.DrawArrow(transform.position, GetTarget().transform.position - transform.position, Color.yellow);
+                if (GetTarget().Count > 0)
+                {
+                    foreach (GameObject item in target)
+                    {
+                        DebugExtension.DrawArrow(transform.position, item.transform.position - transform.position, Color.yellow);
+
+                    }
+                }
             }
         }
     }
-    public GameObject GetTarget()
+    public List<GameObject> GetTarget()
     {
-        if (target == null)
+        for (int i = hitColliders.Count - 1; i > 0; i--)
+        {
+            if (hitColliders[i] == null) hitColliders.RemoveAt(i);
+        }
+
+
+        for (int i = target.Count - 1; i > 0; i--)
+        {
+            if (target[i] == null || target[i].GetComponent<Mind>().IsDead()) target.RemoveAt(i);
+        }
+
+
+        if (target.Count == 0 || hitColliders.Count == 0)
         {
             DefineTarget();
         }
@@ -86,14 +107,27 @@ public class Tower : MonoBehaviour
     }
     public void DefineTarget()
     {
-        hitColliders = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
-        for (int i = 0; i < hitColliders.Length; i++)
+
+        target.Clear();
+        hitColliders = new List<Collider>(Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask));
+
+        //if (hitColliders.Length > 0)
+        //{
+        if (stat.isZoneAttack)
         {
-            if (!hitColliders[i].GetComponent<Mind>().IsDead())
+            for (int i = 0; i < hitColliders.Count; i++)
             {
-                target = hitColliders[i].gameObject;
+                if (!hitColliders[i].GetComponent<Mind>().IsDead())
+                {
+                    target.Add(hitColliders[i].gameObject);
+                }
             }
         }
+        else
+        {
+            target.Add(hitColliders[0].gameObject);
+        }
+        //}
     }
     [Button("Definir un TowerBehaviour")]
     void UpdateTowerBehaviour()

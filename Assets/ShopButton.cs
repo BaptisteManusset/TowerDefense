@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopButton : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class ShopButton : MonoBehaviour
 
 
     [BoxGroup("UI")] [SerializeField] TextMeshProUGUI uiCout;
+    [BoxGroup("UI")] [SerializeField] Image uiZone;
 
     void Awake()
     {
@@ -54,17 +56,12 @@ public class ShopButton : MonoBehaviour
     {
 
 
-        //if (tour.Value == null)
-        //{
-        //    Debug.LogError("Aucune tour selectionné", tour);
-        //    return;
-        //}
 
-        //GameObject t = tour.Value.gameObject;
-        
-        //TowerStat stat = t.GetComponent<Tower>().statDefault;
         TowerStat stat = tourToSell.GetComponent<Tower>().statDefault;
         uiName.text = tourToSell.name;
+
+
+        uiZone.enabled = stat.isZoneAttack;
 
 
         uiDescription.text = stat.description;

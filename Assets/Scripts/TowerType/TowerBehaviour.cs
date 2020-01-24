@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
@@ -15,13 +16,21 @@ public class TowerBehaviour : MonoBehaviour
     {
         if (Shotenabled)
         {
-            Mind m = master.GetTarget().GetComponent<Mind>();
-            m.Damage(master.stat.datas["Damage"].value);
-            Shotenabled = false;
-            shotLoading = 0;
-            if (m.IsDead())
+            Mind m;
+            List<GameObject> obj = master.GetTarget();
+            for (int i = 0; i < obj.Count; i++)
             {
-                master.DefineTarget();
+                m = null;
+                m = obj[i].GetComponent<Mind>();
+                if (m == null) Debug.LogError("Cette ennemie n'a pas de Mind", obj[i]);
+
+                m.Damage(master.stat.datas["Damage"].value);
+                Shotenabled = false;
+                shotLoading = 0;
+                if (m.IsDead())
+                {
+                    master.DefineTarget();
+                }
             }
         }
     }
@@ -38,4 +47,5 @@ public class TowerBehaviour : MonoBehaviour
             shotLoading += shotStepLoad;
         }
     }
+
 }
