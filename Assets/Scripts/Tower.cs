@@ -156,7 +156,7 @@ public class Tower : MonoBehaviour
     }
 
     //update radius of detection
-    private void UpdateInfo()
+    public void UpdateInfo()
     {
         int scale = stat.datas["Radius"].upgrateLevel * 8 + radiusDefault;
 

@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MainShop : MonoBehaviour
 {
@@ -23,8 +24,6 @@ public class MainShop : MonoBehaviour
     {
         for (int i = 0; i < itemToSell.Length; i++)
         {
-            Debug.Log(itemToSell[i].name);
-
             GameObject p = Instantiate(prefab, parent.transform);
             p.GetComponent<ShopButton>().SetObj(itemToSell[i].gameObject);
         }

@@ -49,8 +49,9 @@ public class UiStatDisplay : MonoBehaviour
     {
         if (tower.Value != null)
         {
-            stat = tower.Value.gameObject.GetComponent<Tower>().stat;
 
+            Tower tw = tower.Value.gameObject.GetComponent<Tower>();
+            stat = tw.stat;
             if (stat.datas[variable].upgrateLevel < stat.datas[variable].upgrateLevelMax)
             {
                 if (argent.Value - stat.datas[variable].cost >= 0)
@@ -58,6 +59,8 @@ public class UiStatDisplay : MonoBehaviour
                     stat.datas[variable].upgrateLevel++;
                     argent.Value -= stat.datas[variable].cost;
                     stat.GetValue();
+
+                    tw.UpdateInfo();
                 }
             }
             else

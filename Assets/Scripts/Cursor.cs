@@ -70,8 +70,7 @@ public class Cursor : MonoBehaviour
 
 
                 #region collide with a tower
-                Debug.Log(hit.collider.gameObject.tag);
-                if (hit.collider.gameObject.CompareTag("Tower"))  //////////////////////////////////////////////////////////
+                if (hit.collider.gameObject.CompareTag("Tower"))
                 {
                     Debug.Log("salut");
                     actualTower.SetValue(hit.collider.gameObject.GetComponent<Tower>().gameObject);
@@ -88,14 +87,11 @@ public class Cursor : MonoBehaviour
                     {
 
                         towerUi.SetActive(false);
-                        //si on touche une zone de placement
-                        //if (hit.collider.gameObject.CompareTag(zoneDePlacement))
-                        //{
+
                         if (tower)
                         {
 
                             #region verification de si la place est disponible
-                            //if (hit.collider.gameObject.layer != placementLayer) return;
                             if (hit.collider.gameObject.CompareTag(restrictedArea)) return;
 
                             if (PlaceIsFree(pos))
@@ -176,7 +172,7 @@ public class Cursor : MonoBehaviour
         Collider[] hitCollidersBox = Physics.OverlapBox(pos, Vector3.one, Quaternion.identity, LayerMaskAtPosition);
         if (hitCollidersBox.Length == 0)
         {
-            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, towerLayer); ////////////////////////////
+            Collider[] hitCollidersSphere = Physics.OverlapSphere(pos, safeRadius, towerLayer);
             if (hitCollidersSphere.Length == 0)
             {
                 return true;
