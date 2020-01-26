@@ -126,10 +126,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_464E47F9: {r: 1, g: 0, b: 0.08614111, a: 0}
-    - _BaseColor: {r: 0.46666667, g: 0, b: 0, a: 0}
+    - _BaseColor: {r: 0.6156863, g: 0, b: 0, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 0.14150977, g: 30, b: 3.6865675, a: 30}
-    - _ColorRipple: {r: 0, g: 2.4837797, b: 42.224255, a: 0}
+    - _ColorRipple: {r: 0.0009765625, g: 0.000030637257, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0.14150977, g: 30, b: 3.6865675, a: 30}
     - _EmissiveColorLDR: {r: 0.0047169924, g: 1, b: 0.122885585, a: 1}

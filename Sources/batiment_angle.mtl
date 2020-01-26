@@ -1,0 +1,5 @@
+newmtl checkerDark
+map_Kd Checker.png
+Kd 0.4528301 0.4165183 0.4165183
+d 1
+
