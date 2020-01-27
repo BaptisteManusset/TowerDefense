@@ -34,6 +34,7 @@ public class MainLevel : MonoBehaviour
     {
         health.SetValue(maxHealth);
         argent.SetValue(argentDefault);
+        Time.timeScale = 1;
     }
 
 
@@ -43,11 +44,13 @@ public class MainLevel : MonoBehaviour
         camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
+    [Button]
     public void Pause()
     {
         Time.timeScale = 0;
     }
     
+    [Button]
     public void Unpause()
     {
         Time.timeScale = 1;

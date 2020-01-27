@@ -91,6 +91,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 5593453251275554653, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5593453251275554654, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
         type: 3}
       propertyPath: stat
@@ -165,7 +170,17 @@ PrefabInstance:
     - target: {fileID: 7198180087282262936, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899449157405542610, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811058325370086907, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9, type: 3}

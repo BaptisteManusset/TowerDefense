@@ -8,71 +8,64 @@ public class Tower : MonoBehaviour
 
 
     Color color = Color.red;
-    [BoxGroup("Target"), Label("Mob détectés")] public List<Collider> hitColliders;
+    [BoxGroup("Target"), Label("Mob détectés")] public List<Collider> detectedEnemies;
     [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
-    [BoxGroup("Target")] [Label("Cible")] public List<GameObject> target;
+    [BoxGroup("Target")] [Label("Cible")] public List<GameObject> targets;
     public TowerStat statDefault;
     public TowerStat stat;
     [SerializeField] GameObject radius;
     [SerializeField] int radiusDefault = 25;
+    public ParticleSystem shotPoint;
 
-
-
-
-
-    [BoxGroup("Systeme de tir"), ReadOnly, Required("Il est necessaire d'avoir un TowerBehaviour")] public TowerBehaviour slave;
+    //[BoxGroup("Systeme de tir"), ReadOnly, Required("Il est necessaire d'avoir un TowerBehaviour")] public TowerBehaviour slave;
     void Awake()
     {
         stat = Object.Instantiate(statDefault);
         stat.Init();
-
-        UpdateTowerBehaviour();
     }
 
     void Start()
     {
-
         UpdateInfo();
         DefineTarget();
     }
 
     void FixedUpdate()
     {
-        //if (GetTarget() == null || GetTarget().GetComponent<Mind>().IsDead())
-        if (GetTarget() == null || GetTarget().Count == 0)
-            DefineTarget();
+        //if (GetTarget() == null || GetTarget().Count == 0)
+        DefineTarget();
 
         #region shot
         if (GetTarget() != null && GetTarget().Count > 0)
         {
-            slave.Shot();
+            Shot();
         }
         #endregion
 
 
-        slave.ShotReload();
+        ShotReload();
         UpdateInfo();
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = color;
-        if (slave)
-            Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
-        if (hitColliders != null)
+        Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
+        if (detectedEnemies != null)
         {
-            if (hitColliders.Count != 0)
+            if (detectedEnemies.Count != 0)
             {
-                for (int i = 0; i < hitColliders.Count; i++)
+                for (int i = detectedEnemies.Count - 1; i > 0; i--)
                 {
-                    if (!hitColliders[i].GetComponent<Mind>().IsDead())
-                    {
-                        Gizmos.DrawLine(transform.position, hitColliders[i].transform.position);
-                    }
+                    Mind m = detectedEnemies[i].GetComponent<Mind>();
+                    if (!m) continue;
+                    if (m.IsDead()) continue;
+                    Gizmos.DrawLine(transform.position, detectedEnemies[i].transform.position);
                 }
+
                 if (GetTarget().Count > 0)
                 {
-                    foreach (GameObject item in target)
+                    foreach (GameObject item in targets)
                     {
                         DebugExtension.DrawArrow(transform.position, item.transform.position - transform.position, Color.yellow);
 
@@ -83,72 +76,97 @@ public class Tower : MonoBehaviour
     }
     public List<GameObject> GetTarget()
     {
-        for (int i = hitColliders.Count - 1; i > 0; i--)
+
+        List<int> detectedEnemiesToDelete = new List<int>();
+        List<int> targetsToDelete = new List<int>();
+
+
+        #region clear the list of detected ennemis
+        if (detectedEnemies.Count > 0)
         {
-            if (hitColliders[i] == null) hitColliders.RemoveAt(i);
+            for (int i = detectedEnemies.Count - 1; i > 0; i--)
+            {
+                if (detectedEnemies[i] == null) { detectedEnemiesToDelete.Add(i); }
+
+            }
+
+            for (int i = 0; i < detectedEnemiesToDelete.Count; i++)
+            {
+                detectedEnemies.RemoveAt(detectedEnemiesToDelete[i]);
+            }
         }
+        #endregion
 
-
-        for (int i = target.Count - 1; i > 0; i--)
+        #region clear the list of targets
+        if (targets.Count > 0)
         {
-            if (target[i] == null || target[i].GetComponent<Mind>().IsDead()) target.RemoveAt(i);
+            for (int i = targets.Count - 1; i > 0; i--)
+            {
+                Debug.Log(i);
+                if (targets[i] == null)
+                {
+                    targetsToDelete.Add(i);
+                }
+                else
+                {
+                    Mind m = targets[i].GetComponent<Mind>();
+                    if (!m || m.IsDead())
+                    {
+                        targetsToDelete.Add(i);
+                    }
+                }
+
+            }
+
+            for (int i = 0; i < targetsToDelete.Count; i++)
+            {
+                targets.RemoveAt(targetsToDelete[i]);
+            }
         }
+        #endregion
 
 
-        if (target.Count == 0 || hitColliders.Count == 0)
+
+
+
+        if (targets.Count == 0 || detectedEnemies.Count == 0)
         {
             DefineTarget();
         }
         else
         {
-            return target;
+            return targets;
         }
         return null;
     }
     public void DefineTarget()
     {
 
-        target.Clear();
-        hitColliders = new List<Collider>(Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask));
 
-        //if (hitColliders.Length > 0)
-        //{
+        targets.Clear();
+        detectedEnemies.Clear();
+        detectedEnemies = new List<Collider>(Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask));
+
         if (stat.isZoneAttack)
         {
-            for (int i = 0; i < hitColliders.Count; i++)
+            if (detectedEnemies.Count > 0)
             {
-                if (!hitColliders[i].GetComponent<Mind>().IsDead())
+                for (int i = detectedEnemies.Count - 1; i > 0; i--)
                 {
-                    target.Add(hitColliders[i].gameObject);
+                    if (detectedEnemies[i] == null) continue;
+                    Mind mind = detectedEnemies[i].GetComponent<Mind>();
+                    if (mind != null && !mind.IsDead())
+                    {
+                        targets.Add(detectedEnemies[i].gameObject);
+                    }
                 }
             }
         }
         else
         {
-            target.Add(hitColliders[0].gameObject);
-        }
-        //}
-    }
-    [Button("Definir un TowerBehaviour")]
-    void UpdateTowerBehaviour()
-    {
-        slave = GetComponent<TowerBehaviour>();
-        if (slave != null)
-        {
-            slave.master = this;
-        }
-        else
-        {
-            Debug.LogError("Argh! Il manque un TowerBehaviour ici!");
+            targets.Add(detectedEnemies[0].gameObject);
         }
     }
-    [Button("Reset le TowerBehaviour")]
-    void ResetTowerBehaviour()
-    {
-        DestroyImmediate(slave);
-        slave = null;
-    }
-
 
     public void sellTower()
     {
@@ -166,13 +184,57 @@ public class Tower : MonoBehaviour
     }
 
 
-    public void OnEnter()
+    bool Shotenabled = true;
+    [BoxGroup("Stats"), ProgressBar("chargement")] public float shotLoading = 100;
+
+    [BoxGroup("Stats"), Label("Vitesse de recharge")] public float shotStepLoad = 1;
+
+    private void Shot()
     {
-        Debug.Log("OnEnter");
-    }
-    public void OnQuit()
-    {
-        Debug.Log("OnQuit");
+        if (Shotenabled)
+        {
+            Mind m;
+            List<GameObject> obj = GetTarget();
+            for (int i = 0; i < obj.Count; i++)
+            {
+                if (obj[i] == null) continue;
+                m = null;
+                m = obj[i].GetComponent<Mind>();
+                if (m == null) Debug.LogError("Cette ennemie n'a pas de Mind", obj[i]);
+
+                m.Damage(stat.datas["Damage"].value);
+                Shotenabled = false;
+                shotLoading = 0;
+
+                shotPoint.transform.LookAt(obj[i].transform);
+                ShotParticle();
+
+
+                if (m.IsDead())
+                {
+                    DefineTarget();
+                }
+            }
+        }
     }
 
+    [Button]
+    private void ShotParticle()
+    {
+        if (!shotPoint.isPlaying)
+            shotPoint.Play();
+    }
+
+    private void ShotReload()
+    {
+        if (shotLoading >= 100)
+        {
+            shotLoading = 100;
+            Shotenabled = true;
+        }
+        else
+        {
+            shotLoading += shotStepLoad;
+        }
+    }
 }
