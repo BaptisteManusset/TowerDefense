@@ -22,12 +22,12 @@ public class Cursor : MonoBehaviour
     Renderer gizmosRender;
 
     [BoxGroup("Placement")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
-    [BoxGroup("Placement")] [Tooltip("Taille de la zone où le placement est interdit")] public float safeRadius;
+    [BoxGroup("Placement")] [Tooltip("Taille de la zone oÃ¹ le placement est interdit")] public float safeRadius;
     [BoxGroup("Placement")] [SerializeField] [Label("Parent des Tours")] GameObject parent;
 
     [BoxGroup("Tower Placement")] public GameObjectVariable tower;
 
-    [InfoBox("Liste des éléments sur lequelle la tour ne PEUT PAS etre placée", EInfoBoxType.Normal)]
+    [InfoBox("Liste des Ã©lÃ©ments sur lequelle la tour ne PEUT PAS etre placÃ©e", EInfoBoxType.Normal)]
     [Space(20)] [BoxGroup("Tower Placement")] [SerializeField] LayerMask LayerMaskAtPosition;
 
 
@@ -72,7 +72,6 @@ public class Cursor : MonoBehaviour
                 #region collide with a tower
                 if (hit.collider.gameObject.CompareTag("Tower"))
                 {
-                    Debug.Log("salut");
                     actualTower.SetValue(hit.collider.gameObject.GetComponent<Tower>().gameObject);
                     towerUi.SetActive(true);
                     towerUi.transform.position = actualTower.Value.transform.position + offsetTowerUi;

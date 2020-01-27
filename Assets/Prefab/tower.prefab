@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 30
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5754,12 +5754,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94a64308e34c0a459068b9e8eb82d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitColliders: []
+  detectedEnemies: []
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  target:
-  - {fileID: 0}
+  targets: []
   statDefault: {fileID: 11400000, guid: f2b09e3a9a2c66c428e904de34502f15, type: 2}
   stat: {fileID: 0}
   radius: {fileID: 3159970124257178514}
