@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Neon
     second: {fileID: 2100000, guid: cd534dc5e541b8e449ac25983fc481a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Neon.001
+    second: {fileID: 2100000, guid: cd534dc5e541b8e449ac25983fc481a3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
