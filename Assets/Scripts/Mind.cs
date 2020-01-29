@@ -3,6 +3,7 @@ using ScriptableVariable.Unite2017.Sets;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Mind : MonoBehaviour
@@ -19,7 +20,7 @@ public class Mind : MonoBehaviour
   Renderer cubeRenderer;
 
   [BoxGroup("Deplacement")] public Transform destination;
-  [BoxGroup("Deplacement")] [Tag] public string tag;
+  [BoxGroup("Deplacement")] [Tag]public string tagDeplacement;
   //[BoxGroup("Valeur à la mort")] public int valeur = 10;
 
   public FloatReference damageToTower;
@@ -47,7 +48,7 @@ public class Mind : MonoBehaviour
     //    destinations = GameObject.FindGameObjectsWithTag("Destination");
     //}
     //destination = destinations.Items[Random.Range(0, destinations.Items.Count)].transform;
-    destination = GameObject.FindGameObjectWithTag(tag).transform;
+    destination = GameObject.FindGameObjectWithTag(tagDeplacement).transform;
     if (destination == null) Debug.LogError("Impossible de trouver une destination");
     meshAgent.SetDestination(destination.position);
     #endregion
@@ -60,7 +61,7 @@ public class Mind : MonoBehaviour
   }
   void Update()
   {
-    canvas.transform.LookAt(MainLevel.instance.camera.transform);
+    canvas.transform.LookAt(MainLevel.instance.cam.transform);
     NavMeshHit hit;
     meshAgent.SamplePathPosition(-1, 0.0f, out hit);
   }

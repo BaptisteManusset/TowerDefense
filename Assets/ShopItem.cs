@@ -18,7 +18,7 @@ public class ShopItem : MonoBehaviour
         TxtNom.text = nom;
         TxtTarif.text = tarif + "#";
         placer = (Cursor)FindObjectOfType(typeof(Cursor));
-
+        Debug.Log("shop item", gameObject);
 
     }
 

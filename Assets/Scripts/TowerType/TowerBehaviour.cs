@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
-  [HideInInspector] public Tower master;
+  //[HideInInspector] public Tower master;
 
 
-  bool Shotenabled = true;
-  [BoxGroup("Stats"), ProgressBar("chargement")] public float shotLoading = 100;
+  //bool Shotenabled = true;
+  //[BoxGroup("Stats"), ProgressBar("chargement")] public float shotLoading = 100;
 
-  [BoxGroup("Stats"), Label("Vitesse de recharge")] public float shotStepLoad = 1;
+  //[BoxGroup("Stats"), Label("Vitesse de recharge")] public float shotStepLoad = 1;
   /*
   public void Shot()
   {

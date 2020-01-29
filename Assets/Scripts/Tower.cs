@@ -1,3 +1,4 @@
+#pragma warning disable 0649
 using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;

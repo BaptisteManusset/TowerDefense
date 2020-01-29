@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace UnityEngine.ProBuilder
@@ -7,7 +5,7 @@ namespace UnityEngine.ProBuilder
     [AddComponentMenu("")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ProBuilderMesh))]
-    sealed class BezierShape : MonoBehaviour
+    internal sealed class BezierShape : MonoBehaviour
     {
         public List<BezierPoint> points = new List<BezierPoint>();
         public bool closeLoop = false;
@@ -15,28 +13,26 @@ namespace UnityEngine.ProBuilder
         public int rows = 8;
         public int columns = 16;
         public bool smooth = true;
+
         [SerializeField]
-        bool m_IsEditing;
-        public bool isEditing
-        {
+        private bool m_IsEditing;
+
+        public bool isEditing {
             get { return m_IsEditing; }
             set { m_IsEditing = value; }
         }
 
-        ProBuilderMesh m_Mesh;
+        private ProBuilderMesh m_Mesh;
 
-        public ProBuilderMesh mesh
-        {
-            get
-            {
+        public ProBuilderMesh mesh {
+            get {
                 if (m_Mesh == null)
                     m_Mesh = GetComponent<ProBuilderMesh>();
 
                 return m_Mesh;
             }
 
-            set
-            {
+            set {
                 m_Mesh = value;
             }
         }

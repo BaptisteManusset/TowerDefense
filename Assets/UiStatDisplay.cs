@@ -1,7 +1,5 @@
-using NaughtyAttributes;
+#pragma warning disable 0649
 using ScriptableVariable.Unite2017.Variables;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace UnityEngine.ProBuilder
 {
-    static class ArrayUtility
+    internal static class ArrayUtility
     {
         public static T[] ValuesWithIndexes<T>(this T[] arr, int[] indexes)
         {
@@ -52,6 +52,7 @@ namespace UnityEngine.ProBuilder
         /**
          * Remove @val from @arr.
          */
+
         public static T[] Remove<T>(this T[] arr, T val)
         {
             List<T> list = new List<T>(arr);
@@ -89,6 +90,7 @@ namespace UnityEngine.ProBuilder
         /**
          * Remove elements at indexes from an array, but accepts a pre-sorted indexes list.
          */
+
         public static T[] SortedRemoveAt<T>(this IList<T> list, IList<int> sorted)
         {
             int indexeSortedCount = sorted.Count;
@@ -117,7 +119,8 @@ namespace UnityEngine.ProBuilder
         /**
          * Holds a start and end index for a binary search.
          */
-        struct SearchRange
+
+        private struct SearchRange
         {
             public int begin, end;
 
@@ -127,8 +130,15 @@ namespace UnityEngine.ProBuilder
                 this.end = end;
             }
 
-            public bool Valid() { return end - begin > 1; }
-            public int Center() { return begin + (end - begin) / 2; }
+            public bool Valid()
+            {
+                return end - begin > 1;
+            }
+
+            public int Center()
+            {
+                return begin + (end - begin) / 2;
+            }
 
             public override string ToString()
             {
@@ -142,6 +152,7 @@ namespace UnityEngine.ProBuilder
          * If value is less than sorted[0], -1 is returned.  If value is greater than sorted[end], sorted.Count-1
          * is returned.  If an exact match is found, the index prior to that match is returned.
          */
+
         public static int NearestIndexPriorToValue<T>(IList<T> sorted_list, T value) where T : System.IComparable<T>
         {
             int count = sorted_list.Count;
@@ -198,6 +209,7 @@ namespace UnityEngine.ProBuilder
         /**
          * True if any value is present in both arrays.
          */
+
         public static bool ContainsMatch<T>(this T[] a, T[] b)
         {
             int ind = -1;
@@ -212,6 +224,7 @@ namespace UnityEngine.ProBuilder
         /**
          * True if any value is present in both arrays, setting index_a and index_b to the index in the array of each match.
          */
+
         public static bool ContainsMatch<T>(this T[] a, T[] b, out int index_a, out int index_b)
         {
             index_b = -1;
@@ -228,6 +241,7 @@ namespace UnityEngine.ProBuilder
         /**
          * Concatenate two arrays.
          */
+
         public static T[] Concat<T>(this T[] x, T[] y)
         {
             if (x == null) throw new ArgumentNullException("x");
@@ -241,6 +255,7 @@ namespace UnityEngine.ProBuilder
         /**
          * Returns the index of the array that contains this value.  -1 if not found.
          */
+
         public static int IndexOf<T>(this List<List<T>> InList, T InValue)
         {
             for (int i = 0; i < InList.Count; i++)
@@ -256,6 +271,7 @@ namespace UnityEngine.ProBuilder
         /**
          *  Generate a new array with count using the constructor.  ctor recieves the index and returns a new instance of T.
          */
+
         public static T[] Fill<T>(int count, System.Func<int, T> ctor)
         {
             T[] arr = new T[count];
@@ -267,6 +283,7 @@ namespace UnityEngine.ProBuilder
         /**
          *  Add a value to a key in dictionary, adding a new entry if necessray.
          */
+
         public static void AddOrAppend<T, K>(this Dictionary<T, List<K>> dictionary, T key, K value)
         {
             List<K> list;
@@ -280,6 +297,7 @@ namespace UnityEngine.ProBuilder
         /**
          *  Add a value to a key in dictionary, adding a new entry if necessray.
          */
+
         public static void AddOrAppendRange<T, K>(this Dictionary<T, List<K>> dictionary, T key, List<K> value)
         {
             List<K> list;
@@ -293,6 +311,7 @@ namespace UnityEngine.ProBuilder
         /**
          * http://stackoverflow.com/questions/1300088/distinct-with-lambda
          */
+
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)

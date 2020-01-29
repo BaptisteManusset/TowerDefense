@@ -19,12 +19,9 @@ public class MainLevel : MonoBehaviour
     //[BoxGroup("Stats")] public int lifes = 20;
 
 
-    [BoxGroup("Game Infos")] [ReadOnly] public GameObject camera;
+    [BoxGroup("Game Infos")] [ReadOnly] public GameObject cam;
     public enum GameState { Wave, InterWave };
     [BoxGroup("Etat d'avancement")] public GameState gameState;
-
-    //MainUI mainui;
-    MainMode mainMode;
 
     [BoxGroup("Vie")] public FloatVariable health;
     [BoxGroup("Vie")] public FloatReference maxHealth;
@@ -41,7 +38,7 @@ public class MainLevel : MonoBehaviour
     void Start()
     {
         if (MainLevel.instance == null) MainLevel.instance = this;
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     [Button]

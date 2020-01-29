@@ -28,7 +28,7 @@ public class FlyCam : MonoBehaviour
         //Mouse  camera angle done.  
 
         //Keyboard commands
-        float f = 0;
+        //float f = 0;
         var p = GetBaseInput();
         if (Input.GetKey(KeyCode.LeftShift))
         {

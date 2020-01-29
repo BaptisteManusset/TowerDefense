@@ -1,3 +1,4 @@
+#pragma warning disable 0649
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class Cursor : MonoBehaviour
 
 
     [BoxGroup("Gizmos")] public GameObject gizmos;
-    Renderer gizmosRender;
+    private Renderer gizmosRender;
 
     [BoxGroup("Placement")] [ReadOnly] [Label("Position du curseur")] public Vector3 pos;
     [BoxGroup("Placement")] [Tooltip("Taille de la zone où le placement est interdit")] public float safeRadius;
@@ -63,7 +64,7 @@ public class Cursor : MonoBehaviour
 
 
                 clickPosition = hit.point;
-                
+
 
                 // align coordinate to the grid
                 pos = new Vector3(Mathf.Round(clickPosition.x / caseSize) * caseSize, hit.point.y, Mathf.Round(clickPosition.z / caseSize) * caseSize);

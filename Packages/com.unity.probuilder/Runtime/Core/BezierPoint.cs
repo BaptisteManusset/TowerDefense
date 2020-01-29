@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections.Generic;
 
 namespace UnityEngine.ProBuilder
@@ -6,14 +5,14 @@ namespace UnityEngine.ProBuilder
     /// <summary>
     /// How bezier handles behave when being manipulated in the scene view.
     /// </summary>
-    enum BezierTangentMode
+    internal enum BezierTangentMode
     {
         Free,
         Aligned,
         Mirrored
     }
 
-    enum BezierTangentDirection
+    internal enum BezierTangentDirection
     {
         In,
         Out
@@ -23,7 +22,7 @@ namespace UnityEngine.ProBuilder
     /// A bezier knot.
     /// </summary>
     [System.Serializable]
-    struct BezierPoint
+    internal struct BezierPoint
     {
         public Vector3 position;
         public Vector3 tangentIn;

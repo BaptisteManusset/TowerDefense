@@ -1,24 +1,18 @@
-﻿using System.Collections;
-using System.Collections;
-using System.Collections.Generic;
+﻿using NaughtyAttributes;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
 
-    [SerializeField] float speed = 10;
-    [SerializeField] float boost = 10;
+    [SerializeField] [ReadOnly] float speed = 10;
+    [SerializeField] [ReadOnly] float boost = 10;
     float fov;
     [SerializeField] float sensitivity = 10f;
 
-    public LayerMask layerMask;
-    [SerializeField] float toCloseDistance = 10;
-    [SerializeField] float toFarDistance = 100;
+    [SerializeField] LayerMask layerMask;
+    [SerializeField] [ReadOnly] float toCloseDistance = 10;
+    [SerializeField] [ReadOnly] float toFarDistance = 100;
 
-    void Start()
-    {
-
-    }
     void Update()
     {
         bool toClose = false;
@@ -32,7 +26,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);          
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
         }
 
 
