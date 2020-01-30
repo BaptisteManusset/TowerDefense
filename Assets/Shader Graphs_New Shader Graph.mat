@@ -26,7 +26,9 @@ Material:
     - Vector1_C86DD0EB: 0
     - Vector1_C88B4E50: 0.6
     - Vector1_F08BD2C7: 0.6
+    - _Size: -0.29
     m_Colors:
     - Color_7C6F2F65: {r: 0.096706845, g: 0, b: 1, a: 0}
     - Color_E20DBEF: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 55.71524, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
