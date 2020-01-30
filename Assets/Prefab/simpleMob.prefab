@@ -135,7 +135,7 @@ MonoBehaviour:
   health: 10
   healthbar: {fileID: 4311599205669830603}
   destination: {fileID: 0}
-  tag: Destination
+  tagDestination: Destination
   damageToTower:
     UseConstant: 0
     ConstantValue: 0

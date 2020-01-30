@@ -36,6 +36,7 @@ public class TowerStat : ScriptableObject
   public class GenericDictionary : SerializableDictionaryBase<string, Data> { }
 
   [SerializeField, ID("id")]
+
   public GenericDictionary datas;
 
 

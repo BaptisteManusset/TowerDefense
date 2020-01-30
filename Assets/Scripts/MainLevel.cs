@@ -46,15 +46,21 @@ public class MainLevel : MonoBehaviour
     {
         Time.timeScale = 0;
     }
-    
+
     [Button]
     public void Unpause()
     {
         Time.timeScale = 1;
-    }    
+    }
     public void Accelerate(int value)
     {
         Time.timeScale = value;
+    }
+
+    void OnDisable()
+    {
+
+        Time.timeScale = 1;
     }
 
 }
