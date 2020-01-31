@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d5cc13f1f75d940a87a38a5781d179, type: 3}
-  m_Name: Vie
+  m_Script: {fileID: 11500000, guid: f47ada6c6b58f414fb9c422fb39aa120, type: 3}
+  m_Name: ShowRadius
   m_EditorClassIdentifier: 
-  DeveloperDescription: Nombre de point de vie de la tour
-  Value: -0.44
+  DeveloperDescription: 
+  Value: 0

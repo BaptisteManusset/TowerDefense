@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Sets;
+using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,19 +8,29 @@ public class MainUi : MonoBehaviour
 {
 
   [SerializeField] ThingRuntimeSet towers;
+  [SerializeField] BoolVariable showRadius;
 
   [SerializeField] UnityEvent initShop;
+
+
+  void Awake()
+  {
+    showRadius.SetValue(true);
+
+    ToggleRadius();
+  }
 
   void Start()
   {
     initShop.Invoke();
   }
 
-  public void ToggleRadius(bool value)
+  public void ToggleRadius()
   {
+    showRadius.Invert();
     for (int i = 0; i < towers.Items.Count; i++)
     {
-      towers.Items[i].transform.Find("Radius").gameObject.SetActive(value);
+      towers.Items[i].transform.Find("Radius").gameObject.SetActive(showRadius.Value);
     }
 
   }
