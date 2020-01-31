@@ -10,33 +10,42 @@ public class Tower : MonoBehaviour
 
     Color color = Color.red;
     [BoxGroup("Target"), Label("Mob détectés")] public List<Mind> detectedEnemies;
-    [BoxGroup("Target")] [Label("Cible")] public List<Mind> targets;
+    //[BoxGroup("Target")] [Label("Cible")] public List<Mind> targets;
 
     [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
-    public TowerStat statDefault;
-    public TowerStat stat;
+
+
+    // Must be public
+    [BoxGroup("Stats")] public TowerStat statDefault;
+    [BoxGroup("Stats")] public TowerStat stat;
+
+
     [SerializeField] GameObject radius;
     [SerializeField] int radiusDefault = 25;
+
+    [BoxGroup("Reload")] [SerializeField] [Label("Tir prés")] bool reloadRequire = false;
+    [BoxGroup("Reload")] [ProgressBar("chargement")] public float shotLoading = 100;
+
     [BoxGroup("FX")] [SerializeField] ParticleSystem shotPoint;
     [BoxGroup("FX")] [SerializeField] ParticleSystem muzzle;
 
 
 
-    [SerializeField] bool reloadRequire = false;
-    [BoxGroup("Stats"), ProgressBar("chargement")] public float shotLoading = 100;
-    [BoxGroup("Stats"), Label("Vitesse de recharge")] public float shotStepLoad = 1;
 
+    private LineRenderer lineRenderer;
 
     void Awake()
     {
         stat = Object.Instantiate(statDefault);
         stat.Init();
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 0;
     }
     void Start()
     {
         UpdateInfo();
     }
-    void FixedUpdate()
+    void Update()
     {
         detectedEnemies.Clear();
         Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
@@ -64,6 +73,19 @@ public class Tower : MonoBehaviour
             Shot();
 
 
+        if (reloadRequire == true)
+        {
+            lineRenderer.positionCount = 0;
+            shotLoading += stat.datas["ReloadSpeed"].upgrateLevel;
+
+            if (shotLoading >= 100)
+            {
+                reloadRequire = false;
+                shotLoading = 0;
+            }
+        }
+
+
         UpdateInfo();
     }
     void OnDrawGizmos()
@@ -84,13 +106,17 @@ public class Tower : MonoBehaviour
 
             if (detectedEnemies.Count > 0)
             {
-                foreach (Mind item in targets)
+                foreach (Mind item in detectedEnemies)
                 {
                     DebugExtension.DrawArrow(transform.position, item.transform.position - transform.position, Color.yellow);
 
                 }
             }
 
+        }
+        else
+        {
+            muzzle.Stop();
         }
     }
     public void sellTower()
@@ -108,6 +134,7 @@ public class Tower : MonoBehaviour
 
     void Shot()
     {
+        lineRenderer.positionCount = 2;
         if (reloadRequire == false)
         {
             reloadRequire = true;
@@ -115,18 +142,29 @@ public class Tower : MonoBehaviour
             {
                 if (item.IsDead()) continue;
                 item.Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
-
+                #region juicy
+                lineRenderer.SetPosition(0, shotPoint.transform.position);
+                lineRenderer.SetPosition(1, item.gameObject.transform.position);
                 shotPoint.transform.LookAt(item.transform);
                 shotPoint.Play();
                 muzzle.Play();
+                #endregion
             }
-            Invoke("Reload", 5 / stat.datas["ReloadSpeed"].upgrateLevel);
+            //Invoke("Reload", 5 / stat.datas["ReloadSpeed"].upgrateLevel);
         }
     }
 
-    void Reload()
-    {
-        reloadRequire = false;
-    }
+    //void Reload()
+    //{
+    //reloadRequire = false;
+    //}
 
+
+    /*
+                lineRenderer.SetPosition(0, shotPoint.transform.position);
+                lineRenderer.SetPosition(1, item.gameObject.transform.position);
+                shotPoint.transform.LookAt(item.transform);
+                shotPoint.Play();
+                muzzle.Play();
+     */
 }

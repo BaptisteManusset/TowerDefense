@@ -87,7 +87,8 @@ public class Mind : MonoBehaviour
 
 
             argent.ApplyChange(valeur);
-            Destroy(gameObject, 2);
+            //Destroy(gameObject, 2);
+            Destroy(gameObject);
 
 
         }

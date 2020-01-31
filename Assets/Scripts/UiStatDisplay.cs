@@ -1,4 +1,5 @@
 #pragma warning disable 0649
+using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using TMPro;
 using UnityEngine;
@@ -6,29 +7,38 @@ using UnityEngine.UI;
 
 public class UiStatDisplay : MonoBehaviour
 {
-    [SerializeField] string prefix;
-    [SerializeField] string suffix;
-    [SerializeField] TextMeshProUGUI description;
-    [SerializeField] TextMeshProUGUI button;
-    [SerializeField] Button buttonComp;
-    [SerializeField] GameObjectVariable tower;
-    [SerializeField] FloatVariable argent;
-    [SerializeField] uiStatDisplayDot dots;
+    [BoxGroup("Element")] public string variable;
+
+    [BoxGroup("Display")] [SerializeField] [TextArea] string desc;
+    //[SerializeField] string prefix;
+    //[SerializeField] string suffix;
+    [BoxGroup("Ref")] [SerializeField] TextMeshProUGUI description;
+    [BoxGroup("Ref")] [SerializeField] TextMeshProUGUI button;
+    [BoxGroup("Ref")] [SerializeField] Button buttonComp;
+    [BoxGroup("Ref")] [SerializeField] GameObjectVariable tower;
+    [BoxGroup("Ref")] [SerializeField] FloatVariable argent;
+    [BoxGroup("Ref")] [SerializeField] uiStatDisplayDot dots;
+    [BoxGroup("Ref")] [SerializeField] SimpleTooltip simpleTooltip;
 
 
-    public string variable;
+
     TowerStat stat;
 
     private void Start()
     {
         buttonComp = GetComponentInChildren<Button>();
+        simpleTooltip = GetComponentInChildren<SimpleTooltip>();
+
+        simpleTooltip.infoLeft = desc;
+
     }
     public void UpdateInterface()
     {
         if (tower.Value != null)
         {
             stat = tower.Value.gameObject.GetComponent<Tower>().stat;
-            description.text = prefix + stat.datas[variable].upgrateLevel + suffix;
+            //description.text = prefix + stat.datas[variable].upgrateLevel + suffix;
+            description.text = stat.datas[variable].upgrateLevel.ToString();
             button.text = stat.datas[variable].cost + "#";
             dots.UpdateUi(stat.datas[variable].upgrateLevel, variable);
 
@@ -72,10 +82,10 @@ public class UiStatDisplay : MonoBehaviour
 
     public void SetValue(string value)
     {
-        description.text = prefix + value + suffix;
+        description.text = value;
     }
     public void SetValue(int value)
     {
-        description.text = prefix + value + suffix;
+        description.text = value.ToString();
     }
 }

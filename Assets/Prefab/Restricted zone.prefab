@@ -269,6 +269,8 @@ GameObject:
   - component: {fileID: 6004090297884463493}
   - component: {fileID: 4390332105606006422}
   - component: {fileID: 5023209591795461704}
+  - component: {fileID: 372148983737326411}
+  - component: {fileID: 5364518065432501085}
   m_Layer: 12
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -462,3 +464,32 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
+--- !u!114 &372148983737326411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3403364295500929203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: "*Zone interdite\nSuite \xE0 l'Arr\xEAt\xE9 pour la s\xE9curit\xE9 B-2049-56,\nil
+    est interdit de placer des appareils de\nd\xE9fenses l\xE9tales dans cette zone."
+  infoRight: 
+--- !u!65 &5364518065432501085
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3403364295500929203}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 36.572735, y: 13.9318, z: 0}
+  m_Center: {x: 0.2227478, y: 0.05739069, z: 0}

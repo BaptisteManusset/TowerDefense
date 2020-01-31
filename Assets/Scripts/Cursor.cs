@@ -121,6 +121,10 @@ public class Cursor : MonoBehaviour
             }
 
         }
+        else
+        {
+
+        }
     }
 
     void OnDrawGizmos()

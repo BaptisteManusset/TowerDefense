@@ -11,7 +11,10 @@ public class MainShop : MonoBehaviour
 
     void Awake()
     {
-        Destroy(GetComponentInChildren<ShopButton>().gameObject);
+        foreach (var item in GetComponentsInChildren<ShopButton>())
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     void Start()
