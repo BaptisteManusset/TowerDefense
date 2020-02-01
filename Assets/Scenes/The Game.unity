@@ -11892,7 +11892,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 44.2
+  m_fontSize: 41.55
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24262,7 +24262,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.3
+  m_fontSize: 27.55
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -30371,7 +30371,8 @@ PrefabInstance:
       propertyPath: desc
       value: '*Vitesse de Recharge
 
-''        Temps de recharge entre chaque tir'
+''                Temps de recharge entre chaque
+        tir'
       objectReference: {fileID: 0}
     - target: {fileID: 5096740830897744906, guid: 86268cd8ecd35a84a8460c4a37157598,
         type: 3}
@@ -33393,7 +33394,7 @@ GameObject:
   - component: {fileID: 1472992252}
   - component: {fileID: 8769716064576825021}
   m_Layer: 5
-  m_Name: Money
+  m_Name: Argent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33438,10 +33439,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Argent
+  m_text: 'Argent#
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 675b355d044ab114a9f4bc35b317a867, type: 2}
-  m_sharedMaterial: {fileID: -1272897835629006451, guid: 675b355d044ab114a9f4bc35b317a867,
+  m_fontAsset: {fileID: 11400000, guid: 261392d35e87b5a43b5ec72ecde8389a, type: 2}
+  m_sharedMaterial: {fileID: -7246345134015747134, guid: 261392d35e87b5a43b5ec72ecde8389a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -33484,7 +33487,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 6
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -33508,12 +33511,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -72.557434, w: 0}
   m_textInfo:
     textComponent: {fileID: 1472992252}
-    characterCount: 6
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 0
+    spaceCount: 1
     wordCount: 1
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -47253,7 +47256,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.65
+  m_fontSize: 30.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -50203,7 +50206,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21.35
+  m_fontSize: 20.15
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -50494,7 +50497,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 27.5
+  m_fontSize: 26
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
