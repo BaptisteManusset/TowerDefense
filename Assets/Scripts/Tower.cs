@@ -9,160 +9,166 @@ public class Tower : MonoBehaviour
 {
 
 
-  Color color = Color.red;
-  [BoxGroup("Target"), Label("Mob détectés")] public List<Mind> detectedEnemies;
-  //[BoxGroup("Target")] [Label("Cible")] public List<Mind> targets;
+    Color color = Color.red;
+    [BoxGroup("Target"), Label("Mob détectés")] public List<Mind> detectedEnemies;
 
-  [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
-
-
-  // Must be public
-  [BoxGroup("Stats")] public TowerStat statDefault;
-  [BoxGroup("Stats")] public TowerStat stat;
+    [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
 
 
-  [SerializeField] GameObject radius;
-  [SerializeField] int radiusDefault = 25;
-
-  [BoxGroup("Reload")] [SerializeField] [Label("Tir prés")] bool reloadRequire = false;
-  [BoxGroup("Reload")] [ProgressBar("chargement")] public float shotLoading = 100;
-
-  [BoxGroup("FX")] [SerializeField] ParticleSystem shotPoint;
-  [BoxGroup("FX")] [SerializeField] ParticleSystem muzzle;
+    // Must be public
+    [BoxGroup("Stats")] public TowerStat statDefault;
+    [BoxGroup("Stats")] public TowerStat stat;
 
 
-  [BoxGroup("Externe")] [SerializeField] BoolVariable showRadius;
+    [SerializeField] Renderer radius;
+    [SerializeField] int radiusDefault = 25;
+
+    [BoxGroup("Reload")] [SerializeField] [Label("Tir prés")] bool reloadRequire = false;
+    [BoxGroup("Reload")] [ProgressBar("chargement")] public float shotLoading = 100;
+
+    [BoxGroup("FX")] [SerializeField] ParticleSystem shotPoint;
+    [BoxGroup("FX")] [SerializeField] ParticleSystem muzzle;
 
 
-  private LineRenderer lineRenderer;
+    [BoxGroup("Externe")] [SerializeField] BoolVariable showRadius;
 
-  void Awake()
-  {
-    stat = Object.Instantiate(statDefault);
-    stat.Init();
-    lineRenderer = GetComponent<LineRenderer>();
-    lineRenderer.positionCount = 0;
 
-    radius.SetActive(showRadius.Value);
-  }
-  void Start()
-  {
-    UpdateInfo();
-  }
-  void Update()
-  {
-    detectedEnemies.Clear();
-    Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
-    foreach (Collider item in tempArray)
+    private LineRenderer lineRenderer;
+
+    void Awake()
     {
-      Mind mind = item.GetComponent<Mind>();
-      if (mind)
-      {
-        if (mind.IsDead() == false)
+        stat = Object.Instantiate(statDefault);
+        stat.Init();
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 0;
+
+        //radius.SetActive(showRadius.Value);
+        radius.material.SetFloat("_Display", showRadius.Value ? 1 : 0);
+    }
+    void Start()
+    {
+        UpdateInfo();
+    }
+    void Update()
+    {
+        detectedEnemies.Clear();
+        Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
+        foreach (Collider item in tempArray)
         {
-          detectedEnemies.Add(mind);
+            Mind mind = item.GetComponent<Mind>();
+            if (mind)
+            {
+                if (mind.IsDead() == false)
+                {
+                    detectedEnemies.Add(mind);
 
-          if (stat.isZoneAttack == false)
-          {
-            break;
-          }
+                    if (stat.isZoneAttack == false)
+                    {
+                        break;
+                    }
+                }
+            }
         }
-      }
-    }
 
 
 
 
-    if (detectedEnemies.Count > 0)
-      Shot();
+        if (detectedEnemies.Count > 0)
+            Shot();
 
 
-    if (reloadRequire == true)
-    {
-      lineRenderer.positionCount = 0;
-      shotLoading += stat.datas["ReloadSpeed"].upgrateLevel;
-
-      if (shotLoading >= 100)
-      {
-        reloadRequire = false;
-        shotLoading = 0;
-      }
-    }
-
-
-    UpdateInfo();
-  }
-  void OnDrawGizmos()
-  {
-
-    Gizmos.color = color;
-    if (stat)
-      Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
-    if (detectedEnemies.Count != 0)
-    {
-      for (int i = 0; i < detectedEnemies.Count; i++)
-      {
-        Mind m = detectedEnemies[i].GetComponent<Mind>();
-        if (!m) continue;
-        if (m.IsDead()) continue;
-        Gizmos.DrawLine(transform.position, detectedEnemies[i].transform.position);
-      }
-
-      if (detectedEnemies.Count > 0)
-      {
-        foreach (Mind item in detectedEnemies)
+        if (reloadRequire == true)
         {
-          DebugExtension.DrawArrow(transform.position, item.transform.position - transform.position, Color.yellow);
+            lineRenderer.positionCount = 0;
+            shotLoading += stat.datas["ReloadSpeed"].upgrateLevel;
+
+            if (shotLoading >= 100)
+            {
+                reloadRequire = false;
+                shotLoading = 0;
+            }
+        }
+
+
+        UpdateInfo();
+    }
+    void OnDrawGizmos()
+    {
+
+        Gizmos.color = color;
+        if (stat)
+            Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
+        if (detectedEnemies.Count != 0)
+        {
+            for (int i = 0; i < detectedEnemies.Count; i++)
+            {
+                Mind m = detectedEnemies[i].GetComponent<Mind>();
+                if (!m) continue;
+                if (m.IsDead()) continue;
+                Gizmos.DrawLine(transform.position, detectedEnemies[i].transform.position);
+            }
+
+            if (detectedEnemies.Count > 0)
+            {
+                foreach (Mind item in detectedEnemies)
+                {
+                    DebugExtension.DrawArrow(transform.position, item.transform.position - transform.position, Color.yellow);
+
+                }
+            }
 
         }
-      }
-
-    } else
-    {
-      muzzle.Stop();
+        else
+        {
+            muzzle.Stop();
+        }
     }
-  }
-  public void sellTower()
-  {
-    Destroy(gameObject);
-  }
-  public void UpdateInfo()
-  {
-    int scale = stat.datas["Radius"].upgrateLevel * 8 + radiusDefault;
-
-    radius.transform.localScale = Vector3.one * scale;
-    scale /= 2; // diameter to radius
-    stat.datas["Radius"].value = scale;
-  }
-
-  void Shot()
-  {
-    lineRenderer.positionCount = 2;
-    if (reloadRequire == false)
+    public void sellTower()
     {
-      reloadRequire = true;
-      foreach (Mind item in detectedEnemies)
-      {
-        if (item.IsDead()) continue;
-        item.Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
-        #region juicy
-        lineRenderer.SetPosition(0, shotPoint.transform.position);
-        lineRenderer.SetPosition(1, item.gameObject.transform.position);
-        shotPoint.transform.LookAt(item.transform);
-        shotPoint.Play();
-        muzzle.Play();
-        #endregion
-      }
-      //Invoke("Reload", 5 / stat.datas["ReloadSpeed"].upgrateLevel);
+        Destroy(gameObject);
     }
-  }
+    public void UpdateInfo()
+    {
+        int scale = stat.datas["Radius"].upgrateLevel * 8 + radiusDefault;
 
-  public void RadiusDisplay()
-  {
-    radius.SetActive(true);
-  }
-  public void RadiusHide()
-  {
-    radius.SetActive(showRadius.Value);
-  }
+        radius.transform.localScale = Vector3.one * scale;
+        scale /= 2; // diameter to radius
+        stat.datas["Radius"].value = scale;
+    }
+
+    void Shot()
+    {
+        lineRenderer.positionCount = 2;
+        if (reloadRequire == false)
+        {
+            reloadRequire = true;
+            foreach (Mind item in detectedEnemies)
+            {
+                if (item.IsDead()) continue;
+                item.Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
+                #region juicy
+                lineRenderer.SetPosition(0, shotPoint.transform.position);
+                lineRenderer.SetPosition(1, item.gameObject.transform.position);
+                shotPoint.transform.LookAt(item.transform);
+                shotPoint.Play();
+                muzzle.Play();
+                #endregion
+            }
+            //Invoke("Reload", 5 / stat.datas["ReloadSpeed"].upgrateLevel);
+        }
+    }
+
+    public void RadiusDisplay()
+    {
+        radius.material.SetFloat("_Display", 1);
+    }
+    public void RadiusHide()
+    {
+        radius.material.SetFloat("_Display", showRadius.Value ? 1 : 0);
+    }
+
+    public void RadiusToggle()
+    {
+        radius.material.SetFloat("_Display", showRadius.Value ? 1 : 0);
+    }
 }

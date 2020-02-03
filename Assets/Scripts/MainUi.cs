@@ -7,32 +7,33 @@ using UnityEngine.Events;
 public class MainUi : MonoBehaviour
 {
 
-  [SerializeField] ThingRuntimeSet towers;
-  [SerializeField] BoolVariable showRadius;
+    [SerializeField] ThingRuntimeSet towers;
+    [SerializeField] BoolVariable showRadius;
 
-  [SerializeField] UnityEvent initShop;
+    [SerializeField] UnityEvent initShop;
 
 
-  void Awake()
-  {
-    showRadius.SetValue(true);
-
-    ToggleRadius();
-  }
-
-  void Start()
-  {
-    initShop.Invoke();
-  }
-
-  public void ToggleRadius()
-  {
-    showRadius.Invert();
-    for (int i = 0; i < towers.Items.Count; i++)
+    void Awake()
     {
-      towers.Items[i].transform.Find("Radius").gameObject.SetActive(showRadius.Value);
+        showRadius.SetValue(true);
+
+        ToggleRadius();
     }
 
-  }
+    void Start()
+    {
+        initShop.Invoke();
+    }
+
+    public void ToggleRadius()
+    {
+        showRadius.Invert();
+        for (int i = 0; i < towers.Items.Count; i++)
+        {
+            towers.Items[i].GetComponent<Tower>().RadiusToggle();
+            //radius.material.SetFloat("_Display", showRadius.Value ? 1 : 0);
+        }
+
+    }
 
 }

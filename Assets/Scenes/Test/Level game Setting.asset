@@ -52,15 +52,15 @@ MonoBehaviour:
   m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 1
-  m_AdvancedMode: 0
+  m_AdvancedMode: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.074
+    m_Value: 0.073
     min: 0
     max: 1
   scatter:
-    m_OverrideState: 0
-    m_Value: 0.522
+    m_OverrideState: 1
+    m_Value: 0.069
     min: 0
     max: 1
   tint:
@@ -71,10 +71,10 @@ MonoBehaviour:
     showEyeDropper: 1
   dirtTexture:
     m_OverrideState: 0
-    m_Value: {fileID: 2800000, guid: 76b0b7c29f8441540a1cf986b45f6a7c, type: 3}
+    m_Value: {fileID: 2800000, guid: 24ec1da2abbbab64f93f0a48e281f243, type: 3}
   dirtIntensity:
     m_OverrideState: 0
-    m_Value: 7.79
+    m_Value: 69.76
     min: 0
   highQualityFiltering:
     m_OverrideState: 1

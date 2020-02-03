@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: MorePerfectDOSVGA
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 432322094
   material: {fileID: -1272897835629006451}
-  materialHashCode: 0
+  materialHashCode: 1348552421
   m_Version: 1.1.0
   m_SourceFontFileGUID: 7ec424b3d1baa1e41ac49bbd50ffe857
   m_SourceFontFile_EditorRef: {fileID: 0}
