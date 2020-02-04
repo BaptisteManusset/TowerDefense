@@ -54,7 +54,7 @@ MonoBehaviour:
       upgrateLevel: 4
       upgrateLevelMax: 6
     - id: Damage
-      value: 10
+      value: 1
       cost: 10
       upgrateLevel: 3
       upgrateLevelMax: 6

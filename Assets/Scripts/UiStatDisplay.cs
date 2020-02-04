@@ -7,85 +7,91 @@ using UnityEngine.UI;
 
 public class UiStatDisplay : MonoBehaviour
 {
-    [BoxGroup("Element")] public string variable;
+  [BoxGroup("Element")] public string variable;
 
-    [BoxGroup("Display")] [SerializeField] [TextArea] string desc;
-    //[SerializeField] string prefix;
-    //[SerializeField] string suffix;
-    [BoxGroup("Ref")] [SerializeField] TextMeshProUGUI description;
-    [BoxGroup("Ref")] [SerializeField] TextMeshProUGUI button;
-    [BoxGroup("Ref")] [SerializeField] Button buttonComp;
-    [BoxGroup("Ref")] [SerializeField] GameObjectVariable tower;
-    [BoxGroup("Ref")] [SerializeField] FloatVariable argent;
-    [BoxGroup("Ref")] [SerializeField] uiStatDisplayDot dots;
-    [BoxGroup("Ref")] [SerializeField] SimpleTooltip simpleTooltip;
+  [BoxGroup("Display")] [SerializeField] [TextArea] string desc;
+  [BoxGroup("Display")] [SerializeField] [ShowAssetPreview] Sprite icon;
+
+  //[SerializeField] string prefix;
+  //[SerializeField] string suffix;
+  [BoxGroup("Ref")] [SerializeField] TextMeshProUGUI description;
+  [BoxGroup("Ref")] [SerializeField] TextMeshProUGUI button;
+  [BoxGroup("Ref")] [SerializeField] Button buttonComp;
+  [BoxGroup("Ref")] [SerializeField] GameObjectVariable tower;
+  [BoxGroup("Ref")] [SerializeField] FloatVariable argent;
+  [BoxGroup("Ref")] [SerializeField] uiStatDisplayDot dots;
+  [BoxGroup("Ref")] [SerializeField] SimpleTooltip simpleTooltip;
+  [BoxGroup("Ref")] [SerializeField] Image iconPlace;
 
 
 
-    TowerStat stat;
+  TowerStat stat;
 
-    private void Start()
+  private void Start()
+  {
+    SetUI();
+  }
+  [Button]
+  void SetUI()
+  {
+    buttonComp = GetComponentInChildren<Button>();
+    simpleTooltip = GetComponentInChildren<SimpleTooltip>();
+    simpleTooltip.infoLeft = desc;
+    iconPlace.sprite = icon;
+  }
+
+  public void UpdateInterface()
+  {
+    if (tower.Value != null)
     {
-        buttonComp = GetComponentInChildren<Button>();
-        simpleTooltip = GetComponentInChildren<SimpleTooltip>();
+      stat = tower.Value.gameObject.GetComponent<Tower>().stat;
+      //description.text = prefix + stat.datas[variable].upgrateLevel + suffix;
+      description.text = stat.datas[variable].upgrateLevel.ToString();
+      button.text = stat.datas[variable].cost + "#";
+      dots.UpdateUi(stat.datas[variable].upgrateLevel, variable);
 
-        simpleTooltip.infoLeft = desc;
 
+      if (stat.datas[variable].upgrateLevel >= stat.datas[variable].upgrateLevelMax)
+      {
+        buttonComp.interactable = false;
+      } else
+      {
+        buttonComp.interactable = true;
+      }
     }
-    public void UpdateInterface()
+  }
+  public void IncrementValue()
+  {
+    if (tower.Value != null)
     {
-        if (tower.Value != null)
+
+      Tower tw = tower.Value.gameObject.GetComponent<Tower>();
+      stat = tw.stat;
+      if (stat.datas[variable].upgrateLevel < stat.datas[variable].upgrateLevelMax)
+      {
+        if (argent.Value - stat.datas[variable].cost >= 0)
         {
-            stat = tower.Value.gameObject.GetComponent<Tower>().stat;
-            //description.text = prefix + stat.datas[variable].upgrateLevel + suffix;
-            description.text = stat.datas[variable].upgrateLevel.ToString();
-            button.text = stat.datas[variable].cost + "#";
-            dots.UpdateUi(stat.datas[variable].upgrateLevel, variable);
+          stat.datas[variable].upgrateLevel++;
+          argent.Value -= stat.datas[variable].cost;
+          stat.GetValue();
 
-
-            if (stat.datas[variable].upgrateLevel >= stat.datas[variable].upgrateLevelMax)
-            {
-                buttonComp.interactable = false;
-            }
-            else
-            {
-                buttonComp.interactable = true;
-            }
+          tw.UpdateInfo();
         }
+      } else
+      {
+        buttonComp.interactable = false;
+      }
     }
-    public void IncrementValue()
-    {
-        if (tower.Value != null)
-        {
-
-            Tower tw = tower.Value.gameObject.GetComponent<Tower>();
-            stat = tw.stat;
-            if (stat.datas[variable].upgrateLevel < stat.datas[variable].upgrateLevelMax)
-            {
-                if (argent.Value - stat.datas[variable].cost >= 0)
-                {
-                    stat.datas[variable].upgrateLevel++;
-                    argent.Value -= stat.datas[variable].cost;
-                    stat.GetValue();
-
-                    tw.UpdateInfo();
-                }
-            }
-            else
-            {
-                buttonComp.interactable = false;
-            }
-        }
-    }
+  }
 
 
 
-    public void SetValue(string value)
-    {
-        description.text = value;
-    }
-    public void SetValue(int value)
-    {
-        description.text = value.ToString();
-    }
+  public void SetValue(string value)
+  {
+    description.text = value;
+  }
+  public void SetValue(int value)
+  {
+    description.text = value.ToString();
+  }
 }

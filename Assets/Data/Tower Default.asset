@@ -52,11 +52,14 @@ MonoBehaviour:
       value: 10
       cost: 10
       upgrateLevel: 1
+      upgrateLevelMax: 6
     - id: Damage
-      value: 10
+      value: 1
       cost: 10
       upgrateLevel: 1
+      upgrateLevelMax: 6
     - id: ReloadSpeed
       value: 10
       cost: 10
       upgrateLevel: 1
+      upgrateLevelMax: 6
