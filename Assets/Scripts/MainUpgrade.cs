@@ -1,4 +1,4 @@
-﻿#pragma warning disable 0649
+
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
