@@ -10,12 +10,12 @@ public class Destination : MonoBehaviour
   [SerializeField] LayerMask layer;
   [SerializeField] UnityEvent DamageEvent;
   [SerializeField] UnityEvent DeathEvent;
-  [SerializeField] bool enableEffect = true;
+  [SerializeField] bool enable = true;
 
   private void OnTriggerEnter(Collider other)
   {
 
-    if (!enableEffect) return;
+    if (!enable) return;
 
     Mind ennemy = other.GetComponent<Mind>();
     vie.ApplyChange(-ennemy.damageToTower);
