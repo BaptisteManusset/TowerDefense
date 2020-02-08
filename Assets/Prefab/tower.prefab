@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136887996897822679}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.224, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8674179627983258875}
   - {fileID: 5299444908876463937}
-  m_Father: {fileID: 5593453251275554650}
-  m_RootOrder: 3
+  m_Father: {fileID: 3125457862620358190}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &8811058325370086907
 ParticleSystem:
@@ -286,7 +286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6
+      scalar: 20
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -551,7 +551,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5707963
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4743,12 +4743,12 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
-  m_ApplyActiveColorSpace: 1
+  m_ApplyActiveColorSpace: 0
   m_AllowRoll: 1
   m_VertexStreams: 00010304
   m_Mesh: {fileID: -5495902117074765545, guid: 3346be97d76d1674aa344df44a256370, type: 3}
@@ -5158,7 +5158,7 @@ Transform:
   m_GameObject: {fileID: 3159970124257178514}
   m_LocalRotation: {x: -0.8660244, y: -0, z: -0, w: 0.50000167}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 49, y: 49, z: 49}
   m_Children: []
   m_Father: {fileID: 5593453251275554650}
   m_RootOrder: 2
@@ -5248,13 +5248,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3334471031679207561}
-  m_LocalRotation: {x: 0.70709366, y: -0, z: -0, w: 0.70711994}
-  m_LocalPosition: {x: 0, y: 1.76, z: 0.00000031409635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.67, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5593453251275554650}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &5060190934414636310
 Light:
   m_ObjectHideFlags: 0
@@ -5267,8 +5267,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 128
-  m_Range: 15
+  m_Intensity: 512
+  m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5314,7 +5314,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 0
+  m_ShadowRadius: 30
   m_ShadowAngle: 0
 --- !u!114 &3333422256799910122
 MonoBehaviour:
@@ -5336,7 +5336,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 10
+  m_Intensity: 12
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -5350,7 +5350,7 @@ MonoBehaviour:
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 1
-  m_ShapeRadius: 10
+  m_ShapeRadius: 30
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 30
@@ -5432,7 +5432,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5593453251275554650}
   - component: {fileID: 5593453251275554653}
-  - component: {fileID: 5593453251275554654}
   - component: {fileID: 5593453251275554652}
   - component: {fileID: 469396122315661724}
   - component: {fileID: 7727262624242410774}
@@ -5442,6 +5441,7 @@ GameObject:
   - component: {fileID: 2894700465685126674}
   - component: {fileID: 5900326088029976687}
   - component: {fileID: 4538052671012455980}
+  - component: {fileID: 5593453251275554654}
   - component: {fileID: 1906575671882889559}
   m_Layer: 10
   m_Name: tower
@@ -5464,7 +5464,7 @@ Transform:
   - {fileID: 7735199996460720940}
   - {fileID: 7198180087282262936}
   - {fileID: 7039410000520649504}
-  - {fileID: 637778625729306237}
+  - {fileID: 3125457862620358190}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5476,32 +5476,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5593453251275554641}
   m_Mesh: {fileID: 0}
---- !u!114 &5593453251275554654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5593453251275554641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94a64308e34c0a459068b9e8eb82d4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectedEnemies: []
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  statDefault: {fileID: 11400000, guid: f2b09e3a9a2c66c428e904de34502f15, type: 2}
-  stat: {fileID: 0}
-  radius: {fileID: 2899526741855316617}
-  radiusDefault: 25
-  reloadRequire: 0
-  shotLoading: 100
-  shotPoint: {fileID: 8811058325370086907}
-  muzzle: {fileID: 8674179627968053691}
-  loading: {fileID: 4538052671012455980}
-  showRadius: {fileID: 11400000, guid: d02bf6e611992f745b8d7337b638acbe, type: 2}
 --- !u!23 &5593453251275554652
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6201,7 +6175,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10607,6 +10581,33 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &5593453251275554654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593453251275554641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94a64308e34c0a459068b9e8eb82d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedEnemies: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  statDefault: {fileID: 11400000, guid: f2b09e3a9a2c66c428e904de34502f15, type: 2}
+  stat: {fileID: 0}
+  radius: {fileID: 2899526741855316617}
+  radiusDefault: 25
+  reloadRequire: 0
+  shotLoading: 100
+  shotPoint: {fileID: 8811058325370086907}
+  muzzle: {fileID: 8674179627968053691}
+  loading: {fileID: 4538052671012455980}
+  showRadius: {fileID: 11400000, guid: d02bf6e611992f745b8d7337b638acbe, type: 2}
+  rotatePoint: {fileID: 3125457862620358190}
 --- !u!199 &1906575671882889559
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -10671,6 +10672,37 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &6746280244396816595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3125457862620358190}
+  m_Layer: 0
+  m_Name: RotationPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3125457862620358190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6746280244396816595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 637778625729306237}
+  m_Father: {fileID: 5593453251275554650}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8674179627982872189
 PrefabInstance:
   m_ObjectHideFlags: 0
