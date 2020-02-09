@@ -60,6 +60,8 @@ public class UiStatDisplay : MonoBehaviour
       }
     }
   }
+
+
   public void IncrementValue()
   {
     if (tower.Value != null)

@@ -12,8 +12,12 @@ public class MainUpgrade : MonoBehaviour
 
     void Awake()
     {
-        SetDisplay();
+        //SetDisplay();
     }
+
+  /// <summary>
+  /// toggle on the ui for the screen upgrade if necessary
+  /// </summary>
     [Button("Update UI")]
     public void SetDisplay()
     {
@@ -39,6 +43,6 @@ public class MainUpgrade : MonoBehaviour
 
     public void Update()
     {
-        SetDisplay();
+        //SetDisplay();
     }
 }
