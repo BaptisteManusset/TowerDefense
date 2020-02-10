@@ -11,8 +11,7 @@ public class Tower : MonoBehaviour
 
 
     Color color = Color.red;
-    [BoxGroup("Target"), Label("Mob détectés")] public List<Mind> detectedEnemies;
-
+    [BoxGroup("Target"), Label("Mob détectés")] public List<Mind> targets;
     [BoxGroup("Target"), Label("Layer des mobs")] public LayerMask layerMask;
 
 
@@ -38,7 +37,7 @@ public class Tower : MonoBehaviour
 
 
     private LineRenderer lineRenderer;
-
+    bool shootInProgress = false;
     void Awake()
     {
         stat = Object.Instantiate(statDefault);
@@ -55,97 +54,100 @@ public class Tower : MonoBehaviour
     }
     void FixedUpdate()
     {
-        bool seekNewTarget = false;
 
 
-
-        #region get all ennemys alive in range or 1 if is not a zoneAttack
-
-        if (stat.isZoneAttack)
+        if (shootInProgress == false)
         {
-            seekNewTarget = true;
-        }
-        else
-        {
-            if (detectedEnemies.Count == 0)
+
+            #region Clear Targets
+            for (var y = GetTargets().Count - 1; y > -1; y--)
             {
-                seekNewTarget = true;
+                if (targets[y] == null)
+                    targets.RemoveAt(y);
+            }
+            #endregion
+
+
+
+
+
+            Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
+
+
+            if (stat.isZoneAttack == false)
+            {
+                int i = 0;
+                while (i < tempArray.Length && GetTargets().Count == 0)
+                {
+                    Mind mind = tempArray[i].GetComponent<Mind>();
+                    if (mind)
+                    {
+                        if (mind.IsDead() == false)
+                        {
+                            GetTargets().Add(mind);
+                        }
+                    }
+                    i++;
+                }
             }
             else
             {
-                if (detectedEnemies[0] == null || detectedEnemies[0].IsDead())
+                for (int i = 0; i < tempArray.Length; i++)
                 {
-                    seekNewTarget = true;
-                }
-            }
-        }
-
-
-        if (seekNewTarget)
-        {
-            detectedEnemies.Clear();
-            Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
-
-            for (int i = 0; i < (stat.isZoneAttack ? 1 : tempArray.Length); i++)
-            {
-                Mind mind = tempArray[i].GetComponent<Mind>();
-                if (mind)
-                {
-                    if (mind.IsDead() == false)
+                    Mind mind = tempArray[i].GetComponent<Mind>();
+                    if (mind)
                     {
-                        detectedEnemies.Add(mind);
+                        if (mind.IsDead() == false)
+                        {
+                            GetTargets().Add(mind);
+                        }
                     }
                 }
+
+
             }
-        }
-        #endregion
+            if (GetTargets().Count > 0)
+            {
+                StartCoroutine(Shot());
+            }
 
 
-
-
-        if (detectedEnemies.Count > 0)
-        {
-            StartCoroutine(Shot());
         }
         else
         {
-            AnimStop();
-        }
-
-
-
-        #region reloading  
-        if (reloadRequire == true)
-        {
-            loading.Play();
-            shotLoading += stat.datas["ReloadSpeed"].upgrateLevel;
-
-            if (shotLoading >= 100)
+            if (reloadRequire)
             {
-                reloadRequire = false;
-                shotLoading = 0;
-                loading.Stop();
+
+                if (shotLoading >= 100)
+                {
+                    shotLoading = 100;
+                    reloadRequire = false;
+                }
+                else
+                {
+                    shotLoading += stat.datas["ReloadSpeed"].upgrateLevel * stat.datas["ReloadSpeed"].value;
+                }
             }
         }
-        #endregion
 
-        UpdateInfo();
+        if (GetTargets().Count > 0)
+        {
+            AnimPlay(GetTargets()[0].gameObject);
+        }
     }
     void OnDrawGizmos()
     {
 
         Gizmos.color = color;
-        //if (stat)
-        //    Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
-        if (detectedEnemies.Count >= 0)
+        if (GetTargets().Count >= 0)
         {
-            for (int i = 0; i < detectedEnemies.Count; i++)
+            for (int i = 0; i < GetTargets().Count; i++)
             {
-                Mind m = detectedEnemies[i]?.GetComponent<Mind>();
+                Mind m = targets[i]?.GetComponent<Mind>();
                 if (m == null) continue;
 
-                Gizmos.DrawLine(transform.position, detectedEnemies[i].transform.position);
-                DebugExtension.DrawArrow(transform.position, detectedEnemies[i].transform.position - transform.position, Color.yellow);
+                Gizmos.DrawLine(transform.position, targets[i].transform.position);
+                DebugExtension.DrawArrow(transform.position, targets[i].transform.position - transform.position, Color.yellow);
 
             }
         }
@@ -162,6 +164,7 @@ public class Tower : MonoBehaviour
 
     IEnumerator Shot()
     {
+        shootInProgress = true;
         if (reloadRequire == false)
         {
             if (!shotPoint.isPlaying)
@@ -172,28 +175,27 @@ public class Tower : MonoBehaviour
 
 
 
-            for (int i = 0; i < detectedEnemies.Count; i++)
+            for (int i = 0; i < GetTargets().Count; i++)
             {
-                if (detectedEnemies[i].IsDead()) continue;
-                AnimPlay(detectedEnemies[i].gameObject);
+                AnimPlay(GetTargets()[i].gameObject);
             }
 
-
+            Debug.Log("sHot");
 
             yield return new WaitForSeconds(1f);
 
 
             reloadRequire = true;
+            shotLoading = 0;
 
-            for (int i = 0; i < detectedEnemies.Count; i++)
+            for (int i = 0; i < GetTargets().Count; i++)
             {
-                if (detectedEnemies[i].IsDead()) continue;
-                detectedEnemies[i].Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
+                GetTargets()[i].Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
             }
 
         }
         yield return new WaitForSeconds(.1f);
-        //AnimStop();
+        shootInProgress = false;
     }
 
     public void RadiusDisplay()
@@ -216,11 +218,18 @@ public class Tower : MonoBehaviour
 
     void AnimPlay(GameObject obj)
     {
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, obj.transform.position);
+        if (stat.isZoneAttack)
+        {
 
-        rotatePoint.LookAt(obj.transform);
 
+        }
+        else
+        {
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, obj.transform.position);
+
+            rotatePoint.LookAt(obj.transform);
+        }
     }
     void AnimStop()
     {
@@ -228,5 +237,17 @@ public class Tower : MonoBehaviour
         lineRenderer.SetPosition(1, transform.position);
         //shotPoint.Stop();
         //muzzle.Stop();
+    }
+
+    List<Mind> GetTargets()
+    {
+        if (stat.isZoneAttack == false)
+        {
+            if (targets.Count > 1)
+                targets.RemoveRange(1, targets.Count - 1);
+        }
+
+        return targets;
+
     }
 }
