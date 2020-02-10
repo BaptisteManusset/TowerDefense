@@ -6,29 +6,32 @@ using UnityEngine.Events;
 
 public class Destination : MonoBehaviour
 {
-  [SerializeField] FloatVariable vie;
-  [SerializeField] LayerMask layer;
-  [SerializeField] UnityEvent DamageEvent;
-  [SerializeField] UnityEvent DeathEvent;
-  [SerializeField] bool enable = true;
+    [SerializeField] FloatVariable vie;
+    [SerializeField] LayerMask layer;
+    [SerializeField] UnityEvent DamageEvent;
+    [SerializeField] UnityEvent DeathEvent;
+    [SerializeField] bool enable = true;
 
-  private void OnTriggerEnter(Collider other)
-  {
-
-    if (!enable) return;
-
-    Mind ennemy = other.GetComponent<Mind>();
-    vie.ApplyChange(-ennemy.damageToTower);
-
-
-    if (vie.Value <= 0)
+    private void OnTriggerEnter(Collider other)
     {
-      DeathEvent.Invoke();
-    } else
-    {
-      DamageEvent.Invoke();
+
+        if (!enable) return;
+
+        Mind ennemy = other.GetComponent<Mind>();
+        if (!ennemy) return;
+
+        vie.ApplyChange(-ennemy.damageToTower);
+
+        Debug.Log(" >>>  " + vie.Value);
+        if (vie.Value <= 0)
+        {
+            DeathEvent.Invoke();
+        }
+        else
+        {
+            DamageEvent.Invoke();
+        }
+
+        Destroy(other.gameObject);
     }
-
-    Destroy(other.gameObject);
-  }
 }

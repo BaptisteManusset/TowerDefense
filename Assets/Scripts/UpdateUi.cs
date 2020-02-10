@@ -20,4 +20,10 @@ public class UpdateUi : MonoBehaviour
       vol.weight = Mathf.InverseLerp(1, 0, vie.Value / minVie);
     }
   }
+
+    public void Disable()
+    {
+        vol.enabled = false;
+        this.enabled = false;
+    }
 }

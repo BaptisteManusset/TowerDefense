@@ -62,11 +62,15 @@ public class Mind : MonoBehaviour
   }
   void Update()
   {
-    canvas.transform.LookAt(MainLevel.instance.cam.transform);
     NavMeshHit hit;
     meshAgent.SamplePathPosition(-1, 0.0f, out hit);
   }
-  public void Damage(int d)
+
+    private void LateUpdate()
+    {
+        canvas.transform.LookAt(canvas.transform.position + MainLevel.instance.cam.transform.forward);
+    }
+    public void Damage(int d)
   {
     if (alive)
     {
