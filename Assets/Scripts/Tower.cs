@@ -55,22 +55,45 @@ public class Tower : MonoBehaviour
     }
     void FixedUpdate()
     {
-        detectedEnemies.Clear();
-        Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
+        bool seekNewTarget = false;
 
-        #region get all ennemys in range
-        foreach (Collider item in tempArray)
+
+
+        #region get all ennemys alive in range or 1 if is not a zoneAttack
+
+        if (stat.isZoneAttack)
         {
-            Mind mind = item.GetComponent<Mind>();
-            if (mind)
+            seekNewTarget = true;
+        }
+        else
+        {
+            if (detectedEnemies.Count == 0)
             {
-                if (mind.IsDead() == false)
+                seekNewTarget = true;
+            }
+            else
+            {
+                if (detectedEnemies[0] == null || detectedEnemies[0].IsDead())
                 {
-                    detectedEnemies.Add(mind);
+                    seekNewTarget = true;
+                }
+            }
+        }
 
-                    if (stat.isZoneAttack == false)
+
+        if (seekNewTarget)
+        {
+            detectedEnemies.Clear();
+            Collider[] tempArray = Physics.OverlapSphere(transform.position, stat.datas["Radius"].value, layerMask);
+
+            for (int i = 0; i < (stat.isZoneAttack ? 1 : tempArray.Length); i++)
+            {
+                Mind mind = tempArray[i].GetComponent<Mind>();
+                if (mind)
+                {
+                    if (mind.IsDead() == false)
                     {
-                        break;
+                        detectedEnemies.Add(mind);
                     }
                 }
             }
@@ -112,16 +135,14 @@ public class Tower : MonoBehaviour
     {
 
         Gizmos.color = color;
-        if (stat)
-            Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
+        //if (stat)
+        //    Gizmos.DrawWireSphere(transform.position, stat.datas["Radius"].value);
         if (detectedEnemies.Count >= 0)
         {
             for (int i = 0; i < detectedEnemies.Count; i++)
             {
-                Mind m = detectedEnemies[i].GetComponent<Mind>();
-                if (!m) continue;
-                if (m.IsDead()) continue;
-
+                Mind m = detectedEnemies[i]?.GetComponent<Mind>();
+                if (m == null) continue;
 
                 Gizmos.DrawLine(transform.position, detectedEnemies[i].transform.position);
                 DebugExtension.DrawArrow(transform.position, detectedEnemies[i].transform.position - transform.position, Color.yellow);
@@ -149,25 +170,27 @@ public class Tower : MonoBehaviour
             if (!muzzle.isPlaying)
                 muzzle.Play();
 
-            foreach (Mind item in detectedEnemies)
+
+
+            for (int i = 0; i < detectedEnemies.Count; i++)
             {
-                if (item.IsDead()) continue;
-                AnimPlay(item.gameObject);
+                if (detectedEnemies[i].IsDead()) continue;
+                AnimPlay(detectedEnemies[i].gameObject);
             }
+
+
 
             yield return new WaitForSeconds(1f);
 
 
             reloadRequire = true;
 
-
-            foreach (Mind item in detectedEnemies)
+            for (int i = 0; i < detectedEnemies.Count; i++)
             {
-                if (item.IsDead()) continue;
-                item.Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
-
-
+                if (detectedEnemies[i].IsDead()) continue;
+                detectedEnemies[i].Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
             }
+
         }
         yield return new WaitForSeconds(.1f);
         //AnimStop();
