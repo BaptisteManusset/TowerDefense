@@ -257,6 +257,11 @@ PrefabInstance:
       propertyPath: ShapeModule.radiusThickness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8811058325370086907, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b17ef37e2f2ce40bc0b2fc7d09d1a9, type: 3}
 --- !u!4 &5809559930945513036 stripped

@@ -68,7 +68,7 @@ public class Mind : MonoBehaviour
 
     private void LateUpdate()
     {
-        canvas.transform.LookAt(canvas.transform.position + MainLevel.instance.cam.transform.forward);
+        canvas.transform.LookAt(canvas.transform.position + Camera.main.transform.forward);
     }
     public void Damage(int d)
   {

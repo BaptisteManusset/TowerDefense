@@ -1,7 +1,5 @@
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Events;
-
 public class MainShop : MonoBehaviour
 {
     [BoxGroup("Tour Disponible")] [SerializeField] GameObject[] itemToSell;

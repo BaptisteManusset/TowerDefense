@@ -18,7 +18,6 @@ public class MainWave : MonoBehaviour
 
   IEnumerator Waving() // ~~¤_¤~~
   {
-    Debug.Log("Debut de wave");
     for (int i = 0; i < count; i++)
     {
       for (int y = 0; y < spawners.Length; y++)
@@ -30,6 +29,6 @@ public class MainWave : MonoBehaviour
     Debug.Log("Fin de wave");
 
     yield return new WaitForSeconds(10);
-    Debug.Log("Fin d'interwave");
+
   }
 }

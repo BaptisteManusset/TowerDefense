@@ -47,7 +47,7 @@ public class UiStatTower : MonoBehaviour
         {
             stat = tower.Value.gameObject.GetComponent<Tower>().stat;
 
-            #region Debug
+#if UNITY_EDITOR
             text = "";
             text += "name " + tower.Value.name + "\n";
             text += "Buy Cost " + stat.buyCost + "\n";
@@ -56,7 +56,7 @@ public class UiStatTower : MonoBehaviour
             text += "damage " + stat.datas["Damage"].upgrateLevel + "\n";
             text += "recharge " + stat.datas["ReloadSpeed"].upgrateLevel + "\n";
             text += "ZoneAttack " + stat.isZoneAttack + "\n";
-            #endregion
+#endif
 
             description.text = text;
 

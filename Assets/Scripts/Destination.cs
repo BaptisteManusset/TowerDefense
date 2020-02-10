@@ -22,7 +22,6 @@ public class Destination : MonoBehaviour
 
         vie.ApplyChange(-ennemy.damageToTower);
 
-        Debug.Log(" >>>  " + vie.Value);
         if (vie.Value <= 0)
         {
             DeathEvent.Invoke();

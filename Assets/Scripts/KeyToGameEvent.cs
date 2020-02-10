@@ -19,6 +19,7 @@ public class KeyToGameEvent : MonoBehaviour
 [System.Serializable]
 public class keyEvent
 {
+    [Label("Nom du groupe")]public string name;
     public KeyCode key;
     public UnityEvent evnt;
 
