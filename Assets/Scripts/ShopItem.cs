@@ -1,7 +1,7 @@
 ﻿using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
-
+using itsbaptiste;
 public class ShopItem : MonoBehaviour
 {
     [BoxGroup("Info")] [SerializeField] string nom;
@@ -10,14 +10,14 @@ public class ShopItem : MonoBehaviour
 
     [BoxGroup("Technique")] [SerializeField] TextMeshProUGUI TxtNom;
     [BoxGroup("Technique")] [SerializeField] TextMeshProUGUI TxtTarif;
-    Cursor placer;
+    itsbaptiste.Cursor placer;
 
     [Button("Update")]
     void Start()
     {
         TxtNom.text = nom;
         TxtTarif.text = tarif + "#";
-        placer = (Cursor)FindObjectOfType(typeof(Cursor));
+        placer = (itsbaptiste.Cursor)FindObjectOfType(typeof(itsbaptiste.Cursor));
         Debug.Log("shop item", gameObject);
 
     }

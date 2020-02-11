@@ -14,39 +14,63 @@ public class Mine : Tower
     }
     protected override void FixedUpdate()
     {
-        Debug.Log("FixedUpdate Mine");
+
+        //if (shootInProgress == false)
+        //{
+        //    
+        //    if (Seek())
+        //        StartCoroutine(Shot());
+        //}
+        //else
+        //{
+        //    Reload();
+        //}
+
+
+
+
 
         if (shootInProgress == false)
         {
-            ClearTargets();
-            if (Seek())
-                StartCoroutine(Shot());
-        }
-        else
-        {
-            Reload();
-        }
-
-        if (GetTargets().Count > 0)
-        {
-            AnimPlay();
+            if (GetTargets().Count > 0)
+            {
+                ClearTargets();
+                Seek();
+                Transform closest = GetClosestTarget(GetTargets());
+                int dist = (int)Vector3.Distance(closest.position, transform.position);
+                if (dist > 1)
+                {
+                    transform.LookAt(closest);
+                    transform.Translate(transform.forward * .5f);
+                    Debug.Log("distance  " + dist);
+                }
+                else
+                {
+                    StartCoroutine(Shot());
+                }
+            }
+            else
+            {
+                Seek();
+            }
         }
     }
 
+
+
     protected override IEnumerator Shot()
     {
-        Debug.Log("Shot Mine");
         shootInProgress = true;
-        if (reloadRequire == false)
+        ClearTargets();
+        Seek();
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < GetTargets().Count; i++)
         {
-            reloadRequire = true;
-            shotLoading = 0;
-            transform.LookAt(GetClosestTarget(GetTargets()));
-            transform.Translate(transform.forward);
-
+            GetTargets()[i].Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
         }
         yield return new WaitForSeconds(.1f);
-        shootInProgress = false;
+        Destroy(gameObject);
+
     }
 
 

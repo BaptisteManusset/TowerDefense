@@ -191,7 +191,7 @@ MonoBehaviour:
   targets: []
   layerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 512
   statDefault: {fileID: 11400000, guid: b8af65e02ea142a4a9561e689286060d, type: 2}
   stat: {fileID: 0}
   radius: {fileID: 2027381704732050266}

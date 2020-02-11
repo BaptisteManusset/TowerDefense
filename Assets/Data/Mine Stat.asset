@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isZoneAttack: 1
   sellValue: 0
-  buyCost: 10
-  description: Tourrel Default
+  buyCost: 30
+  description: "Une mine teleguid\xE9 qui exploque a proximit\xE9 de sa cible"
   datas:
     reorderableList:
       canAdd: 1
@@ -51,15 +51,15 @@ MonoBehaviour:
     - id: Radius
       value: 20
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 6
       upgrateLevelMax: 6
     - id: Damage
-      value: 1
+      value: 20
       cost: 10
       upgrateLevel: 1
       upgrateLevelMax: 6
     - id: ReloadSpeed
-      value: 10
+      value: 100
       cost: 10
-      upgrateLevel: 1
+      upgrateLevel: 6
       upgrateLevelMax: 6

@@ -122,8 +122,6 @@ public class Tower : MonoBehaviour
     }
     protected List<Mind> GetTargets()
     {
-        if (stat == null)
-            Debug.LogError("Stat is null", gameObject);
 
         if (stat.isZoneAttack == false)
         {

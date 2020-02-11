@@ -47,7 +47,7 @@ public class ShopButton : MonoBehaviour
        
         stat = item.statDefault;
 
-        Debug.Log("stat >> " + stat);
+
         uiName.text = tourToSell.name;
 
         uiZone.enabled = stat.isZoneAttack;
