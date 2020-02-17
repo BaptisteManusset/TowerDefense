@@ -1,47 +1,22 @@
-﻿using NaughtyAttributes;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public float width = 1;
+    public float lenght = 1;
 
-    public bool onWave = false;
-    public WaveData wave;
-    public float delay;
-    public Transform parent;
-    public MainMode mainMode;
-
-    
-
-    [Button]
-    public void BeginWave()
+    public GameObject SpawnMob(GameObject obj, Transform parent)
     {
-        wave = mainMode.GetWave();
-        Debug.Log("BeginWave");
-        onWave = true;
-        StartCoroutine(Spawing());
-        onWave = false;
+        Vector3 position = transform.position;
+
+        position.x += Random.Range(-width, width) / 2;
+        position.z += Random.Range(-lenght, lenght) / 2;
+
+        return Instantiate(obj, position, transform.rotation, parent);
     }
 
-    [Button]
-    IEnumerator Spawing()
+    private void OnDrawGizmos()
     {
-        Debug.Log("couroutine");
-        for (int i = 0; i < wave.quantite; i++)
-        {
-            int t = Random.Range(0, wave.spawner.Length);
-            Instantiate(wave.spawner[t], transform.position, Quaternion.identity, transform);
-            yield return new WaitForSeconds(delay);
-        }
-
-        yield return new WaitForSeconds(10);
-        mainMode.Increase();
-    }
-
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 3);
+        DebugExtension.DrawBounds(new Bounds(transform.position, new Vector3(width, 10, lenght)), Color.white);
     }
 }

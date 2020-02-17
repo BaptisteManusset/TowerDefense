@@ -1,51 +1,61 @@
 using NaughtyAttributes;
+using ScriptableVariable.Unite2017.Sets;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-  //public Wave[] waves;
+    public float delayBeetweenWave = 10;
+    public float delayBeetweenSpawn = 1;
+
+    public Wave[] waves;
+    public WaveSpawner[] waveSpawners;
+    public Transform parent;
 
 
-  //[Space(30)] public EnnemyToSpawn[] ennemyToSpawn;
-  public int test;
-
-
-  [System.Serializable]
-  public class Wave
-  {
-
-
-
-    public string name;
-    public float delayBeetweenWave;
-    [BoxGroup("spawners")] [ReorderableList] public SpawnerElement[] spawners;
-
-    public Wave()
+    [System.Serializable]
+    public class Wave
     {
-      name = "Vague";
+        [ReorderableList] public mob[] mobs;
+    }
+    [System.Serializable]
+    public class mob
+    {
+        public GameObject prefab;
+        public int quantity = 5;
+    }
+    private void Start()
+    {
+
+
+        StartCoroutine(WaveReader());
     }
 
-  }
 
-  [System.Serializable]
-  public class SpawnerElement
-  {
-    public string name = "SpawnerElement";
-    public GameObject spawner;
-    public EnnemyToSpawn[] ennemys;
+    IEnumerator WaveReader()
+    {
+        for (int i = 0; i < waves.Length; i++)
+        {
+            Debug.Log("Debug de la vague");
 
-  }
+            #region wave spawner
+            for (int m = 0; m < waves[i].mobs.Length; m++)
+            {
+                for (int p = 0; p < waves[i].mobs[m].quantity; p++)
+                {
+                    for (int s = 0; s < waveSpawners.Length; s++)
+                    {
+                        waveSpawners[s].SpawnMob(waves[i].mobs[m].prefab, parent);
 
+                    }
+                    yield return new WaitForSeconds(delayBeetweenSpawn);
+                }
+            }
+            #endregion
+            Debug.Log("Fin de la vague");
 
-}
-
-[System.Serializable]
-public class EnnemyToSpawn
-{
-  [ShowAssetPreview] public GameObject ennemy;
-  public int quantity;
-
+            yield return new WaitForSeconds(delayBeetweenWave);
+        }
+    }
 
 }

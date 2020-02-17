@@ -1,4 +1,3 @@
-
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using System.Collections;
@@ -49,8 +48,6 @@ public class Tower : MonoBehaviour
     {
         UpdateInfo();
     }
-
-
     protected virtual void FixedUpdate()
     {
         if (shootInProgress == false)
@@ -215,7 +212,7 @@ public class Tower : MonoBehaviour
         GameObject obj = GetTargets()[i].gameObject;
         if (stat.isZoneAttack == false)
         {
-            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(0, shotPoint.transform.position);
             lineRenderer.SetPosition(1, obj.transform.position);
 
             rotatePoint.LookAt(obj.transform);

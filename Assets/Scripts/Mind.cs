@@ -60,11 +60,11 @@ public class Mind : MonoBehaviour
 
 
   }
-  void Update()
-  {
-    NavMeshHit hit;
-    meshAgent.SamplePathPosition(-1, 0.0f, out hit);
-  }
+  //void Update()
+  //{
+  //  NavMeshHit hit;
+  //  meshAgent.SamplePathPosition(-1, 0.0f, out hit);
+  //}
 
     private void LateUpdate()
     {

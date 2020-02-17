@@ -15,19 +15,6 @@ public class Mine : Tower
     protected override void FixedUpdate()
     {
 
-        //if (shootInProgress == false)
-        //{
-        //    
-        //    if (Seek())
-        //        StartCoroutine(Shot());
-        //}
-        //else
-        //{
-        //    Reload();
-        //}
-
-
-
 
 
         if (shootInProgress == false)
@@ -63,12 +50,13 @@ public class Mine : Tower
         shootInProgress = true;
         ClearTargets();
         Seek();
-        yield return new WaitForSeconds(1f);
+
         for (int i = 0; i < GetTargets().Count; i++)
         {
             GetTargets()[i].Damage(stat.datas["Damage"].value * stat.datas["Damage"].upgrateLevel);
         }
         yield return new WaitForSeconds(.1f);
+        shotPoint.Play();
         Destroy(gameObject);
 
     }
