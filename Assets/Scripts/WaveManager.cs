@@ -5,38 +5,41 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-  //public float delay;
+  //public Wave[] waves;
 
 
-  [Space(10)]public Wave[] waves;
-}
-
-[System.Serializable]
-public class Wave
-{
- 
+  //[Space(30)] public EnnemyToSpawn[] ennemyToSpawn;
+  public int test;
 
 
-  public string name;
-  public float delayBeetweenWave;
-  [BoxGroup("spawners")][ReorderableList]public SpawnerElement[] spawners;
-
-  public Wave()
+  [System.Serializable]
+  public class Wave
   {
-    name = "Vague";
+
+
+
+    public string name;
+    public float delayBeetweenWave;
+    [BoxGroup("spawners")] [ReorderableList] public SpawnerElement[] spawners;
+
+    public Wave()
+    {
+      name = "Vague";
+    }
+
   }
 
+  [System.Serializable]
+  public class SpawnerElement
+  {
+    public string name = "SpawnerElement";
+    public GameObject spawner;
+    public EnnemyToSpawn[] ennemys;
+
+  }
+
+
 }
-
-[System.Serializable]
-public class SpawnerElement
-{
-  public string name = "SpawnerElement";
-  public GameObject spawner;
-  public EnnemyToSpawn[] ennemys;
-
-}
-
 
 [System.Serializable]
 public class EnnemyToSpawn
