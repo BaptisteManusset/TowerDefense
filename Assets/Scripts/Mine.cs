@@ -1,4 +1,4 @@
-﻿using NaughtyAttributes;
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +29,6 @@ public class Mine : Tower
                 {
                     transform.LookAt(closest);
                     transform.Translate(transform.forward * .5f);
-                    Debug.Log("distance  " + dist);
                 }
                 else
                 {

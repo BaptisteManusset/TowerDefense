@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1287797323}
   - component: {fileID: 3808528336298211725}
   - component: {fileID: 5551979764217814271}
+  - component: {fileID: 2625980371424296979}
   m_Layer: 5
   m_Name: Weapon Type
   m_TagString: Untagged
@@ -133,6 +134,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2625980371424296979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287797321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a271b5e1232972e4f90e338be6cef2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteZoneAttack: {fileID: 21300000, guid: ad32161e24ec91340ab8b59369a5a5e7, type: 3}
+  spriteAttackOne: {fileID: 21300000, guid: f03a8e91883ac75449fd7d3cf84b2bfa, type: 3}
+  textZoneAttack: Attaque de Zone.
+  textAttackOne: "Attaque cibl\xE9e."
+  tower: {fileID: 11400000, guid: 70031e644ad48e24389236868005271b, type: 2}
 --- !u!1 &136556030327200792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,7 +1374,7 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: '*Vitesse de recharge
 
-''                Temps entre chaque tir.'
+''                    Temps entre chaque tir.'
   infoRight: 
 --- !u!114 &7085171078715631199
 MonoBehaviour:
@@ -1638,10 +1656,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tour: {fileID: 11400000, guid: e9320d55695549f4ca9cf42d5a6886c1, type: 2}
   tourToSell: {fileID: 0}
-  argent:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: a5eaad59f306f3343a3002385d0fa336, type: 2}
   uiName: {fileID: 3808528335434656996}
   uiRadiusAdv: {fileID: 3808528336160168789}
   uiDamageAdv: {fileID: 2146906916226868939}
@@ -1649,6 +1663,7 @@ MonoBehaviour:
   uiDescription: {fileID: 3808528334655651775}
   uiCout: {fileID: 1108742176792423897}
   uiZone: {fileID: 1287797323}
+  uiTowerType: {fileID: 2625980371424296979}
 --- !u!114 &2096483818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2937,7 +2952,7 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: '*Degas
 
-''                Degas par tir.'
+''                    Degas par tir.'
   infoRight: 
 --- !u!114 &9096708637112985702
 MonoBehaviour:
@@ -4031,8 +4046,8 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: '*Zone de detection.
 
-''                Zone dans lequel les cibles seront
-    detectees et neutralisees.'
+''                    Zone dans lequel les cibles
+    seront detectees et neutralisees.'
   infoRight: 
 --- !u!114 &2930378709055039189
 MonoBehaviour:

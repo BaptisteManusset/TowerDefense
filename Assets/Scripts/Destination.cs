@@ -6,31 +6,33 @@ using UnityEngine.Events;
 
 public class Destination : MonoBehaviour
 {
-    [SerializeField] FloatVariable vie;
-    [SerializeField] LayerMask layer;
-    [SerializeField] UnityEvent DamageEvent;
-    [SerializeField] UnityEvent DeathEvent;
-    [SerializeField] bool enable = true;
+  [SerializeField] FloatVariable vie;
+  [SerializeField] LayerMask layer;
+  [SerializeField] UnityEvent DamageEvent;
+  [SerializeField] UnityEvent DeathEvent;
+  [SerializeField][Tooltip("Activer les degas fait au CORE")] bool enable = true;
 
-    private void OnTriggerEnter(Collider other)
+  private void OnTriggerEnter(Collider other)
+  {
+
+
+
+    Mind ennemy = other.GetComponent<Mind>();
+    if (!ennemy) return;
+
+    vie.ApplyChange(-ennemy.damageToTower);
+
+    if (enable)
     {
-
-        if (!enable) return;
-
-        Mind ennemy = other.GetComponent<Mind>();
-        if (!ennemy) return;
-
-        vie.ApplyChange(-ennemy.damageToTower);
-
-        if (vie.Value <= 0)
-        {
-            DeathEvent.Invoke();
-        }
-        else
-        {
-            DamageEvent.Invoke();
-        }
-
-        Destroy(other.gameObject);
+      if (vie.Value <= 0)
+      {
+        DeathEvent.Invoke();
+      } else
+      {
+        DamageEvent.Invoke();
+      }
     }
+
+    Destroy(other.gameObject);
+  }
 }

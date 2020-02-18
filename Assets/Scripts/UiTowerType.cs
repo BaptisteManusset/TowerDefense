@@ -29,4 +29,10 @@ public class UiTowerType : MonoBehaviour
 
     }
   }
+
+  public void UpdateUi(TowerStat stat)
+  {
+    img.sprite = stat.isZoneAttack ? spriteZoneAttack : spriteAttackOne;
+    tp.infoLeft = stat.isZoneAttack ? textZoneAttack : textAttackOne;
+  }
 }
