@@ -24,7 +24,7 @@ public class Mine : Tower
                 ClearTargets();
                 Seek();
                 Transform closest = GetClosestTarget(GetTargets());
-                int dist = (int)Vector3.Distance(closest.position, transform.position);
+                int dist = (int)Vector3.Distance(transform.position, closest.position);
                 if (dist > 1)
                 {
                     transform.LookAt(closest);

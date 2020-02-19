@@ -146,6 +146,9 @@ MonoBehaviour:
     ConstantValue: 5
     Variable: {fileID: 0}
   destinations: {fileID: 11400000, guid: 345647bc217781543956d035ed66337c, type: 2}
+  speed: 3.5
+  angularSpeed: 5
+  acceleration: 5
 --- !u!114 &7827598364762501028
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,18 +20,17 @@ public class Mind : MonoBehaviour
   Renderer cubeRenderer;
 
   [BoxGroup("Deplacement")] public Transform destination;
+
   // string set in readonly for prevent edit and fuck up the mind of my ennemy
   [BoxGroup("Deplacement")] [SerializeField] [ReadOnly] string tagDestination = "Destination";
-  //[BoxGroup("Valeur à la mort")] public int valeur = 10;
 
   public FloatReference damageToTower;
   [BoxGroup("Argent")] public FloatVariable argent;
   [BoxGroup("Argent")] [Label("Valeur")] public FloatReference valeur;
   [SerializeField] ThingRuntimeSet destinations;
   public float speed = 3.5f;
-  //public float radius = .4f;
-  public float angularSpeed = 20;
-  public float acceleration = 10;
+  public float angularSpeed = 5;
+  public float acceleration = 5;
 
 
 
@@ -41,10 +40,7 @@ public class Mind : MonoBehaviour
     #region definition de la destination
     meshAgent = GetComponent<NavMeshAgent>();
 
-
-
     meshAgent.speed += Random.Range(-speed, speed);
-    //meshAgent.radius += Random.Range(-radius, radius);
     meshAgent.angularSpeed  += Random.Range(-angularSpeed, angularSpeed);
     meshAgent.acceleration += Random.Range(-acceleration, acceleration);
     
@@ -60,11 +56,6 @@ public class Mind : MonoBehaviour
 
 
   }
-  //void Update()
-  //{
-  //  NavMeshHit hit;
-  //  meshAgent.SamplePathPosition(-1, 0.0f, out hit);
-  //}
 
     private void LateUpdate()
     {
@@ -96,7 +87,6 @@ public class Mind : MonoBehaviour
 
 
       argent.ApplyChange(valeur);
-      //Destroy(gameObject, 2);
       Destroy(gameObject);
 
 
