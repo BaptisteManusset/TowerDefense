@@ -1,83 +1,95 @@
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Events;
 using ScriptableVariable.Unite2017.Sets;
+using ScriptableVariable.Unite2017.Variables;
 using System.Collections;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-  public float delayBeetweenWave = 10;
-  public float delayBeetweenSpawn = 1;
+    [BoxGroup("Delay")] public float delayBeetweenWave = 10;
+    [BoxGroup("Delay")] public float delayBeetweenSpawn = 1;
 
-  public Wave[] waves;
-  public WaveSpawner[] waveSpawners;
-  public Transform parent;
-
-  [BoxGroup("Events")] public GameEvent beginWave;
-  [BoxGroup("Events")] public GameEvent endWave;
+    [BoxGroup("Waves")] [Label("List of Waves")] public Wave[] waves;
 
 
-
-  [System.Serializable]
-  public class Wave
-  {
-    [ReorderableList] public mob[] mobs;
-  }
-  [System.Serializable]
-  public class mob
-  {
-    public GameObject prefab;
-    public int quantity = 5;
-  }
-  private void Start()
-  {
+    [BoxGroup("Spawner")] public WaveSpawner[] waveSpawners;
 
 
-    StartCoroutine(WaveReader());
-  }
+    [BoxGroup("Parent")] public Transform parent;
+
+    [BoxGroup("Events")] public GameEvent beginWave;
+    [BoxGroup("Events")] public GameEvent endWave;
+    [BoxGroup("Variable")] public FloatVariable waveNumber;
 
 
-  IEnumerator WaveReader()
-  {
-    for (int i = 0; i < waves.Length; i++)
+
+
+    [System.Serializable]
+    public class Wave
     {
-      Debug.Log("<color=red>Debug de la vague</color>");
-      beginWave.Raise();
-      #region wave spawner
-      for (int m = 0; m < waves[i].mobs.Length; m++)
-      {
-        for (int p = 0; p < waves[i].mobs[m].quantity; p++)
-        {
-          for (int s = 0; s < waveSpawners.Length; s++)
-          {
-            waveSpawners[s].SpawnMob(waves[i].mobs[m].prefab, parent);
-
-          }
-          yield return new WaitForSeconds(delayBeetweenSpawn);
-        }
-      }
-      #endregion
-      endWave.Raise();
-
-      Debug.Log("<color=red>Fin de la vague</color>");
-
-      if (delayBeetweenWave > 5)
-      {
-
-        for (int d = 0; d < 5; d++)
-        {
-
-          yield return new WaitForSeconds(1f);
-          Debug.Log("<color=red>[" + (5 - d) + "] Temps restant avant la prochaine vague </color>");
-
-        }
-
-        yield return new WaitForSeconds(delayBeetweenWave - 5);
-      } else
-      {
-        yield return new WaitForSeconds(delayBeetweenWave);
-      }
+        [ReadOnly] [SerializeField] string name = "Wave";
+        [Header("-----------------------------------------------")] [Label("List of Mobs")] public mob[] mobs;
     }
-  }
+    [System.Serializable]
+    public class mob
+    {
+
+        [ReadOnly] [SerializeField] string name = "Quantity of mob to spawn";
+        public GameObject prefab;
+        [MinValue(1)] [MaxValue(20)] public int quantity = 5;
+    }
+    private void Start()
+    {
+
+
+        StartCoroutine(WaveReader());
+    }
+
+
+    IEnumerator WaveReader()
+    {
+        for (int i = 0; i < waves.Length; i++)
+        {
+            Debug.Log("<color=red>Debug de la vague</color>");
+            beginWave.Raise();
+            waveNumber.SetValue(i + 1);
+            #region wave spawner
+            for (int m = 0; m < waves[i].mobs.Length; m++)
+            {
+                for (int p = 0; p < waves[i].mobs[m].quantity; p++)
+                {
+                    for (int s = 0; s < waveSpawners.Length; s++)
+                    {
+                        waveSpawners[s].SpawnMob(waves[i].mobs[m].prefab, parent);
+
+                    }
+                    yield return new WaitForSeconds(delayBeetweenSpawn);
+                }
+            }
+            #endregion
+            endWave.Raise();
+
+            Debug.Log("<color=red>Fin de la vague</color>");
+
+            if (delayBeetweenWave > 5)
+            {
+
+                for (int d = 0; d < 5; d++)
+                {
+
+                    yield return new WaitForSeconds(1f);
+                    Debug.Log("<color=red>[" + (5 - d) + "] Temps restant avant la prochaine vague </color>");
+
+                }
+
+                yield return new WaitForSeconds(delayBeetweenWave - 5);
+            }
+            else
+            {
+                yield return new WaitForSeconds(delayBeetweenWave);
+            }
+        }
+    }
 
 }

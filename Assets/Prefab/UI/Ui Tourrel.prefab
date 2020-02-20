@@ -1374,7 +1374,7 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: '*Vitesse de recharge
 
-''                    Temps entre chaque tir.'
+''                        Temps entre chaque tir.'
   infoRight: 
 --- !u!114 &7085171078715631199
 MonoBehaviour:
@@ -1664,6 +1664,8 @@ MonoBehaviour:
   uiCout: {fileID: 1108742176792423897}
   uiZone: {fileID: 1287797323}
   uiTowerType: {fileID: 2625980371424296979}
+  zoneAttack: {fileID: 21300000, guid: ad32161e24ec91340ab8b59369a5a5e7, type: 3}
+  soloAttack: {fileID: 21300000, guid: f03a8e91883ac75449fd7d3cf84b2bfa, type: 3}
 --- !u!114 &2096483818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2164,7 +2166,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 6
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2193,7 +2195,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2952,7 +2954,7 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: '*Degas
 
-''                    Degas par tir.'
+''                        Degas par tir.'
   infoRight: 
 --- !u!114 &9096708637112985702
 MonoBehaviour:
@@ -4046,8 +4048,8 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: '*Zone de detection.
 
-''                    Zone dans lequel les cibles
-    seront detectees et neutralisees.'
+''                        Zone dans lequel les
+    cibles seront detectees et neutralisees.'
   infoRight: 
 --- !u!114 &2930378709055039189
 MonoBehaviour:
