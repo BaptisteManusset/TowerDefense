@@ -9,7 +9,7 @@ public class Mine : Tower
     {
         stat = Object.Instantiate(statDefault);
         stat.Init();
-        lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer = GetComponent<LineRenderer>();
         radius.material.SetFloat("_Display", showRadius.Value ? 1 : 0);
     }
     protected override void FixedUpdate()

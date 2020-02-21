@@ -3,7 +3,6 @@ using ScriptableVariable.Unite2017.Sets;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Mind : MonoBehaviour
@@ -28,9 +27,6 @@ public class Mind : MonoBehaviour
     [BoxGroup("Argent")] public FloatVariable argent;
     [BoxGroup("Argent")] [Label("Valeur")] public FloatReference valeur;
     [SerializeField] ThingRuntimeSet destinations;
-    [BoxGroup("random")] public float speed = 3.5f;
-    [BoxGroup("random")] public float angularSpeed = 5;
-    [BoxGroup("random")] public float acceleration = 5;
 
 
 
@@ -40,9 +36,6 @@ public class Mind : MonoBehaviour
         #region definition de la destination
         meshAgent = GetComponent<NavMeshAgent>();
 
-        meshAgent.speed += Random.Range(-speed, speed);
-        meshAgent.angularSpeed += Random.Range(-angularSpeed, angularSpeed);
-        meshAgent.acceleration += Random.Range(-acceleration, acceleration);
 
 
         destination = GameObject.FindGameObjectWithTag(tagDestination).transform;
@@ -79,12 +72,10 @@ public class Mind : MonoBehaviour
         if (alive)
         {
             GetComponent<Collider>().enabled = false;
-
             health = 0;
             alive = false;
             meshAgent.isStopped = true;
             cubeRenderer.material.SetColor("_BaseColor", Color.red);
-
 
             argent.ApplyChange(valeur);
             Destroy(gameObject);

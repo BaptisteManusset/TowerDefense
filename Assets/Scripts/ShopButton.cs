@@ -1,7 +1,5 @@
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,11 +38,10 @@ public class ShopButton : MonoBehaviour
         UpdateUi();
     }
 
+    //update Ui to show all statictics about an item
     public void UpdateUi()
     {
-
         TowerStat stat;
-
         Tower item = tourToSell.GetComponent<Tower>();
         if (item == null) item = (Tower)tourToSell.GetComponent<Mine>();
 
@@ -53,12 +50,9 @@ public class ShopButton : MonoBehaviour
 
         uiName.text = tourToSell.name;
 
-
         if (stat.isZoneAttack)
         {
             uiZone.sprite = zoneAttack;
-
-
         }
         else
         {

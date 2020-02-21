@@ -9,25 +9,26 @@ public class MainLevel : MonoBehaviour
 {
     static public MainLevel instance;
 
-    [BoxGroup("Game Infos")] [Label("Gameover")] public bool gameover;
 
 
 
     [BoxGroup("Destination tag")] [Tag] public string destinationsTag;
-    //static public GameObject[] destinations;
-
-    //[BoxGroup("Stats")] public int money;
-    //[BoxGroup("Stats")] public int lifes = 20;
 
 
     [BoxGroup("Game Infos")] [ReadOnly] public GameObject cam;
     public enum GameState { Wave, InterWave };
     [BoxGroup("Etat d'avancement")] public GameState gameState;
-    
+
     [BoxGroup("Vie")] public FloatVariable health;
     [BoxGroup("Vie")] public FloatReference maxHealth;
     [BoxGroup("Argent")] public FloatVariable argent;
     [BoxGroup("Argent")] public float argentDefault = 1000;
+
+
+    [BoxGroup("Game Infos")] [Label("Gameover")] public bool gameover;
+
+    [BoxGroup("Events")] [SerializeField] float delayBeforeGameOver = 5;
+    [BoxGroup("Events")] [SerializeField] UnityEvent GameOver;
 
 
     [SerializeField] UnityEvent StartEvent;
@@ -70,5 +71,10 @@ public class MainLevel : MonoBehaviour
         Time.timeScale = 1;
     }
 
-
+    public void LaunchGameOver()
+    {
+        gameover = true;
+        GameOver.Invoke();
+        Debug.Log("saluuuu");
+    }
 }

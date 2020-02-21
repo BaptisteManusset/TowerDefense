@@ -1,4 +1,5 @@
 
+using LeakyAbstraction;
 using NaughtyAttributes;
 using ScriptableVariable.Unite2017.Variables;
 using UnityEngine;
@@ -106,6 +107,12 @@ namespace itsbaptiste
                                         {
                                             GameObject obj = Instantiate(tower.Value, pos, Quaternion.identity, parent.transform);
                                             obj.name = tower.Value.name;
+                                            SoundManager.Instance.PlaySound(GameSound.UiSucess);
+
+                                        }
+                                        else
+                                        {
+                                            SoundManager.Instance.PlaySound(GameSound.UiDenied);
                                         }
                                         #endregion
                                     }

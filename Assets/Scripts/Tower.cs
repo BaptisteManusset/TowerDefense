@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class Tower : MonoBehaviour
 {
 
@@ -25,24 +26,27 @@ public class Tower : MonoBehaviour
     [BoxGroup("Reload")] [SerializeField] [Label("Tir prés")] protected bool reloadRequire = false;
     [BoxGroup("Reload")] [ProgressBar("chargement")] public float shotLoading = 100;
 
-    [BoxGroup("FX")] [SerializeField] protected ParticleSystem shotPoint;
-    [BoxGroup("FX")] [SerializeField] protected ParticleSystem muzzle;
-    [BoxGroup("FX")] [SerializeField] protected ParticleSystem loading;
+    [BoxGroup("FX")] [SerializeField] [Required] protected ParticleSystem shotPoint;
+    [BoxGroup("FX")] [SerializeField] [Required] protected ParticleSystem muzzle;
+    [BoxGroup("FX")] [SerializeField] [Required] protected ParticleSystem loading;
 
 
     [BoxGroup("Externe")] [SerializeField] protected BoolVariable showRadius;
 
-    [SerializeField] protected Transform rotatePoint;
+    [SerializeField] [Required] protected Transform rotatePoint;
+
+    private AudioSource audio;
 
 
-    protected LineRenderer lineRenderer;
+    //protected LineRenderer lineRenderer;
     protected bool shootInProgress = false;
     void Awake()
     {
         stat = Object.Instantiate(statDefault);
         stat.Init();
-        lineRenderer = GetComponent<LineRenderer>();
+        audio = GetComponent<AudioSource>();
         radius.material.SetFloat("_Display", showRadius.Value ? 1 : 0);
+
     }
     void Start()
     {
@@ -119,6 +123,7 @@ public class Tower : MonoBehaviour
     }
     protected List<Mind> GetTargets()
     {
+        if (stat == null) return null;
 
         if (stat.isZoneAttack == false)
         {
@@ -150,6 +155,7 @@ public class Tower : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
+            audio.Play();
 
             reloadRequire = true;
             shotLoading = 0;
@@ -212,16 +218,16 @@ public class Tower : MonoBehaviour
         GameObject obj = GetTargets()[i].gameObject;
         if (stat.isZoneAttack == false)
         {
-            lineRenderer.SetPosition(0, shotPoint.transform.position);
-            lineRenderer.SetPosition(1, obj.transform.position);
+            //lineRenderer.SetPosition(0, shotPoint.transform.position);
+            //lineRenderer.SetPosition(1, obj.transform.position);
 
             rotatePoint.LookAt(obj.transform);
         }
     }
     protected void AnimStop()
     {
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, transform.position);
+        //lineRenderer.SetPosition(0, transform.position);
+        //lineRenderer.SetPosition(1, transform.position);
     }
     protected void OnDrawGizmos()
     {
