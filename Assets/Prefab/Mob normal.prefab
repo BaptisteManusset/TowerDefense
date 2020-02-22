@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &1442814638238349130
+--- !u!95 &7771293963391242660
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -80,6 +80,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f27870a47d7d5394190d4f5eca56207f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f27870a47d7d5394190d4f5eca56207f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: f27870a47d7d5394190d4f5eca56207f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: f27870a47d7d5394190d4f5eca56207f,
         type: 3}

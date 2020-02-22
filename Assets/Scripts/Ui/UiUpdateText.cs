@@ -12,6 +12,7 @@ public class UiUpdateText : MonoBehaviour
   [BoxGroup("Interface")] public string prefix;
   [BoxGroup("Interface")] public string suffix;
 
+    [Button]
   void Update()
   {
     texte.text = prefix + valeur.Value + suffix;

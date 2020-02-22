@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class MainLevel : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MainLevel : MonoBehaviour
 
 
 
-    [BoxGroup("Destination tag")] [Tag] public string destinationsTag;
+    [BoxGroup("Destination tag")] [NaughtyAttributes.Tag] public string destinationsTag;
 
 
     [BoxGroup("Game Infos")] [ReadOnly] public GameObject cam;
@@ -24,29 +25,55 @@ public class MainLevel : MonoBehaviour
     [BoxGroup("Argent")] public FloatVariable argent;
     [BoxGroup("Argent")] public float argentDefault = 1000;
 
+    [BoxGroup("Score")] public FloatVariable score;
 
     [BoxGroup("Game Infos")] [Label("Gameover")] public bool gameover;
 
     [BoxGroup("Events")] [SerializeField] float delayBeforeGameOver = 5;
     [BoxGroup("Events")] [SerializeField] UnityEvent GameOver;
+    int mm = 0;
+    int s = 0;
+    int m = 0;
 
 
     [SerializeField] UnityEvent StartEvent;
 
+
+    [BoxGroup("Timer")] [SerializeField] FloatVariable timer;
+    [BoxGroup("Timer")] [SerializeField] TextMeshProUGUI timerText;
+
     void Awake()
     {
+        if (MainLevel.instance == null) MainLevel.instance = this;
+
+
         health.SetValue(maxHealth);
         argent.SetValue(argentDefault);
+        score.SetValue(0);
+        timer.SetValue(0);
+
         Time.timeScale = 1;
     }
 
 
     void Start()
     {
-        if (MainLevel.instance == null) MainLevel.instance = this;
         cam = GameObject.FindGameObjectWithTag("MainCamera");
-
         StartEvent.Invoke();
+
+    }
+
+    private void Update()
+    {
+        if (!gameover)
+        {
+            timer.Value += Time.deltaTime;
+            mm = (int)(timer.Value * 100);
+            mm %= 100;
+            s = Mathf.RoundToInt(timer.Value);
+            m = s / 60;
+            timerText.text = $"{m}:{s}.<size=75%>{mm}</size>";
+        }
     }
 
     [Button]
@@ -74,7 +101,8 @@ public class MainLevel : MonoBehaviour
     public void LaunchGameOver()
     {
         gameover = true;
+
         GameOver.Invoke();
-        Debug.Log("saluuuu");
+
     }
 }

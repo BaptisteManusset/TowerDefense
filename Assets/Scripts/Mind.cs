@@ -29,6 +29,10 @@ public class Mind : MonoBehaviour
     [SerializeField] ThingRuntimeSet destinations;
 
 
+    [BoxGroup("Score")] public FloatVariable score;
+    [BoxGroup("Score")] public int scoreValue;
+
+
 
     void Start()
     {
@@ -78,6 +82,10 @@ public class Mind : MonoBehaviour
             cubeRenderer.material.SetColor("_BaseColor", Color.red);
 
             argent.ApplyChange(valeur);
+            score.ApplyChange(scoreValue);
+
+
+
             Destroy(gameObject);
 
 

@@ -37,6 +37,7 @@ public class Tower : MonoBehaviour
 
     private AudioSource audio;
 
+    
 
     //protected LineRenderer lineRenderer;
     protected bool shootInProgress = false;

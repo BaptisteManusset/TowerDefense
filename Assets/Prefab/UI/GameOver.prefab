@@ -945,6 +945,7 @@ GameObject:
   - component: {fileID: 839612888871548304}
   - component: {fileID: 839612888871548307}
   - component: {fileID: 839612888871548319}
+  - component: {fileID: 9154582259115974006}
   m_Layer: 0
   m_Name: GameOver
   m_TagString: Untagged
@@ -1044,13 +1045,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: b3a845bf319c3664994e02bf6b5fa13f, type: 2}
+  Event: {fileID: 11400000, guid: 9de5f0f28ad30f44eb7d331a1f59c359, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 839612888908459907}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 9154582259115974006}
+        m_MethodName: ThisIsTheEnd
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1086,6 +1098,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9154582259115974006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839612888871548309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b270bf49ba52b1a4f858f79f24dc519c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 11400000, guid: f8b058e54e01c1d42a01d33c01f0d996, type: 2}
+  timer: {fileID: 11400000, guid: 7bbc75a12b52ca048bf4238aadd0baef, type: 2}
+  argent: {fileID: 11400000, guid: a5eaad59f306f3343a3002385d0fa336, type: 2}
+  preffix: 'Score: '
+  suffix: 
+  scoreDisplay: {fileID: 5344445291963457619}
 --- !u!1 &839612888908459907
 GameObject:
   m_ObjectHideFlags: 0

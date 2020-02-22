@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//updateUi. not upate, i'm stupid...  
 public class UpateUi : MonoBehaviour
 {
     public FloatReference valeur;
