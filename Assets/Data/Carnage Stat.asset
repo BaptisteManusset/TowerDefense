@@ -50,16 +50,16 @@ MonoBehaviour:
     _values:
     - id: Radius
       value: 10
-      cost: 10
-      upgrateLevel: 4
+      cost: 30
+      upgrateLevel: 1
       upgrateLevelMax: 6
     - id: Damage
-      value: 3
-      cost: 10
+      value: 1
+      cost: 30
       upgrateLevel: 1
       upgrateLevelMax: 6
     - id: ReloadSpeed
       value: 10
-      cost: 10
-      upgrateLevel: 3
+      cost: 30
+      upgrateLevel: 1
       upgrateLevelMax: 6

@@ -10,7 +10,7 @@ public class Mind : MonoBehaviour
     #region stats    
     [BoxGroup("Stats")] [ProgressBar(null, 10)] public int health;
     [BoxGroup("Stats")] public Image healthbar;
-    int maxHealth = 10;
+   public  int maxHealth = 10;
     bool alive = true;
     #endregion
 

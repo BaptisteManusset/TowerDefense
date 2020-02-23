@@ -131,6 +131,11 @@ PrefabInstance:
       propertyPath: acceleration
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 782441928431970062, guid: f4560a7fd6f330e42b981bc07092eea5,
+        type: 3}
+      propertyPath: maxHealth
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 782441928431970063, guid: f4560a7fd6f330e42b981bc07092eea5,
         type: 3}
       propertyPath: m_Height
