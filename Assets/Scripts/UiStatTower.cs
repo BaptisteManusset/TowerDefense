@@ -58,7 +58,7 @@ public class UiStatTower : MonoBehaviour
             text += "ZoneAttack " + stat.isZoneAttack + "\n";
 #endif
 
-            description.text = text;
+            //description.text = text;
 
             UiName.text = tower.Value.name;
 
